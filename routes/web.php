@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\MakerController;
+use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,3 +24,5 @@ Route::get('/orders', [OrderController::class, 'index'])->name('orders');
 Route::get('/products', [ProductController::class, 'index'])->name('products');
 
 Route::resource('/products/makers', MakerController::class);
+
+Route::resource('/products/categories', CategoryController::class);

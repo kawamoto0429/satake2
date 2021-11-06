@@ -11,11 +11,14 @@
             メーカー
         </a>
     </div>
+    <div class="category">
+        <a href="/products/categories">
+            カテゴリー
+        </a>
+    </div>
     <div class="genre">
         ジャンル
     </div>
-    <div class="category">
-        カテゴリー
-    </div>
+    
 </div>
 @endsection
