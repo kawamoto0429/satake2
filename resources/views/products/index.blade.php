@@ -7,7 +7,9 @@
         商品メンテナンス
     </div>
     <div class="maker">
-        メーカー
+        <a href="/products/makers">
+            メーカー
+        </a>
     </div>
     <div class="genre">
         ジャンル
