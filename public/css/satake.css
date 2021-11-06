@@ -1,0 +1,60 @@
+.container {
+    width: 400px;
+    height: 300px;
+    margin: 100px auto;
+}
+
+.note {
+    border: solid 1px #b2b2b2;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.orders {
+    border: solid 1px #b2b2b2;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.products {
+     border: solid 1px #b2b2b2;
+     text-align: center;
+}
+
+.products-container {
+    width: 400px;
+    height: 800px;
+    margin: 100px auto;
+}
+.products-home {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.maintenance {
+    border: solid 1px #b2b2b2;
+    margin-bottom: 10px;
+    padding: 20px 0px;
+    text-align: center;
+    
+}
+
+.maker {
+    border: solid 1px #b2b2b2;
+    margin-bottom: 10px;
+    padding: 20px 0px;
+    text-align: center;
+}
+
+.genre {
+    border: solid 1px #b2b2b2;
+    margin-bottom: 10px;
+    padding: 20px 0px;
+    text-align: center;
+}
+
+.category {
+    border: solid 1px #b2b2b2;
+    margin-bottom: 10px;
+    padding: 20px 0px;
+    text-align: center;
+}
