@@ -58,3 +58,33 @@
     padding: 20px 0px;
     text-align: center;
 }
+
+.maker-home {
+    width: 500px;
+    margin: 50px auto;
+    display: flex;
+    
+}
+label {
+   margin: 0px auto;
+}
+
+.maker-container {
+    width: 500px;
+    margin: 100px auto;
+}
+
+.maker-table {
+    margin: 0px auto;
+    margin-top: 50px;
+}
+
+.maker-name {
+    width: 200px;
+}
+
+
+.maker-form {
+    text-align: center;
+}
+
