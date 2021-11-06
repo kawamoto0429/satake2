@@ -15,6 +15,7 @@ class MakerController extends Controller
     public function index()
     {
         $makers = Maker::all();
+       
         return view('products.makers.index', compact('makers'));
     }
 
