@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TopController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\MakerController;
@@ -17,7 +17,7 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [TopController::class, 'index']);
 
 Route::get('/orders', [OrderController::class, 'index'])->name('orders');
 
@@ -26,3 +26,6 @@ Route::get('/products', [ProductController::class, 'index'])->name('products');
 Route::resource('/products/makers', MakerController::class);
 
 Route::resource('/products/categories', CategoryController::class);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
