@@ -17,7 +17,9 @@
         </a>
     </div>
     <div class="genre">
-        ジャンル
+        <a href="/products/genres">
+            ジャンル
+        </a>
     </div>
     
 </div>
