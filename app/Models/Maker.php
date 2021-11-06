@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Maker extends Model
 {
-    use HasFactory;
+    public function genre()
+    {
+        return $this->hasMany(Genre::class);
+    }
 }
