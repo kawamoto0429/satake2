@@ -27,15 +27,17 @@
                     <a href="/products/categories/{{$category->id}}/edit">編集</a>
                 </td>
                 <td>
-                    <form method="POST" action="/products/categories/{{$category->id}}">
+                    <form method="POST" action="/products/categories/{{$category->id}}" onsubmit="return confirm('本気ですか？')">
                         @csrf
                         <input type="hidden" name="_method" value="DELETE">
-                        <button type="submit">delete</button>
+                        <button type="submit" >delete</button>
                     </form>
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
+    
+    
 </div>
 @endsection

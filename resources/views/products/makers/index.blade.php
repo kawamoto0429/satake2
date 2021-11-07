@@ -27,7 +27,7 @@
                     <a href="/products/makers/{{$maker->id}}/edit">編集</a>
                 </td>
                 <td>
-                    <form method="POST" action="/products/makers/{{$maker->id}}">
+                    <form method="POST" action="/products/makers/{{$maker->id}}" onsubmit="return confirm('本気ですか？')">
                         @csrf
                         <input type="hidden" name="_method" value="DELETE">
                         <button type="submit">delete</button>
