@@ -2,7 +2,11 @@
 
 @section('content')
 <div class="products-container">
-    <div class="products-home">商品管理</div>
+    <div class="products-home">
+        <a href="/">
+            商品管理
+        </a>
+    </div>
     <div class="maintenance">
         商品メンテナンス
     </div>
