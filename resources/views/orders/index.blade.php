@@ -6,7 +6,7 @@
 
     @foreach($makers as $maker)
         <div class="maker">
-            <a href="/">
+            <a href="/orders/{{$maker->id}}/home">
                 {{$maker->name}}
             </a>
         </div>
