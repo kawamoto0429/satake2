@@ -1,7 +1,7 @@
 .container {
     width: 400px;
     height: 300px;
-    margin: 100px auto;
+    margin: 200px auto;
 }
 
 .note {
@@ -86,5 +86,16 @@ label {
 
 .maker-form {
     text-align: center;
+}
+
+.orders-container {
+    width: 500px;
+    margin: 100px auto;
+    text-align: center;
+}
+
+.orders-top {
+    font-size: 20px;
+    margin-bottom: 40px;
 }
 

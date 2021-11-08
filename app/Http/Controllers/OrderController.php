@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Maker;
 
 class OrderController extends Controller
 {
     public function index() {
-        return view('orders.index');
+        $makers = Maker::all();
+        
+        return view('orders.index', compact('makers'));
     }
 }
