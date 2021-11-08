@@ -14,6 +14,7 @@ class OrderController extends Controller
     }
     
     public function home(Maker $maker) {
+        
         return view('orders.home', compact('maker'));
     }
 }

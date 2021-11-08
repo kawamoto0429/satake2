@@ -2,7 +2,11 @@
 
 @section('content')
 <div class="orders-container">
-    <div class="orders-top">メーカーを選んでください</div>
+    <div class="orders-top">
+        <a href="/">
+            メーカーを選んでください
+        </a>
+    </div>
 
     @foreach($makers as $maker)
         <div class="maker">
