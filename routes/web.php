@@ -21,6 +21,7 @@ use App\Http\Controllers\GenreController;
 Route::get('/', [TopController::class, 'index']);
 
 Route::get('/orders', [OrderController::class, 'index'])->name('orders');
+Route::get('/orders/{maker}/home', [OrderController::class, 'home']);
 
 Route::get('/products', [ProductController::class, 'index'])->name('products');
 

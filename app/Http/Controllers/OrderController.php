@@ -12,4 +12,8 @@ class OrderController extends Controller
         
         return view('orders.index', compact('makers'));
     }
+    
+    public function home(Maker $maker) {
+        return view('orders.home', compact('maker'));
+    }
 }
