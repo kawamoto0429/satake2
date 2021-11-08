@@ -88,6 +88,23 @@ label {
     text-align: center;
 }
 
+.orders-header {
+    width: 1000px;
+    height: 50px;
+    margin: 0px auto;
+    display: flex;
+    border: solid 1px black;
+}
+
+.orders-1 {
+    margin: 10px 20px 0px 10px;
+}
+
+.orders-note {
+    display: flex;
+    margin-right: auto;
+}
+
 .orders-container {
     width: 500px;
     margin: 100px auto;
@@ -99,3 +116,20 @@ label {
     margin-bottom: 40px;
 }
 
+.orders-maker {
+    display: flex;
+}
+
+.search {
+    width: 300px;
+    margin: 0px auto;
+}
+
+.genres-sort {
+    width: 150px;
+    margin: 0px 40px 0px 0px ;
+}
+
+.products-list {
+    text-align: right;
+}

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Maker extends Model
 {
-    public function genre()
+    public function genres()
     {
         return $this->hasMany(Genre::class);
     }
