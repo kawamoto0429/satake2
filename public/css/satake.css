@@ -15,7 +15,13 @@
     margin-bottom: 10px;
     text-align: center;
 }
+
 .products {
+     border: solid 1px #b2b2b2;
+     text-align: center;
+}
+
+.pop {
      border: solid 1px #b2b2b2;
      text-align: center;
 }

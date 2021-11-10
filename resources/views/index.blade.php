@@ -15,5 +15,10 @@
             <p>商品管理</p>
         </a>
     </div>
+    <div class="pop">
+        <a href="/pops">
+            <p>POP印刷</p>
+        </a>
+    </div>
 </div>
 @endsection
