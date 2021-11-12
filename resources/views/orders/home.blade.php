@@ -22,36 +22,14 @@
     <div class="products-list">
         
         <form>
+        @foreach($maintenances as $maintenance)
         <div>
-            <input type="checkbox">商品
-            <input type="text" value="100">円
+            <input type="checkbox">{{$maintenance->name}}
+            <input type="text" value="{{$maintenance->price_1pc}}">円
             <input type="text">個
         </div>
-        <div>
-            <input type="checkbox">商品
-            <input type="text" value="100">円
-            <input type="text">個
-        </div>
-        <div>
-            <input type="checkbox">商品
-            <input type="text" value="100">円
-            <input type="text">個
-        </div>
-        <div>
-            <input type="checkbox">商品
-            <input type="text" value="100">円
-            <input type="text">個
-        </div>
-        <div>
-            <input type="checkbox">商品
-            <input type="text" value="100">円
-            <input type="text">個
-        </div>
-        <div>
-            <input type="checkbox">商品
-            <input type="text" value="100">円
-            <input type="text">個
-        </div>
+        @endforeach
+        
         <button type="submit">確定</button>
         </form>
     
