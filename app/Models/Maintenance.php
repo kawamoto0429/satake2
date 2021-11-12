@@ -5,13 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Genre extends Model
+class Maintenance extends Model
 {
-    // protected $fillable = [
-    //     'category_id',
-    //     '',
-    // ];
-    
+    use HasFactory;
     
     public function category()
     {
@@ -23,8 +19,8 @@ class Genre extends Model
         return $this->belongsTo(Maker::class);
     }
     
-    public function maintenances()
+    public function genre()
     {
-        return $this->hasMany(maintenance::class);
+        return $this->belongsTo(genre::class);
     }
 }
