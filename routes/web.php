@@ -8,6 +8,7 @@ use App\Http\Controllers\MakerController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\PopController;
+use App\Http\Controllers\MaintenanceController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,6 +30,27 @@ Route::get('/products', [ProductController::class, 'index'])->name('products');
 Route::resource('/products/makers', MakerController::class);
 Route::resource('/products/categories', CategoryController::class);
 Route::resource('/products/genres', GenreController::class);
+
+Route::get('/products/maintenances', [MaintenanceController::class, 'index'])->name('maintenance.index');
+Route::get('/products/maintenances/create', [MaintenanceController::class, 'create'])->name('maintenance.create');
+Route::post('/products/maintenances/store', [MaintenanceController::class, 'store'])->name('maintenance.store');
+Route::get('/products/maintenances/{maintenance}/show', [MaintenanceController::class, 'show'])
+    ->name('maintenance.show')
+    ->where('maintenance', '[0-9]+');
+
+Route::get('/products/maintenances/{maintenance}/edit', [MaintenanceController::class, 'edit'])
+    ->name('maintenance.edit')
+    ->where('maintenance', '[0-9]+');
+
+Route::put('/products/maintenances/{maintenance}/update', [MaintenanceController::class, 'update'])
+    ->name('maintenance.update')
+    ->where('maintenance', '[0-9]+');
+    
+Route::delete('/products/maintenances/{maintenance}/delete', [MaintenanceController::class, 'delete'])
+    ->name('maintenance.delete')
+    ->where('maintenance', '[0-9]+');    
+
+
 
 Route::get('/pops',[PopController::class, 'index']);
 

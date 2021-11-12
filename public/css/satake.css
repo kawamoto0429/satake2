@@ -139,3 +139,7 @@ label {
 .products-list {
     text-align: right;
 }
+
+.maintenances-list {
+    display: flex;
+}

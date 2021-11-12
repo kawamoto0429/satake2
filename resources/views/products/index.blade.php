@@ -8,7 +8,9 @@
         </a>
     </div>
     <div class="maintenance">
-        商品メンテナンス
+        <a href="{{route('maintenance.index')}}">
+            商品メンテナンス
+        </a>
     </div>
     <div class="maker">
         <a href="/products/makers">

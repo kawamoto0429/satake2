@@ -11,4 +11,9 @@ class Category extends Model
     {
         return $this->hasMany(Genre::class);
     }
+    
+    public function maintenances()
+    {
+        return $this->hasMany(maintenance::class);
+    }
 }
