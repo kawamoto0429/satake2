@@ -33,7 +33,7 @@
             <input type="text" name="jan">
         </div>
         <label>メーカー</label>
-        <select name="maker_id">
+        <select name="maker_id" id="maker">
         @foreach($makers as $maker)
             <option  value="{{$maker->id}}">{{$maker->name}}</option>
         @endforeach
@@ -49,9 +49,9 @@
         </div>
         <div>
         <label>ジャンル</label>
-        <select name="genre_id">
+        <select name="genre_id" id="genres_select">
         @foreach($genres as $genre)
-            <option  value="{{$genre->id}}">{{$genre->name}}</option>
+            <option id="genre_option" value="{{$genre->id}}">{{$genre->name}}</option>
         @endforeach
         </select>
         </div>
@@ -64,4 +64,39 @@
 
     </form>
 </div>
+<script>
+    $(function(){
+    
+        $('#maker').on('input', () => {
+            let maker = $('#maker').val();
+            <!--console.log(maker);-->
+            $.ajax({
+            <!--headers: {-->
+            <!--    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')-->
+            <!--}, -->
+                type: "get",
+                url: "/products/maintenances/maker/ajax",
+                data: {'maker_id': maker},
+                dataType: 'json',
+            }).done(function(data){
+                console.log(data)
+               $('#genres_select').children().remove();
+               $.each(data, function (index, value) {
+                html = `
+                      <option>${value.name}</option>
+                 `;
+                 $('#genres_select').append(html);
+               })
+               
+               
+              
+            }).fail(function() {
+              console.log('失敗');
+            }); 
+                 
+        });
+
+    });
+</script>
+
 @endsection

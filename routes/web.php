@@ -48,7 +48,9 @@ Route::put('/products/maintenances/{maintenance}/update', [MaintenanceController
     
 Route::delete('/products/maintenances/{maintenance}/delete', [MaintenanceController::class, 'delete'])
     ->name('maintenance.delete')
-    ->where('maintenance', '[0-9]+');    
+    ->where('maintenance', '[0-9]+');
+
+Route::get('/products/maintenances/maker/ajax', [MaintenanceController::class, 'maker']);
 
 
 

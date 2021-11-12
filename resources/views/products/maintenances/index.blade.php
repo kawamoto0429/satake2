@@ -13,7 +13,7 @@
 <div >
     @foreach($maintenances as $maintenance)
     <div class="maintenances-list">
-        <div>{{$maintenance->maker_id}}</div>
+        <div>{{$maintenance->maker_name}}</div>
         <div>{{$maintenance->name}}</div>
         <div>{{$maintenance->price_1pc}}</div>
         <div>

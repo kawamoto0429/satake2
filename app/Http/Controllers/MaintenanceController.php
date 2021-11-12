@@ -7,6 +7,7 @@ use App\Models\Maintenance;
 use App\Models\Maker;
 use App\Models\Category;
 use App\Models\Genre;
+use Log;
 
 class MaintenanceController extends Controller
 {
@@ -82,5 +83,23 @@ class MaintenanceController extends Controller
         $maintenance->delete();
         
         return redirect()->route('maintenance.index');
+    }
+    
+    public function maker(Request $request) {
+        Log::debug($request);
+        // Log::debug($request);
+        $maker = $request['maker_id'];
+        
+        Log::debug($maker);
+        // info($maker);
+        $maker = $request['maker_id'];
+        // $callback = $request['callback'];
+        
+        // return $maker;
+        
+        $genres = Genre::where('maker_id', $maker)->get();
+        
+        // // return response()->json($genres);
+        return $genres;
     }
 }
