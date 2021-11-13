@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Maker extends Model
 {
+    use HasFactory;
+    
     public function genres()
     {
         return $this->hasMany(Genre::class);
@@ -14,6 +16,6 @@ class Maker extends Model
     
     public function maintenances()
     {
-        return $this->hasMany(maintenance::class);
+        return $this->hasMany(Maintenance::class);
     }
 }

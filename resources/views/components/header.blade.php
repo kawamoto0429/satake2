@@ -1,4 +1,4 @@
-@extends('layouts.app')
+
 <div class="orders-header">
     <div class="orders-1">
         <a href="{{ route("orders")}}">
@@ -10,3 +10,4 @@
         <div class="orders-1">今日ノート</div>
     </div>
 </div>
+
