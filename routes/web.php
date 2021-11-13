@@ -23,7 +23,13 @@ use App\Http\Controllers\MaintenanceController;
 Route::get('/', [TopController::class, 'index']);
 
 Route::get('/orders', [OrderController::class, 'index'])->name('orders');
-Route::get('/orders/{maker}/home', [OrderController::class, 'home']);
+Route::get('/orders/{maker}/home', [OrderController::class, 'home'])->name('index_home');
+Route::get('/orders/{maintenance}/show', [OrderController::class, 'show'])
+        ->name('home_show')
+        ->where('maintenance', '[0-9]+');
+Route::post('/orders/purchase/store', [OrderController::class, 'store'])->name('orders_store');
+Route::get('/orders/purchase', [OrderController::class, 'purchase'])->name('orders_purchase');
+    
 
 Route::get('/products', [ProductController::class, 'index'])->name('products');
 
@@ -59,4 +65,6 @@ Route::get('/pops',[PopController::class, 'index']);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+

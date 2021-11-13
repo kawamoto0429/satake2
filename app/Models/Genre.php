@@ -11,7 +11,7 @@ class Genre extends Model
     //     'category_id',
     //     '',
     // ];
-    
+    use HasFactory;
     
     public function category()
     {

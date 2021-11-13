@@ -21,6 +21,11 @@ class Maintenance extends Model
     
     public function genre()
     {
-        return $this->belongsTo(genre::class);
+        return $this->belongsTo(Genre::class);
+    }
+    
+    public function purchases() 
+    {
+        return $this->hasMany(Purchase::class);
     }
 }

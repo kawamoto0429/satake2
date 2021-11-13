@@ -1,5 +1,15 @@
-@component('components.header')
-@endcomponent
+@extends('layouts.app')
+<div class="orders-header">
+    <div class="orders-1">
+        <a href="{{ route("orders")}}">
+            発注
+        </a>
+    </div>
+    <div class="orders-note">
+        <div class="orders-1">昨日ノート</div>
+        <div class="orders-1">今日ノート</div>
+    </div>
+</div>
 
 <h1>{{$maker->name}}</h1>
 
@@ -24,7 +34,7 @@
         <form>
         @foreach($maintenances as $maintenance)
         <div>
-            <input type="checkbox">{{$maintenance->name}}
+            <input type="checkbox"><a href="{{route('home_show', $maintenance)}}">{{$maintenance->name}}</a>
             <input type="text" value="{{$maintenance->price_1pc}}">円
             <input type="text">個
         </div>
