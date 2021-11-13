@@ -33,5 +33,9 @@
         <button type="submit">確定</button>
         </form>
     
+    <div>
+    {{ $maintenances->links() }}
     </div>
+    </div>
+    
 </div>

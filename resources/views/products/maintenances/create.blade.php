@@ -41,7 +41,7 @@
         </div>
         <div>
         <label>カテゴリー</label>
-        <select name="category_id">
+        <select name="category_id" id="category">
         @foreach($categories as $category)
             <option  value="{{$category->id}}">{{$category->name}}</option>
         @endforeach
@@ -77,6 +77,35 @@
                 type: "get",
                 url: "/products/maintenances/maker/ajax",
                 data: {'maker_id': maker},
+                dataType: 'json',
+            }).done(function(data){
+                console.log(data)
+               $('#genres_select').children().remove();
+               $.each(data, function (index, value) {
+                html = `
+                      <option>${value.name}</option>
+                 `;
+                 $('#genres_select').append(html);
+               })
+               
+               
+              
+            }).fail(function() {
+              console.log('失敗');
+            }); 
+                 
+        });
+        
+        $('#category').on('input', () => {
+            let category = $('#category').val();
+            <!--console.log(category);-->
+            $.ajax({
+            <!--headers: {-->
+            <!--    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')-->
+            <!--}, -->
+                type: "get",
+                url: "/products/maintenances/category/ajax",
+                data: {'category_id': category},
                 dataType: 'json',
             }).done(function(data){
                 console.log(data)
