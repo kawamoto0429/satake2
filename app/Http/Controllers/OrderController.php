@@ -19,7 +19,9 @@ class OrderController extends Controller
         
         $id = $maker->id;
         
-        $maintenances = Maintenance::where('maker_id', $id)->paginate(10);
+        // $maintenances = Maintenance::where('maker_id', $id)->paginate(10);
+        
+        $maintenances = Maintenance::where('maker_id', $id)->get();
         
         return view('orders.home', compact('maker','maintenances'));
     }
