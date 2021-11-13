@@ -92,12 +92,30 @@ class MaintenanceController extends Controller
         
         Log::debug($maker);
         // info($maker);
-        $maker = $request['maker_id'];
+        // $maker = $request['maker_id'];
         // $callback = $request['callback'];
         
         // return $maker;
         
         $genres = Genre::where('maker_id', $maker)->get();
+        
+        // // return response()->json($genres);
+        return $genres;
+    }
+    
+    public function category(Request $request) {
+        Log::debug($request);
+        // Log::debug($request);
+        $category = $request['category_id'];
+        
+        Log::debug($category);
+        // info($maker);
+        // $category = $request['maker_id'];
+        // $callback = $request['callback'];
+        
+        // return $maker;
+        
+        $genres = Genre::where('category_id', $category)->get();
         
         // // return response()->json($genres);
         return $genres;

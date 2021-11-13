@@ -51,6 +51,7 @@ Route::delete('/products/maintenances/{maintenance}/delete', [MaintenanceControl
     ->where('maintenance', '[0-9]+');
 
 Route::get('/products/maintenances/maker/ajax', [MaintenanceController::class, 'maker']);
+Route::get('/products/maintenances/category/ajax', [MaintenanceController::class, 'category']);
 
 
 
