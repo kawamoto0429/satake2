@@ -47,7 +47,9 @@
 @auth
 <div class="container">
     <div class="note">
+        <a href="{{ route('note_home')}}">
         <p>ノート確認</p>
+        </a>
     </div>
     <div class="orders">
         <a href="{{ route('orders')}}">
