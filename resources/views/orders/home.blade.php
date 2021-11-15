@@ -1,4 +1,6 @@
 @extends('layouts.app')
+
+@section('content')
 <div class="orders-header">
     <div class="orders-1">
         <a href="{{ route("orders")}}">
@@ -49,3 +51,4 @@
     </div>
     
 </div>
+@endsection

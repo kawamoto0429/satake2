@@ -147,3 +147,7 @@ label {
 .purchase_maintenance {
     display: flex;
 }
+
+.purchase_category {
+    display: flex;
+}

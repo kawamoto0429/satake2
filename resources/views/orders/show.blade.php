@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('content')
 <div class="orders-header">
     <div class="orders-1">
         <a href="{{ route("orders")}}">
@@ -10,7 +11,7 @@
         <div class="orders-1">今日ノート</div>
     </div>
 </div>
-@section('content')
+
 <div>
     <a href="/orders/{{$maintenance->maker_id}}/home">戻る</a>
 </div>

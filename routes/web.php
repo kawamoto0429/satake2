@@ -30,7 +30,9 @@ Route::get('/orders/{maintenance}/show', [OrderController::class, 'show'])
         ->where('maintenance', '[0-9]+');
 Route::post('/orders/purchase/store', [OrderController::class, 'store'])->name('orders_store');
 Route::get('/orders/purchase', [OrderController::class, 'purchase'])->name('orders_purchase');
-    
+Route::get('/orders/purchase/note', [OrderController::class, 'note_today'])->name('note_today');
+
+// Route::get('/purchase/category/ajax', [OrderController::class, 'category']);
 
 Route::get('/products', [ProductController::class, 'index'])->name('products');
 
