@@ -10,6 +10,7 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\PopController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NoteController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +23,10 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [TopController::class, 'index']);
+
+Route::get('/notes/home', [NoteController::class, 'note_home'])->name('note_home');
+Route::get('/notes/home/{id}', [NoteController::class, 'day']);
+Route::get('/notes/home/{id}/{day}', [NoteController::class, 'orders']);
 
 Route::get('/orders', [OrderController::class, 'index'])->name('orders');
 Route::get('/orders/{maker}/home', [OrderController::class, 'home'])->name('index_home');
