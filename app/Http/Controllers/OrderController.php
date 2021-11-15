@@ -7,6 +7,8 @@ use App\Models\Maker;
 use App\Models\Maintenance;
 use Log;
 use App\Models\Purchase;
+use App\Models\Category;
+use Carbon\Carbon;
 
 
 class OrderController extends Controller
@@ -48,8 +50,47 @@ class OrderController extends Controller
     }
     
     public function purchase() {
-        $purchases = Purchase::all();
         
-        return view('orders.purchases.index', compact('purchases'));
+        $today = Carbon::today();
+        
+        Log::debug($today);
+        
+        $purchases = Purchase::whereDate('created_at', $today)->get();
+        
+        Log::debug($purchases);
+        
+        $categories = Category::all();
+        
+        return view('orders.purchases.index', compact('purchases', 'categories'));
+    }
+    
+    public function note_today() 
+    {
+        $today = Carbon::today();
+        
+        $purchases = Purchase::whereDate('created_at', $today)->get();
+        
+        return view('notes.index', compact('today', "purchases"));
+    }
+    
+    public function category(Request $request) {
+        // Log::debug($request);
+        
+        $category = $request['category_id'];
+        
+        // Log::debug($category);
+        
+         
+         $maintenance_id = Maintenance::where('category_id', $category)->get('id');
+         
+         
+         
+         Log::debug($maintenance_id);
+         
+         $purchases = Purchase::where('maintenance_id', $maintenance_id)->get();
+         
+         
+         
+         return $purchases;
     }
 }
