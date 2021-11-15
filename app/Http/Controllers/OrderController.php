@@ -73,6 +73,17 @@ class OrderController extends Controller
         return view('notes.index', compact('today', "purchases"));
     }
     
+    public function note_sub() 
+    {
+        $day_sub = Carbon::today()->subDay(1);
+        
+        
+        
+        $purchases = Purchase::whereDate('created_at', $day_sub)->get();
+        
+        return view('notes.sub', compact('day_sub', "purchases"));
+    }
+    
     public function category(Request $request) {
         // Log::debug($request);
         

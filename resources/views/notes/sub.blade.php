@@ -1,5 +1,5 @@
 <div>
-    {{$today}}
+    {{$day_sub}}
     @foreach($purchases as $purchase)
     <div>
         {{$purchase->maintenance->name}}

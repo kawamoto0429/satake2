@@ -31,6 +31,7 @@ Route::get('/orders/{maintenance}/show', [OrderController::class, 'show'])
 Route::post('/orders/purchase/store', [OrderController::class, 'store'])->name('orders_store');
 Route::get('/orders/purchase', [OrderController::class, 'purchase'])->name('orders_purchase');
 Route::get('/orders/purchase/note', [OrderController::class, 'note_today'])->name('note_today');
+Route::get('/orders/purchase/note_sub', [OrderController::class, 'note_sub'])->name('note_sub');
 
 // Route::get('/purchase/category/ajax', [OrderController::class, 'category']);
 
