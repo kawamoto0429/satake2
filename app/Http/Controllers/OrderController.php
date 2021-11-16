@@ -13,7 +13,30 @@ use Carbon\Carbon;
 
 class OrderController extends Controller
 {
+    public function day() {
+        
+        return view('orders.day');
+    }
+    
+    public function day_store(Request $request)
+    {
+        Log::debug($request);
+        
+        $date = new Carbon();
+        
+        $month = $request->input('month');
+        $day = $request->input('day');
+        
+        $date->month = $month;
+        $date->day = $day;
+        
+         Log::debug($date);
+        
+        return redirect()->route('orders', $date);
+    }
+    
     public function index() {
+        
         $makers = Maker::all();
         
         
