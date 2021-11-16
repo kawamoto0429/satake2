@@ -12,7 +12,6 @@ class NoteController extends Controller
 {
     
     
-    
     public function note_home() 
     {
         
@@ -79,5 +78,22 @@ class NoteController extends Controller
         Log::debug($purchases);
         
         return view('notes.orders', compact('id', 'day', 'purchases'));
+    }
+    
+    public function orders_sub ($id, $day) 
+    {
+        Log::debug($id);
+        
+        Log::debug($day);
+        
+        $date = new Carbon();
+        
+        $date->month = $id;
+        
+        $date->day = $day - 1;
+        
+        $purchases = Purchase::whereDate('created_at', $date)->get();
+        
+        return view('notes.orders', compact('id', 'day','purchases'));
     }
 }

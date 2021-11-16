@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+
+
 <div class="orders-container">
     <div class="orders-top">
         <a href="/">
