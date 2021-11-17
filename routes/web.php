@@ -34,14 +34,14 @@ Route::get('/notes/home/{id}/{day}', [NoteController::class, 'orders']);
 Route::get('/orders', [OrderController::class, 'index'])->name('orders');
 Route::get('/orders/{maker}/home', [OrderController::class, 'home'])->name('index_home');
 Route::get('/orders/{maintenance}/show', [OrderController::class, 'show'])
-        ->name('home_show')
-        ->where('maintenance', '[0-9]+');
+        ->name('home_show');
+        
 Route::post('/orders/purchase/store', [OrderController::class, 'store'])->name('orders_store');
 Route::get('/orders/purchase', [OrderController::class, 'purchase'])->name('orders_purchase');
 Route::get('/orders/purchase/note', [OrderController::class, 'note_today'])->name('note_today');
 Route::get('/orders/purchase/note_sub', [OrderController::class, 'note_sub'])->name('note_sub');
 
-// Route::get('/purchase/category/ajax', [OrderController::class, 'category']);
+Route::get('/purchase/category/ajax', [OrderController::class, 'category']);
 
 Route::get('/products', [ProductController::class, 'index'])->name('products');
 

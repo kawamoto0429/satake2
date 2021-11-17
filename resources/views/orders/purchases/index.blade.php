@@ -23,7 +23,7 @@
 <div class="purchase_category">
     @foreach($categories as $category)
     <div>
-        <input type="checkbox"  id="category_id" name="category" value="{{$category->id}}">
+        <input type="checkbox"  class="category_id" name="category" value="{{$category->id}}">
         {{$category->name}}
     </div>
     @endforeach
@@ -44,38 +44,38 @@
     @endforeach
 </div>
 
-// <script>
-  <!--  $(function(){-->
+<script>
+    $(function(){
     
-  <!--      $('#category_id').on('click', () => {-->
-  <!--          let category = $('[name="category"]:checked').val();-->
-  <!--          console.log(category);-->
-  <!--          $.ajax({-->
+        $('.category_id').on('click', () => {
+            let category = $('[name="category"]:checked').val();
+            console.log(category);
+            $.ajax({
             <!--headers: {-->
             <!--    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')-->
             <!--}, -->
-  <!--              type: "get",-->
-  <!--              url: "/purchase/category/ajax",-->
-  <!--              data: {'category_id': category},-->
-  <!--              dataType: 'json',-->
-  <!--          }).done(function(data){-->
-  <!--              console.log(data)-->
-  <!--             $('#genres_select').children().remove();-->
-  <!--             $.each(data, function (index, value) {-->
-  <!--              html = `-->
-  <!--                    <option>${value.name}</option>-->
-  <!--               `;-->
-  <!--               $('#genres_select').append(html);-->
-  <!--             })-->
+                type: "get",
+                url: "/purchase/category/ajax",
+                data: {'category_id': category},
+                dataType: 'json',
+            }).done(function(data){
+                console.log(data)
+               $('#genres_select').children().remove();
+               $.each(data, function (index, value) {
+                html = `
+                      <option>${value.name}</option>
+                 `;
+                 $('#genres_select').append(html);
+               })
                
                
               
-  <!--          }).fail(function() {-->
-  <!--            console.log('失敗');-->
-  <!--          }); -->
+            }).fail(function() {
+              console.log('失敗');
+            }); 
                  
-  <!--      });-->
+        });
         
-  <!--  });-->
-  <!--</script>-->
+    });
+  </script>
  @endsection
