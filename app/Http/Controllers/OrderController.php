@@ -13,27 +13,7 @@ use Carbon\Carbon;
 
 class OrderController extends Controller
 {
-    public function day() {
-        
-        return view('orders.day');
-    }
     
-    public function day_store(Request $request)
-    {
-        Log::debug($request);
-        
-        $date = new Carbon();
-        
-        $month = $request->input('month');
-        $day = $request->input('day');
-        
-        $date->month = $month;
-        $date->day = $day;
-        
-         Log::debug($date);
-        
-        return redirect()->route('orders', $date);
-    }
     
     public function index() {
         
@@ -76,11 +56,11 @@ class OrderController extends Controller
         
         $today = Carbon::today();
         
-        Log::debug($today);
+        // Log::debug($today);
         
         $purchases = Purchase::whereDate('created_at', $today)->get();
         
-        Log::debug($purchases);
+        // Log::debug($purchases);
         
         $categories = Category::all();
         
@@ -108,22 +88,25 @@ class OrderController extends Controller
     }
     
     public function category(Request $request) {
-        // Log::debug($request);
+        Log::debug($request);
         
         $category = $request['category_id'];
         
-        // Log::debug($category);
+        Log::debug($category);
+         
+        $maintenance_id = Maintenance::where('category_id', $category)->get('id');
+         
+        Log::debug($maintenance_id);
         
-         
-         $maintenance_id = Maintenance::where('category_id', $category)->get('id');
-         
-         
-         
-         Log::debug($maintenance_id);
+        for($i = 1; $i <= $maintenance_id.count(); $i++) {
+            $maintenance = $maintenance_id[$i].value();
+        }
+        
+        log::debug($maintenance);
+        
+        // Log::debug($purchases);
          
          $purchases = Purchase::where('maintenance_id', $maintenance_id)->get();
-         
-         
          
          return $purchases;
     }
