@@ -43,9 +43,14 @@ class OrderController extends Controller
     
     public function store(Request $request)
     {
+        $date = new Carbon();
+        
         $purchase = new Purchase();
         $purchase->purchase_qty = $request->input('purchase_qty');
         $purchase->maintenance_id = $request->input('maintenance_id');
+        $arrived_at = $request->input('arrived_at');
+        log::debug($arrived_at);
+        $purchase->arrived_at = $date->addDay($arrived_at);
         $purchase->save();
         
         return redirect()->route('orders_purchase');
@@ -62,9 +67,27 @@ class OrderController extends Controller
         
         // Log::debug($purchases);
         
+        $makers = Maker::all();
+        
         $categories = Category::all();
         
-        return view('orders.purchases.index', compact('purchases', 'categories'));
+        return view('orders.purchases.index', compact('purchases','makers', 'categories'));
+    }
+    
+    public function update(Request $request, Purchase $purchase) 
+    {
+        $purchase->purchase_qty = $request->input('purchase_qty');
+        // $purchase->
+        $purchase->update();
+        
+        return redirect()->route('orders_purchase');
+    }
+    
+    public function delete(Purchase $purchase)
+    {
+        $purchase->delete();
+        
+        return redirect()->route('orders_purchase');
     }
     
     public function note_today() 
