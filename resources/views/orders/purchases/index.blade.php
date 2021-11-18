@@ -27,19 +27,39 @@
         {{$category->name}}
     </div>
     @endforeach
+    @foreach($makers as $maker)
+    <div>
+        <input type="checkbox"  class="maker_id" name="maker" value="{{$maker->id}}">
+        {{$maker->name}}
+    </div>
+    @endforeach
 </div>
 <div>
     @foreach($purchases as $purchase)
     <div class="purchase_maintenance">
         <div>{{$purchase->maintenance->name}}</div>
-        <div>{{$purchase->purchase_qty}}個</div>
-        @if($purchase->purchase_qty < 10)
-        <div>{{$purchase->maintenance->price_1pc}}円</div>
-        @elseif($purchase->maintenance->purchase_qty < 30)
-        <div>{{$purchase->maintenance->price_10pcs}}円</div>
-        @elseif($purchase->maintenance->purchase_qty >= 30)
-        <div>{{$purchase->maintenance->price_30pcs}}円</div>
-        @endif
+        <form method="POST" action="{{route('orders_update', $purchase)}}">
+            {{ csrf_field() }}
+            <input type="hidden" name="_method" value="PUT">
+            <input type="tel" name="purchase_qty" value="{{$purchase->purchase_qty}}">個</input>
+            @if($purchase->purchase_qty < 10)
+            <!--<input type="tel" name="maintenance_pc" value="{{$purchase->maintenance->price_1pc}}">円</input>-->
+            <div>{{$purchase->maintenance->price_1pc}}円</div>
+            @elseif($purchase->purchase_qty < 30)
+            <!--<input type="tel" name="maintenance_pc" value="{{$purchase->maintenance->price_10pcs}}">円</input>-->
+            <div>{{$purchase->maintenance->price_10pcs}}円</div>
+            @elseif($purchase->purchase_qty <= 30)
+            <!--<input type="tel" name="maintenance_pc" value="{{$purchase->maintenance->price_30pcs}}">円</input>-->
+            <div>{{$purchase->maintenance->price_30pcs}}円</div>
+            @endif
+            <div>{{$purchase->arrived_at}}日後</div>
+            <button type="submit">編集</button>
+        </form>
+        <form method="POST" action="{{route('orders_delete', $purchase)}}" onsubmit="return confirm('本気ですか？')">
+            @csrf
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit">削除</button>
+        </form>
     </div>    
     @endforeach
 </div>

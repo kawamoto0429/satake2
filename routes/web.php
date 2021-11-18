@@ -36,8 +36,16 @@ Route::get('/orders/{maker}/home', [OrderController::class, 'home'])->name('inde
 Route::get('/orders/{maintenance}/show', [OrderController::class, 'show'])
         ->name('home_show');
         
-Route::post('/orders/purchase/store', [OrderController::class, 'store'])->name('orders_store');
+
 Route::get('/orders/purchase', [OrderController::class, 'purchase'])->name('orders_purchase');
+Route::post('/orders/purchase/store', [OrderController::class, 'store'])->name('orders_store');
+Route::put('/orders/purchase/{purchase}/update', [OrderController::class, 'update'])
+    ->name('orders_update')
+    ->where('purchase', '[0-9]+');
+Route::delete('/orders/purchase/{purchase}/delete', [OrderController::class, 'delete'])
+    ->name('orders_delete')
+    ->where('purchase', '[0-9]+');
+    
 Route::get('/orders/purchase/note', [OrderController::class, 'note_today'])->name('note_today');
 Route::get('/orders/purchase/note_sub', [OrderController::class, 'note_sub'])->name('note_sub');
 

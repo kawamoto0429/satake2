@@ -8,7 +8,12 @@
     </div>
     <div class="orders-note">
         <div class="orders-1">昨日ノート</div>
-        <div class="orders-1">今日ノート</div>
+        <div class="orders-1">
+            <a href="{{route("note_today")}}">今日ノート</a>
+        </div>
+        <div class="orders-1">
+            <a href="{{route('orders_purchase')}}">今日の発注</a>
+        </div>
     </div>
 </div>
 
@@ -31,6 +36,7 @@
     <form method="POST" action="{{route('orders_store')}}">
         {{ csrf_field() }}
     <input type="text" name="purchase_qty">個
+    <input type="tel" name="arrived_at"> 日後
     <input type="hidden" name="maintenance_id" value="{{$maintenance->id}}">
     <button type="submit">発注</button>
     </form>
