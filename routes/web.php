@@ -11,6 +11,7 @@ use App\Http\Controllers\PopController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NoteController;
+use App\Http\Controllers\PDFController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -87,4 +88,5 @@ Route::get('/pops',[PopController::class, 'index']);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+Route::get('pdf',[PDFController::class, 'index']);
 
