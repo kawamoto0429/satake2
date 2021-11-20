@@ -62,14 +62,12 @@ class OrderController extends Controller
         $today = Carbon::today();
         
         // Log::debug($today);
+        $makers = Maker::all();
+        $categories = Category::all();
         
         $purchases = Purchase::whereDate('created_at', $today)->get();
         
         // Log::debug($purchases);
-        
-        $makers = Maker::all();
-        
-        $categories = Category::all();
         
         return view('orders.purchases.index', compact('purchases','makers', 'categories'));
     }
@@ -90,6 +88,12 @@ class OrderController extends Controller
         return redirect()->route('orders_purchase');
     }
     
+    public function select(Request $request)
+    {
+        Log::debug($request);
+    }
+    
+    
     public function note_today() 
     {
         $today = Carbon::today();
@@ -108,6 +112,22 @@ class OrderController extends Controller
         $purchases = Purchase::whereDate('created_at', $day_sub)->get();
         
         return view('notes.sub', compact('day_sub', "purchases"));
+    }
+    
+    public function specify(Maker $maker)
+    {
+        $date = new Carbon();
+        $maker_id = $maker->id;
+        $purchases = Purchase::wherehas('maintenance_id', function($query){
+                $query->where('maker_id', $maker_id);
+            } )->get();
+            
+        log::debug($purchases);
+        
+        
+        
+        
+        return redirect()->route('orders_purchase', $purchases);
     }
     
     public function category(Request $request) {

@@ -10,6 +10,9 @@
     <div class="orders-note">
         <div class="orders-1">昨日ノート</div>
         <div class="orders-1">今日ノート</div>
+        <div class="orders-1">
+            <a href="{{route('orders_purchase')}}">今日の発注</a>
+        </div>
     </div>
 </div>
 
@@ -33,15 +36,16 @@
     </div>
     <div class="products-list">
         
-        <form>
+        
         @foreach($maintenances as $maintenance)
         <div>
-            <input type="checkbox"><a href="{{route('home_show', $maintenance)}}">{{$maintenance->name}}</a>
-            <input type="text" value="{{$maintenance->price_1pc}}">円
-            <input type="text">個
+            <input type="checkbox" name="" value="{{$maintenance}}"><a href="{{route('home_show', $maintenance)}}">{{$maintenance->name}}</a>
+            <input type="text" name="" value="{{$maintenance->price_1pc}}">円
+            <input type="text" name="">個
         </div>
         @endforeach
-        
+        <!--<form method="POST" action="{{ route('orders_select') }}">-->
+        <form method="POST" action="/">
         <button type="submit">確定</button>
         </form>
     

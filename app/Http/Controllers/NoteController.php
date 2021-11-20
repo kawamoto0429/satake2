@@ -73,7 +73,7 @@ class NoteController extends Controller
         
         Log::debug($date);
         
-        $purchases = Purchase::whereDate('created_at', $date)->get();
+        $purchases = Purchase::whereDate('arrived_at', $date)->get();
         
         Log::debug($purchases);
         
@@ -92,7 +92,7 @@ class NoteController extends Controller
         
         $date->day = $day - 1;
         
-        $purchases = Purchase::whereDate('created_at', $date)->get();
+        $purchases = Purchase::whereDate('arrived_at', $date)->get();
         
         return view('notes.orders', compact('id', 'day','purchases'));
     }

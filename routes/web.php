@@ -34,6 +34,7 @@ Route::get('/notes/home/{id}/{day}', [NoteController::class, 'orders']);
 // Route::post('/orders/day/store', [OrderController::class, 'day_store'])->name('day_store');
 Route::get('/orders', [OrderController::class, 'index'])->name('orders');
 Route::get('/orders/{maker}/home', [OrderController::class, 'home'])->name('index_home');
+Route::get('/orders/select', [OrderController::class, 'select'])->name('orders_select');
 Route::get('/orders/{maintenance}/show', [OrderController::class, 'show'])
         ->name('home_show');
         
@@ -46,6 +47,7 @@ Route::put('/orders/purchase/{purchase}/update', [OrderController::class, 'updat
 Route::delete('/orders/purchase/{purchase}/delete', [OrderController::class, 'delete'])
     ->name('orders_delete')
     ->where('purchase', '[0-9]+');
+Route::get('/purchase/{maker}/specify', [OrderController::class, 'specify']);    
     
 Route::get('/orders/purchase/note', [OrderController::class, 'note_today'])->name('note_today');
 Route::get('/orders/purchase/note_sub', [OrderController::class, 'note_sub'])->name('note_sub');
@@ -88,5 +90,5 @@ Route::get('/pops',[PopController::class, 'index']);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('pdf',[PDFController::class, 'index']);
+Route::get('/pdf',[PDFController::class, 'index'])->name('pdf');
 
