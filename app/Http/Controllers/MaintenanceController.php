@@ -8,6 +8,7 @@ use App\Models\Maker;
 use App\Models\Category;
 use App\Models\Genre;
 use Log;
+use App\Http\Requests\MaintenanceRequest;
 
 class MaintenanceController extends Controller
 {
@@ -27,7 +28,7 @@ class MaintenanceController extends Controller
         return view('products.maintenances.create', compact('makers', 'categories', 'genres'));
     }
     
-    public function store(Request $request) 
+    public function store(MaintenanceRequest $request) 
     {
         $maintenance = new Maintenance();
         $maintenance->name = $request->input('name');
@@ -62,7 +63,7 @@ class MaintenanceController extends Controller
         return view('products.maintenances.edit', compact('maintenance', 'makers', 'categories', 'genres'));
     }
     
-    public function update(Request $request, Maintenance $maintenance)
+    public function update(MaintenanceRequest $request, Maintenance $maintenance)
     {
         $maintenance->name = $request->input('name');
         $maintenance->price_1pc = $request->input('price_1pc');

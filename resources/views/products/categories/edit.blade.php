@@ -6,6 +6,9 @@
     <input type="hidden" name="_method" value="PUT">
     <input type="text" name="name" value="{{$category->name}}">
     <button type="submit">update</button>
+    @error('name')
+            <div class="error">{{$message}}</div>
+    @enderror
 </form>
 
 @endsection

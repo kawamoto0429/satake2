@@ -6,6 +6,7 @@ use App\Models\Genre;
 use Illuminate\Http\Request;
 use App\Models\Maker;
 use App\Models\Category;
+use App\Http\Requests\GenreRequest;
 
 class GenreController extends Controller
 {
@@ -38,7 +39,7 @@ class GenreController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GenreRequest $request)
     {
         $genre = new Genre();
         $genre->name = $request->input('name');
@@ -82,7 +83,7 @@ class GenreController extends Controller
      * @param  \App\Models\Genre  $genre
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Genre $genre)
+    public function update(GenreRequest $request, Genre $genre)
     {
         $genre->name = $request->input('name');
         $genre->category_id = $request->input('category_id');

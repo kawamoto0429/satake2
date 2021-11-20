@@ -12,8 +12,11 @@
     <div class="maker-form">
     <form method="POST" action="/products/makers">
         {{ csrf_field() }}
-        <input type="text" name="name">
+        <input type="text" name="name" value="{{old('name')}}">
         <button type="submit">Create</button>
+        @error('name')
+            <div class="error">{{$message}}</div>
+        @enderror
     </form>
     </div>
 
