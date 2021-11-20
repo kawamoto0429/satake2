@@ -5,6 +5,7 @@
     {{ csrf_field() }}
     <input type="hidden" name="_method" value="PUT">
     <input type="text" name="name" value="{{$genre->name}}">
+    
     <select name="maker_id">
         @foreach($makers as $maker)
         @if($maker->id == $genre->maker_id)
@@ -24,6 +25,9 @@
         @endforeach
     </select>
     <button type="submit">update</button>
+    @error('name')
+            <div class="error">{{$message}}</div>
+    @enderror
 </form>
 
 @endsection

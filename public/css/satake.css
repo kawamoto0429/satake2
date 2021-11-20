@@ -151,3 +151,9 @@ label {
 .purchase_category {
     display: flex;
 }
+
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 8px;
+}

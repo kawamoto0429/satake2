@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Maker;
 use Illuminate\Http\Request;
+use App\Http\Requests\MakerRequest;
 
 class MakerController extends Controller
 {
@@ -35,8 +36,10 @@ class MakerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MakerRequest $request)
     {
+        
+        
         $maker = new Maker();
         $maker->name = $request->name;
         $maker->save();
@@ -73,7 +76,7 @@ class MakerController extends Controller
      * @param  \App\Models\Maker  $maker
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Maker $maker)
+    public function update(MakerRequest $request, Maker $maker)
     {
         $maker->name = $request->name;
         $maker->update();
