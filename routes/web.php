@@ -92,3 +92,10 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/pdf',[PDFController::class, 'index'])->name('pdf');
 
+Route::get('/hello', function () {
+        $pdf = PDF::loadHTML('<h1>こんにちは</h1>');
+
+        return $pdf->setOption('encoding', 'utf-8')->inline();
+
+});
+
