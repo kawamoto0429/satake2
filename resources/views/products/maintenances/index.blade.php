@@ -13,9 +13,9 @@
 <div >
     @foreach($maintenances as $maintenance)
     <div class="maintenances-list">
-        <div>{{$maintenance->maker_name}}</div>
-        <div>{{$maintenance->name}}</div>
-        <div>{{$maintenance->price_1pc}}</div>
+        <label>メーカー</label><div>{{$maintenance->maker_name}}</div>
+        <label>商品名</label><div>{{$maintenance->name}}</div>
+        <label>１個あたりの納価</label><div>{{$maintenance->price_1pc}}</div>
         <div>
             <a href="{{ route('maintenance.show', $maintenance)}}">詳細</a>
         </div>

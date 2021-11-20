@@ -29,7 +29,7 @@
     @endforeach
     @foreach($makers as $maker)
     <div>
-        <input type="checkbox"  class="maker_id" name="maker" value="{{$maker->id}}">
+        <!--<a href="/purchase/{{$maker->id}}/specify">{{$maker->name}}</a>-->
         {{$maker->name}}
     </div>
     @endforeach
@@ -48,7 +48,7 @@
             @elseif($purchase->purchase_qty < 30)
             <!--<input type="tel" name="maintenance_pc" value="{{$purchase->maintenance->price_10pcs}}">円</input>-->
             <div>{{$purchase->maintenance->price_10pcs}}円</div>
-            @elseif($purchase->purchase_qty <= 30)
+            @elseif($purchase->purchase_qty >= 30)
             <!--<input type="tel" name="maintenance_pc" value="{{$purchase->maintenance->price_30pcs}}">円</input>-->
             <div>{{$purchase->maintenance->price_30pcs}}円</div>
             @endif
@@ -62,6 +62,9 @@
         </form>
     </div>    
     @endforeach
+</div>
+<div>
+    <a href="/pdf">確定</a>
 </div>
 
 <script>
