@@ -116,18 +116,36 @@ class OrderController extends Controller
     
     public function specify(Maker $maker)
     {
-        $date = new Carbon();
+        // $date = new Carbon();
         $maker_id = $maker->id;
-        $purchases = Purchase::wherehas('maintenance_id', function($query){
-                $query->where('maker_id', $maker_id);
-            } )->get();
+        $maintenances = Maintenance::where('maker_id', $maker_id)->get('id');
+        
+        Log::debug($maintenances);
+        
+        $purchases = [];//push 要素の追加
+        // foreach($maintenances as $maintenance) {
+        //     $purchases[] = $maintenace->purchases::where('maintenance_id', $maintenace)
+        // }
+        
+        for($i = 0; $i < count($maintenances); $i++){
+            if($maintenances[$i]->id == $i+1){
+                 $purchases[$i] = $maintenances[$i]->purchases::find('maintenance_id', $i);
+            }
+        }
+        
+        
+        
+        // $purchases = Purchase::wherehas('maintenance_id', function($query){
+        //         $query->where('maker_id', $maker_id);
+        //     } )->get();
             
         log::debug($purchases);
         
         
         
         
-        return redirect()->route('orders_purchase', $purchases);
+        // return redirect()->route('orders_purchase', $purchases);
+        return view('orders.purchases.maker', compact('purchases'));
     }
     
     public function category(Request $request) {

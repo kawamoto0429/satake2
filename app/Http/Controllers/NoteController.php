@@ -82,18 +82,22 @@ class NoteController extends Controller
     
     public function orders_sub ($id, $day) 
     {
-        Log::debug($id);
+        // Log::debug($id);
         
-        Log::debug($day);
+        // Log::debug($day);
         
         $date = new Carbon();
         
         $date->month = $id;
         
-        $date->day = $day - 1;
+        $date->day = $day;
         
-        $purchases = Purchase::whereDate('arrived_at', $date)->get();
+        $sub_date = $date->subDay();
         
-        return view('notes.orders', compact('id', 'day','purchases'));
+        $id = $sub_date->month;
+        
+        $day = $sub_date->day;
+        
+        return redirect()->route('home_orders', ['id'=>$id, 'day'=>$day]);
     }
 }
