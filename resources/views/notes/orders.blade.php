@@ -4,7 +4,7 @@
     
 </div>
 <div>
-    <a href="#">&lt;</a>
+    <a href="/notes/hone/{{$id}}/{{$day}}/sub">&lt;</a>
     {{$day}}
     <a href="">&gt;</a>
 </div>

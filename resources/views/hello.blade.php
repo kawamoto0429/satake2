@@ -29,19 +29,30 @@ font-family: ipag;
     </header>
     <div class="container">
     @foreach($purchases as $purchase)
-    <div>{{$purchase->maintenance->name}}</div>
-    <div>{{$purchase->purchase_qty}}</div>
-        @if($purchase->purchase_qty < 10)
-            <!--<input type="tel" name="maintenance_pc" value="{{$purchase->maintenance->price_1pc}}">円</input>-->
-            <div>{{$purchase->maintenance->price_1pc}}円</div>
-            @elseif($purchase->purchase_qty < 30)
-            <!--<input type="tel" name="maintenance_pc" value="{{$purchase->maintenance->price_10pcs}}">円</input>-->
-            <div>{{$purchase->maintenance->price_10pcs}}円</div>
-            @elseif($purchase->purchase_qty <= 30)
-            <!--<input type="tel" name="maintenance_pc" value="{{$purchase->maintenance->price_30pcs}}">円</input>-->
-            <div>{{$purchase->maintenance->price_30pcs}}円</div>
-        @endif
+    @if($purchase->purchase_qty < 10)
+    <div>
+        {{$purchase->maintenance->name}} {{$purchase->purchase_qty}}個 {{$purchase->maintenance->price_1pc}}円
+    </div>
+    @elseif($purchase->purchase_qty < 30)
+    <div>
+        {{$purchase->maintenance->name}} {{$purchase->purchase_qty}}個 {{$purchase->maintenance->price_10pcs}}円
+    </div>
+    @elseif($purchase->purchase_qty <= 30)
+    <div>
+        {{$purchase->maintenance->name}} {{$purchase->purchase_qty}}個 {{$purchase->maintenance->price_30pcs}}円
+    </div>
+    @endif
     @endforeach
+            <!--<input type="tel" name="maintenance_pc" value="{{$purchase->maintenance->price_1pc}}">円</input>-->
+    
+            
+            <!--<input type="tel" name="maintenance_pc" value="{{$purchase->maintenance->price_10pcs}}">円</input>-->
+            
+            
+            <!--<input type="tel" name="maintenance_pc" value="{{$purchase->maintenance->price_30pcs}}">円</input>-->
+            
+        
+   
     </div>
 </div>
 </body>

@@ -29,8 +29,7 @@
     @endforeach
     @foreach($makers as $maker)
     <div>
-        <!--<a href="/purchase/{{$maker->id}}/specify">{{$maker->name}}</a>-->
-        {{$maker->name}}
+        <a href="/purchase/{{$maker->id}}/specify">{{$maker->name}}</a>
     </div>
     @endforeach
 </div>
