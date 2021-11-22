@@ -117,22 +117,20 @@ class OrderController extends Controller
     
     public function specify(Maker $maker)
     {
-        // $date = new Carbon();
+        $today = new Carbon('today');
         $maker_id = $maker->id;
-        $maintenances = Maintenance::where('maker_id', $maker_id)->get('id');
+        $purchases = purchase::where('maker_id', $maker_id)->whereDate('created_at', $today)->get();
         
-        Log::debug($maintenances);
         
-        $purchases = [];//push 要素の追加
         // foreach($maintenances as $maintenance) {
         //     $purchases[] = $maintenace->purchases::where('maintenance_id', $maintenace)
         // }
         
-        for($i = 0; $i < count($maintenances); $i++){
-            if($maintenances[$i]->id == $i+1){
-                 $purchases[$i] = $maintenances[$i]->purchases::find('maintenance_id', $i);
-            }
-        }
+        // for($i = 0; $i < count($maintenances); $i++){
+        //     if($maintenances[$i]->id == $i+1){
+        //          $purchases[$i] = $maintenances[$i]->purchases::find('maintenance_id', $i);
+        //     }
+        // }
         
         
         
@@ -146,7 +144,7 @@ class OrderController extends Controller
         
         
         // return redirect()->route('orders_purchase', $purchases);
-        return view('orders.purchases.maker', compact('purchases'));
+        return view('orders.purchases.maker', compact('purchases', 'maker'));
     }
     
     public function category(Request $request) {
