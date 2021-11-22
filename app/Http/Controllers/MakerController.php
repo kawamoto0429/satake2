@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Maker;
+use App\Models\Maintenance;
+use Log;
 use Illuminate\Http\Request;
 use App\Http\Requests\MakerRequest;
 
@@ -92,6 +94,16 @@ class MakerController extends Controller
      */
     public function destroy(Maker $maker)
     {
+        $maker_id = $maker->id;
+        
+        $target_items = Maintenance::where('maker_id', $maker_id)->get('id');
+        
+        Log::debug($target_items);
+        
+        for($i=0; $i < count($target_items); $i++){
+            $target_items[$i]->delete();
+        }
+        
         $maker->delete();
         
         return redirect('/products/makers');

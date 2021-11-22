@@ -6,6 +6,8 @@ use App\Models\Genre;
 use Illuminate\Http\Request;
 use App\Models\Maker;
 use App\Models\Category;
+use App\Models\Maintenance;
+use Log;
 use App\Http\Requests\GenreRequest;
 
 class GenreController extends Controller
@@ -103,6 +105,16 @@ class GenreController extends Controller
      */
     public function destroy(Genre $genre)
     {
+        $genre_id = $genre->id;
+        
+        $target_items = Maintenance::where('genre_id', $genre_id)->get('id');
+        
+        Log::debug($target_items);
+        
+        for($i=0; $i < count($target_items); $i++){
+            $target_items[$i]->delete();
+        }
+        
         $genre->delete();
         
         return redirect('/products/genres');
