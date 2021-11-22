@@ -48,6 +48,7 @@ class OrderController extends Controller
         $purchase = new Purchase();
         $purchase->purchase_qty = $request->input('purchase_qty');
         $purchase->maintenance_id = $request->input('maintenance_id');
+        $purchase->maker_id = $request->input('maker_id');
         $arrived_at = $request->input('arrived_at');
         log::debug($arrived_at);
         $purchase->arrived_at = $date->addDay($arrived_at);

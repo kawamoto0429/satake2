@@ -13,4 +13,8 @@ class Purchase extends Model
     {
         return $this->belongsTo(Maintenance::class);
     }
+    public function maker()
+    {
+        return $this->belongsTo(Maker::class);
+    }
 }

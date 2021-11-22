@@ -18,4 +18,9 @@ class Maker extends Model
     {
         return $this->hasMany(Maintenance::class);
     }
+    
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class);
+    }
 }
