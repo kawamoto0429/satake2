@@ -71,9 +71,9 @@
     display: flex;
     
 }
-label {
-   margin: 0px auto;
-}
+/*label {*/
+/*   margin: 0px auto;*/
+/*}*/
 
 .maker-container {
     width: 500px;
