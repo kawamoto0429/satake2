@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryRequest;
+use App\Models\Maintenance;
+use Log;
 
 class CategoryController extends Controller
 {
@@ -89,6 +91,16 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        $category_id = $category->id;
+        
+        $target_items = Maintenance::where('category_id', $category_id)->get('id');
+        
+        Log::debug($target_items);
+        
+        for($i=0; $i < count($target_items); $i++){
+            $target_items[$i]->delete();
+        }
+        
         $category->delete();
         
         return redirect('/products/categories');
