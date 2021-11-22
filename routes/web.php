@@ -48,18 +48,23 @@ Route::put('/orders/purchase/{purchase}/update', [OrderController::class, 'updat
 Route::delete('/orders/purchase/{purchase}/delete', [OrderController::class, 'delete'])
     ->name('orders_delete')
     ->where('purchase', '[0-9]+');
-Route::get('/purchase/{maker}/specify', [OrderController::class, 'specify']);    
+Route::get('/purchase/{maker}/specify', [OrderController::class, 'specify']);   
+
     
 Route::get('/orders/purchase/note', [OrderController::class, 'note_today'])->name('note_today');
 Route::get('/orders/purchase/note_sub', [OrderController::class, 'note_sub'])->name('note_sub');
 
+
 Route::get('/purchase/category/ajax', [OrderController::class, 'category']);
 
+
 Route::get('/products', [ProductController::class, 'index'])->name('products');
+
 
 Route::resource('/products/makers', MakerController::class);
 Route::resource('/products/categories', CategoryController::class);
 Route::resource('/products/genres', GenreController::class);
+
 
 Route::get('/products/maintenances', [MaintenanceController::class, 'index'])->name('maintenance.index');
 Route::get('/products/maintenances/create', [MaintenanceController::class, 'create'])->name('maintenance.create');
@@ -67,6 +72,8 @@ Route::post('/products/maintenances/store', [MaintenanceController::class, 'stor
 Route::get('/products/maintenances/{maintenance}/show', [MaintenanceController::class, 'show'])
     ->name('maintenance.show')
     ->where('maintenance', '[0-9]+');
+Route::get('/products/maintenances/csv', [MaintenanceController::class, 'csv']); 
+Route::post('/products/maintenances/csv/store', [MaintenanceController::class, 'csv_store']);
 
 Route::get('/products/maintenances/{maintenance}/edit', [MaintenanceController::class, 'edit'])
     ->name('maintenance.edit')
@@ -99,4 +106,6 @@ Route::get('/hello', function () {
         return $pdf->setOption('encoding', 'utf-8')->inline();
 
 });
+
+
 

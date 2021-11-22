@@ -9,6 +9,9 @@ use App\Models\Category;
 use App\Models\Genre;
 use Log;
 use App\Http\Requests\MaintenanceRequest;
+use Goodby\CSV\Import\Standard\LexerConfig;
+use Goodby\CSV\Import\Standard\Lexer;
+use Goodby\CSV\Import\Standard\Interpreter;
 
 class MaintenanceController extends Controller
 {
@@ -121,4 +124,60 @@ class MaintenanceController extends Controller
         // // return response()->json($genres);
         return $genres;
     }
+    
+    public function csv()
+    {
+        return view('products.maintenances.csv');
+    }
+    
+    public function csv_storetCsv(Request $request)
+    {
+        // CSV ファイル保存
+        $tmpName = mt_rand().".".$request->file('csv')->guessExtension(); //TMPファイル名
+        $request->file('csv')->move(public_path()."/csv/tmp",$tmpName);
+        $tmpPath = public_path()."/csv/tmp/".$tmpName;
+     
+        //Goodby CSVのconfig設定
+        $config = new LexerConfig();
+        $interpreter = new Interpreter();
+        $lexer = new Lexer($config);
+     
+        //CharsetをUTF-8に変換、CSVのヘッダー行を無視
+        $config->setToCharset("UTF-8");
+        $config->setFromCharset("sjis-win");
+        $config->setIgnoreHeaderLine(true);
+     
+        $dataList = [];
+         
+        // 新規Observerとして、$dataList配列に値を代入
+        $interpreter->addObserver(function (array $row) use (&$dataList){
+            // 各列のデータを取得
+            $dataList[] = $row;
+        });
+     
+        // CSVデータをパース
+        $lexer->parse($tmpPath, $interpreter);
+     
+        // TMPファイル削除
+        unlink($tmpPath);
+     
+        // 登録処理
+        $count = 0;
+        foreach($dataList as $row){
+            Maintenance::insert(['name' => $row[0],
+                                    'price_1pc' => $row[1],
+                                    'price_10pcs' => $row[2],
+                                    'price_30pcs' => $row[3],
+                                    'jan' => $row[4],
+                                    'maker_id' => $row[5],
+                                    'category_id' => $row[6],
+                                    'genre_id' => $row[7],
+                                    'lot' => $row[8],
+                                    ]);
+            $count++;
+        }
+     
+        return redirect()->action('ItemsController@book')->with('flash_message', $count . '品登録しました');
+    }
+
 }
