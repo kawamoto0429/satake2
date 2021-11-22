@@ -62,9 +62,6 @@
     </div>    
     @endforeach
 </div>
-<div>
-    <a href="/pdf">確定</a>
-</div>
 
 <script>
     $(function(){

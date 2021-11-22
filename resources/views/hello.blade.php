@@ -25,7 +25,7 @@ font-family: ipag;
 </head>
 <body>
     <header>
-        <div> ヤマザキ 担当者様 </div>
+        <div><label>{{$maker->name}}</label><label>担当者様</label></div>
     </header>
     <div class="container">
     @foreach($purchases as $purchase)
