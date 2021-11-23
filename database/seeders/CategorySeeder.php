@@ -16,17 +16,58 @@ class CategorySeeder extends Seeder
     {
         DB::table('categories')->insert([
             [
-                'name' => '菓子パン'
+                'name' => '菓子パン',
+                'maker_id' => 1,
             ],
             [
-                'name' => '袋パン'
+                'name' => '袋パン',
+                'maker_id' => 1,
             ],
             [
-                'name' => '食パン'
+                'name' => '食パン',
+                'maker_id' => 1,
             ],
             [
-                'name' => '洋菓子'
+                'name' => '洋菓子',
+                'maker_id' => 1,
             ],
+            [
+                'name' => '菓子パン',
+                'maker_id' => 2,
+            ],
+            [
+                'name' => '袋パン',
+                'maker_id' => 2,
+            ],
+            [
+                'name' => '食パン',
+                'maker_id' => 2,
+            ],
+            [
+                'name' => '菓子パン',
+                'maker_id' => 3,
+            ],
+            [
+                'name' => '袋パン',
+                'maker_id' => 3,
+            ],
+            [
+                'name' => '食パン',
+                'maker_id' => 3,
+            ],
+            [
+                'name' => '菓子パン',
+                'maker_id' => 4,
+            ],
+            [
+                'name' => '袋パン',
+                'maker_id' => 4,
+            ],
+            [
+                'name' => '食パン',
+                'maker_id' => 4,
+            ],
+            
             ]);
     }
 }

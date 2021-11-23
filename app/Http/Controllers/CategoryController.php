@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Maker;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Maintenance;
@@ -17,8 +18,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $makers = Maker::all();
         $categories = Category::all();
-        return view('products.categories.index', compact('categories'));
+        return view('products.categories.index', compact('categories', 'makers'));
     }
 
     /**
@@ -41,7 +43,8 @@ class CategoryController extends Controller
     {
         $category = new Category();
         $category->name = $request->name;
-        $category->save();
+        $category->maker_id = $request->input('maker_id');
+         $category->save();
         
         return redirect('/products/categories');
     }
@@ -65,7 +68,9 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('products.categories.edit', compact('category'));
+        $makers = Maker::all();
+        
+        return view('products.categories.edit', compact('category', 'makers'));
     }
 
     /**
@@ -78,6 +83,7 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request, Category $category)
     {
         $category->name = $request->name;
+        $category->maker_id = $request->input('maker_id');
         $category->update();
         
         return redirect('/products/categories');
