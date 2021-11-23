@@ -13,6 +13,11 @@
     <form method="POST" action="/products/categories">
         {{ csrf_field() }}
         <input type="text" name="name" value"{{old('name')}}">
+        <select name="maker_id">
+        @foreach($makers as $maker)
+            <option  value="{{$maker->id}}">{{$maker->name}}</option>
+        @endforeach
+        </select>
         <button type="submit">Create</button>
         @error('name')
             <div class="error">{{$message}}</div>

@@ -18,4 +18,9 @@ class Category extends Model
     {
         return $this->hasMany(maintenance::class);
     }
+    
+    public function maker()
+    {
+        return $this->belongsTo(Maker::class);
+    }
 }
