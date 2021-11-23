@@ -3,7 +3,7 @@
 @section('content')
     <a href="/products">home</a>
 <div class="maker-home">
-    <label>
+    <label class="label_title">
         ジャンル
     </label>
 </div>
