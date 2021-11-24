@@ -74,7 +74,7 @@
             <input type="text" name="lot" value="{{$maintenance->lot}}">
             <label>個</label>
         </div>
-        <button type="submit">Create</button>
+        <button type="submit">編集</button>
 
     </form>
 </div>

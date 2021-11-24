@@ -64,6 +64,7 @@ Route::get('/products', [ProductController::class, 'index'])->name('products');
 Route::resource('/products/makers', MakerController::class);
 Route::resource('/products/categories', CategoryController::class);
 Route::resource('/products/genres', GenreController::class);
+Route::get("/products/genres/category/ajax", [GenreController::class, 'category']);
 
 
 Route::get('/products/maintenances', [MaintenanceController::class, 'index'])->name('maintenance.index');
