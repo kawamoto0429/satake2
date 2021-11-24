@@ -100,11 +100,14 @@ class MaintenanceController extends Controller
         // $callback = $request['callback'];
         
         // return $maker;
+        $categories = Category::where('maker_id', $maker)->get();
         
         $genres = Genre::where('maker_id', $maker)->get();
         
+        $data = ['genres' => $genres, 'categories' => $categories];
+        
         // // return response()->json($genres);
-        return $genres;
+        return $data;
     }
     
     public function category(Request $request) {
@@ -119,7 +122,10 @@ class MaintenanceController extends Controller
         
         // return $maker;
         
+        
         $genres = Genre::where('category_id', $category)->get();
+        Log::debug($genres);
+        
         
         // // return response()->json($genres);
         return $genres;
@@ -130,7 +136,7 @@ class MaintenanceController extends Controller
         return view('products.maintenances.csv');
     }
     
-    public function csv_storetCsv(Request $request)
+    public function csv_store(Request $request)
     {
         // CSV ファイル保存
         $tmpName = mt_rand().".".$request->file('csv')->guessExtension(); //TMPファイル名

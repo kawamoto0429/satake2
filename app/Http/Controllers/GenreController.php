@@ -119,4 +119,27 @@ class GenreController extends Controller
         
         return redirect('/products/genres');
     }
+    
+    public function category(Request $request) {
+        Log::debug($request);
+        // Log::debug($request);
+        $maker = $request['maker_id'];
+        
+        Log::debug($maker);
+        // info($maker);
+        // $category = $request['maker_id'];
+        // $callback = $request['callback'];
+        
+        // return $maker;
+        
+        $categories = Category::where('maker_id', $maker)->get();
+        
+        Log::debug($categories);
+        
+        $data = ['categories' => $categories];
+        
+        
+        // // return response()->json($genres);
+        return $data;
+    }
 }
