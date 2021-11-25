@@ -138,9 +138,10 @@ class MaintenanceController extends Controller
     
     public function csv_store(Request $request)
     {
+        Log::debug($request->file('csv_input'));
         // CSV ファイル保存
-        $tmpName = mt_rand().".".$request->file('csv')->guessExtension(); //TMPファイル名
-        $request->file('csv')->move(public_path()."/csv/tmp",$tmpName);
+        $tmpName = mt_rand().".".$request->file('csv_input')->guessExtension(); //TMPファイル名
+        $request->file('csv_input')->move(public_path()."/csv/tmp",$tmpName);
         $tmpPath = public_path()."/csv/tmp/".$tmpName;
      
         //Goodby CSVのconfig設定
@@ -154,13 +155,21 @@ class MaintenanceController extends Controller
         $config->setIgnoreHeaderLine(true);
      
         $dataList = [];
+        
+        // $interpreter = new Interpreter();
+        // // 厳密なチェックを無効にする
+        // $interpreter->unstrict();
          
         // 新規Observerとして、$dataList配列に値を代入
         $interpreter->addObserver(function (array $row) use (&$dataList){
             // 各列のデータを取得
+            Log::debug($row);
             $dataList[] = $row;
-        });
+            // Log::debug($dataList);
      
+        });
+        
+        
         // CSVデータをパース
         $lexer->parse($tmpPath, $interpreter);
      
@@ -170,7 +179,9 @@ class MaintenanceController extends Controller
         // 登録処理
         $count = 0;
         foreach($dataList as $row){
-            Maintenance::insert(['name' => $row[0],
+
+                // Log::debug($row[0]);
+                Maintenance::insert(['name' => $row[0],
                                     'price_1pc' => $row[1],
                                     'price_10pcs' => $row[2],
                                     'price_30pcs' => $row[3],
@@ -180,10 +191,11 @@ class MaintenanceController extends Controller
                                     'genre_id' => $row[7],
                                     'lot' => $row[8],
                                     ]);
-            $count++;
+                $count++;
+            
         }
      
-        return redirect()->action('ItemsController@book')->with('flash_message', $count . '品登録しました');
+        return redirect()->route('maintenance.index');
     }
 
 }

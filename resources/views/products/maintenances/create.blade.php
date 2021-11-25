@@ -8,6 +8,13 @@
     </label>
 </div>
 <div>
+    <form method="POST" action="{{route('csv_store')}}" enctype="multipart/form-data">
+        {{ csrf_field() }}
+        <input type="file" name="csv_input">
+        <button>CSVで登録</button>
+    </form>
+</div>
+<div>
     <form method="POST" action="{{ route('maintenance.store')}}">
         {{ csrf_field() }}
         <label>商品名</label>

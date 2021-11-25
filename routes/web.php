@@ -74,7 +74,7 @@ Route::get('/products/maintenances/{maintenance}/show', [MaintenanceController::
     ->name('maintenance.show')
     ->where('maintenance', '[0-9]+');
 Route::get('/products/maintenances/csv', [MaintenanceController::class, 'csv']); 
-Route::post('/products/maintenances/csv/store', [MaintenanceController::class, 'csv_store']);
+Route::post('/products/maintenances/csv/store', [MaintenanceController::class, 'csv_store'])->name('csv_store');
 
 Route::get('/products/maintenances/{maintenance}/edit', [MaintenanceController::class, 'edit'])
     ->name('maintenance.edit')
