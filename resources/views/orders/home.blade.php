@@ -77,9 +77,11 @@
                 $.each(data, function (index, value) {
                 console.log(value)
                  html = `
+                    <div>
                         <input type="checkbox" name=""><a href="/orders/${value.id}/show">${value.name}</a>
                         <input type="text" name="" value=${value.price_1pc}><label>円</label>
                         <input type="text" name=""><label>個</label>
+                    </div>    
                   `;
                   $('.products-list').append(html);
                 })

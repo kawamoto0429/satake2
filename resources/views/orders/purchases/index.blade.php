@@ -21,12 +21,7 @@
 </div>
 
 <div class="purchase_category">
-    @foreach($categories as $category)
-    <div>
-        <input type="checkbox"  class="category_id" name="category" value="{{$category->id}}">
-        {{$category->name}}
-    </div>
-    @endforeach
+    
     @foreach($makers as $maker)
     <div>
         <a href="/purchase/{{$maker->id}}/specify">{{$maker->name}}</a>
