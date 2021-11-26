@@ -30,7 +30,7 @@ class OrderController extends Controller
         
         // $maintenances = Maintenance::where('maker_id', $id)->paginate(10);
         
-        $maintenances = Maintenance::where('maker_id', $id)->paginate(1);
+        $maintenances = Maintenance::where('maker_id', $id)->paginate(10);
         
         return view('orders.home', compact('maker','maintenances'));
     }
@@ -176,5 +176,19 @@ class OrderController extends Controller
          $purchases = Purchase::where('maintenance_id', $maintenance_id)->get();
          
          return $purchases;
+    }
+    
+    public function search(Request $request)
+    {
+        Log::debug($request);
+        
+        $keywords = $request['keywords'];
+        
+        Log::debug($keywords);
+        
+        if(!empty($keywords)) {
+            $maintenances = Maintenance::where('name', 'like', '%'.$keywords.'%')->get();
+            return $maintenances;
+        }
     }
 }

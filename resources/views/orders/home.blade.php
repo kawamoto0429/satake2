@@ -19,19 +19,20 @@
 <h1>{{$maker->name}}</h1>
 
 <div class="search">
-    <form>
-        <input tyoe="text">
-        <button type="submit">検索</button>
+    <form >
+        <input tyoe="text" value="" id="search">
     </form>
 </div>
 
 <div class="orders-maker">
     <div class="genres-sort">
-        <ul>
+        
             @foreach($maker->genres as $genre)
-                <li class="genre-select" value="{{$genre->id}}">{{$genre->name}}</li>
+            <div>
+                <input type="checkbox" value="{{$genre->id}}">{{$genre->name}}
+            </div>
             @endforeach
-        </ul>
+        
         
     </div>
     <div class="products-list">
@@ -40,8 +41,8 @@
         @foreach($maintenances as $maintenance)
         <div>
             <input type="checkbox" name="" value="{{$maintenance}}"><a href="{{route('home_show', $maintenance)}}">{{$maintenance->name}}</a>
-            <input type="text" name="" value="{{$maintenance->price_1pc}}">円
-            <input type="text" name="">個
+            <input type="text" name="" value="{{$maintenance->price_1pc}}"><label>円</label>
+            <input type="text" name=""><label>個</label>
         </div>
         @endforeach
         <!--<form method="POST" action="{{ route('orders_select') }}">-->
@@ -59,41 +60,30 @@
 <script>
     $(function(){
     
-        $('.genre-select').on('click', () => {
-            let genre = $('.genre-select').val();
-            console.log(genre);
+        $('#search').on('input', () => {
+            let keywords = $('#search').val();
+            console.log(keywords);
             $.ajax({
             <!--headers: {-->
             <!--    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')-->
             <!--}, -->
                 type: "get",
-                url: "/orders/genre/ajax",
-                data: {'genre': genre},
+                url: "/orders/search/ajax",
+                data: {'keywords': keywords},
                 dataType: 'json',
             }).done(function(data){
-                console.log(data['genres'])
-                console.log(data['categories'])
-                $('#category').children().remove();
-                $.each(data['categories'], function (index, value) {
+                console.log(data);
+                $('.products-list').children().remove();
+                $.each(data, function (index, value) {
                 console.log(value)
                  html = `
-                        <option value= ${value.id}>選択肢</option> 
-                       <option value = ${value.id}>${value.name}</option>
+                        <input type="checkbox" name=""><a href="/orders/${value.id}/show">${value.name}</a>
+                        <input type="text" name="" value=${value.price_1pc}><label>円</label>
+                        <input type="text" name=""><label>個</label>
                   `;
-                  $('#category').append(html);
+                  $('.products-list').append(html);
                 })
                 
-                $('#genres_select').children().remove();
-                
-                $.each(data['genres'], function (index, value) {
-                console.log(value.id)
-                
-                 html = `
-                       
-                       <option value = ${value.id}>${value.name}</option>
-                  `;
-                  $('#genres_select').append(html);
-                })
                
                
               
