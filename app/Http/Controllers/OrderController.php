@@ -9,6 +9,7 @@ use Log;
 use App\Models\Purchase;
 use App\Models\Category;
 use Carbon\Carbon;
+use Illuminate\Pagination\Paginator;
 
 
 class OrderController extends Controller
@@ -29,7 +30,7 @@ class OrderController extends Controller
         
         // $maintenances = Maintenance::where('maker_id', $id)->paginate(10);
         
-        $maintenances = Maintenance::where('maker_id', $id)->get();
+        $maintenances = Maintenance::where('maker_id', $id)->paginate(1);
         
         return view('orders.home', compact('maker','maintenances'));
     }
@@ -58,7 +59,13 @@ class OrderController extends Controller
         
     }
     
-    public function purchase() {
+    public function genre_specify(Request $request)
+    {
+        Log::debug($request);
+    }
+    
+    public function purchase()
+    {
         
         $today = Carbon::today();
         

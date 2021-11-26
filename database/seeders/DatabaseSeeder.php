@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class, 
         ]);
         
-        // $this->call([
-        //     UserSeeder::class, 
-        // ]);
+        $this->call([
+            GenreSeeder::class, 
+        ]);
     }
 }
