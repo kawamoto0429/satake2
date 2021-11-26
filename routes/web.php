@@ -38,7 +38,8 @@ Route::get('/orders/{maker}/home', [OrderController::class, 'home'])->name('inde
 Route::get('/orders/select', [OrderController::class, 'select'])->name('orders_select');
 Route::get('/orders/{maintenance}/show', [OrderController::class, 'show'])
         ->name('home_show');
-Route::get('/orders/genre/a', [OrderController::class, 'genre_specify']);
+Route::get('/orders/genre/ajax', [OrderController::class, 'genre_specify']);
+Route::get('/orders/search/ajax', [OrderController::class, 'search']);
         
 
 Route::get('/orders/purchase', [OrderController::class, 'purchase'])->name('orders_purchase');
