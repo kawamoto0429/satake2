@@ -141,6 +141,7 @@ class MaintenanceController extends Controller
         Log::debug($request->file('csv_input'));
         // CSV ファイル保存
         $tmpName = mt_rand().".".$request->file('csv_input')->guessExtension(); //TMPファイル名
+        Log::debug($tmpName);
         $request->file('csv_input')->move(public_path()."/csv/tmp",$tmpName);
         $tmpPath = public_path()."/csv/tmp/".$tmpName;
      
@@ -161,10 +162,15 @@ class MaintenanceController extends Controller
         // $interpreter->unstrict();
          
         // 新規Observerとして、$dataList配列に値を代入
-        $interpreter->addObserver(function (array $row) use (&$dataList){
+        $interpreter->addObserver(function (array $rows) use (&$dataList){
             // 各列のデータを取得
-            Log::debug($row);
-            $dataList[] = $row;
+            Log::debug($rows);
+            foreach($rows as $row) {
+                Log::debug($row);
+                 $dataList[] = $row;
+                 Log::debug($dataList);
+            }
+           
             // Log::debug($dataList);
      
         });
@@ -180,22 +186,33 @@ class MaintenanceController extends Controller
         $count = 0;
         foreach($dataList as $row){
 
-                // Log::debug($row[0]);
-                Maintenance::insert(['name' => $row[0],
-                                    'price_1pc' => $row[1],
-                                    'price_10pcs' => $row[2],
-                                    'price_30pcs' => $row[3],
-                                    'jan' => $row[4],
-                                    'maker_id' => $row[5],
-                                    'category_id' => $row[6],
-                                    'genre_id' => $row[7],
-                                    'lot' => $row[8],
+                Log::debug($row[0]);
+                // Maintenance::insert(['name' => $row[0],
+                //                     'price_1pc' => $row[1],
+                //                     'price_10pcs' => $row[2],
+                //                     'price_30pcs' => $row[3],
+                //                     'jan' => $row[4],
+                //                     'maker_id' => $row[5],
+                //                     'category_id' => $row[6],
+                //                     'genre_id' => $row[7],
+                //                     'lot' => $row[8],
+                //                     ]);
+                Maintenance::insert([
+                                    'name' => 'ごはん',
+                                    'price_1pc' => $row[0],
+                                    'price_10pcs' => $row[1],
+                                    'price_30pcs' => $row[2],
+                                    'jan' => $row[3],
+                                    'maker_id' => $row[4],
+                                    'category_id' => $row[5],
+                                    'genre_id' => $row[6],
+                                    'lot' => $row[7],
                                     ]);
                 $count++;
             
         }
      
-        return redirect()->route('maintenance.index');
+        // return redirect()->route('maintenance.index');
     }
 
 }
