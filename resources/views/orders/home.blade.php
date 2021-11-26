@@ -27,12 +27,12 @@
 
 <div class="orders-maker">
     <div class="genres-sort">
-        <form>
+        <ul>
             @foreach($maker->genres as $genre)
-               <div><input type="checkbox">{{$genre->name}}</div>
+                <li class="genre-select" value="{{$genre->id}}">{{$genre->name}}</li>
             @endforeach
-        <button type="submit">絞り込み</button>
-        </form>
+        </ul>
+        
     </div>
     <div class="products-list">
         
@@ -48,6 +48,7 @@
         <form method="POST" action="/">
         <button type="submit">確定</button>
         </form>
+        {{ $maintenances->links() }}
     
     <!--<div>-->
     <!---->
@@ -55,4 +56,55 @@
     </div>
     
 </div>
+<script>
+    $(function(){
+    
+        $('.genre-select').on('click', () => {
+            let genre = $('.genre-select').val();
+            console.log(genre);
+            $.ajax({
+            <!--headers: {-->
+            <!--    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')-->
+            <!--}, -->
+                type: "get",
+                url: "/orders/genre/ajax",
+                data: {'genre': genre},
+                dataType: 'json',
+            }).done(function(data){
+                console.log(data['genres'])
+                console.log(data['categories'])
+                $('#category').children().remove();
+                $.each(data['categories'], function (index, value) {
+                console.log(value)
+                 html = `
+                        <option value= ${value.id}>選択肢</option> 
+                       <option value = ${value.id}>${value.name}</option>
+                  `;
+                  $('#category').append(html);
+                })
+                
+                $('#genres_select').children().remove();
+                
+                $.each(data['genres'], function (index, value) {
+                console.log(value.id)
+                
+                 html = `
+                       
+                       <option value = ${value.id}>${value.name}</option>
+                  `;
+                  $('#genres_select').append(html);
+                })
+               
+               
+              
+            }).fail(function() {
+              console.log('失敗');
+            }); 
+                 
+        });
+        
+        
+
+    });
+</script>
 @endsection

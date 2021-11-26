@@ -115,6 +115,7 @@
                 $.each(data['categories'], function (index, value) {
                 console.log(value)
                  html = `
+                        <option value= ${value.id}>選択肢</option> 
                        <option value = ${value.id}>${value.name}</option>
                   `;
                   $('#category').append(html);
@@ -126,6 +127,7 @@
                 console.log(value.id)
                 
                  html = `
+                       
                        <option value = ${value.id}>${value.name}</option>
                   `;
                   $('#genres_select').append(html);

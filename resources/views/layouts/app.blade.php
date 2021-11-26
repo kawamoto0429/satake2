@@ -20,7 +20,10 @@
 
     <!-- Styles -->
     <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ secure_asset('css/satake.css')}}" rel="stylesheet">  
+    <link href="{{ secure_asset('css/satake.css')}}" rel="stylesheet">
+    <link href="{{ secure_asset('css/note.css')}}" rel="stylesheet">
+    <link href="{{ secure_asset('css/products/product.css')}}" rel="stylesheet">
+    <link href="{{ secure_asset('css/products/maintenance.css')}}" rel="stylesheet">
 </head>
 <body>
     <div id="app">

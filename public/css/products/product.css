@@ -1,0 +1,15 @@
+.products {
+     border: solid 1px #b2b2b2;
+     text-align: center;
+}
+
+.products-container {
+    width: 400px;
+    height: 800px;
+    margin: 100px auto;
+}
+
+.products-home {
+  text-align: center;
+  margin-bottom: 50px;
+}
