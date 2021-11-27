@@ -16,6 +16,8 @@ class OrderController extends Controller
 {
     
     
+    
+    
     public function index() {
         
         $makers = Maker::all();
@@ -30,7 +32,7 @@ class OrderController extends Controller
         
         // $maintenances = Maintenance::where('maker_id', $id)->paginate(10);
         
-        $maintenances = Maintenance::where('maker_id', $id)->paginate(10);
+        $maintenances = Maintenance::where('maker_id', $id)->paginate(100);
         
         return view('orders.home', compact('maker','maintenances'));
     }
@@ -53,6 +55,7 @@ class OrderController extends Controller
         $arrived_at = $request->input('arrived_at');
         log::debug($arrived_at);
         $purchase->arrived_at = $date->addDay($arrived_at);
+        log::debug($purchase->arrived_at->format('d'));
         $purchase->save();
         
         return redirect()->route('orders_purchase');

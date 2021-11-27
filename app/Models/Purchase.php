@@ -9,6 +9,8 @@ class Purchase extends Model
 {
     use HasFactory;
     
+    
+    
     public function maintenance()
     {
         return $this->belongsTo(Maintenance::class);
