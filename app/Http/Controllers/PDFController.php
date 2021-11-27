@@ -16,7 +16,7 @@ class PDFController extends Controller
         
         $id = $maker->id;
         
-        $purchases = Purchase::whereDate('created_at', $today)->where('maker_id', $id)->get();
+        $purchases = Purchase::whereDate('created_at', $today)->where('maker_id', $id)->orderBy('arrived_at', 'desc')->get();
 
     	$pdf = PDF::loadView('hello', compact('purchases', 'maker'));
 

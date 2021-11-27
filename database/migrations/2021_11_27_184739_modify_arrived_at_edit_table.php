@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddMakerIdCatetable extends Migration
+class ModifyArrivedAtEditTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddMakerIdCatetable extends Migration
      */
     public function up()
     {
-        Schema::table('categories', function (Blueprint $table) {
-            $table->integer('maker_id')->unsigned()->nullable();
+        Schema::table('purchases', function (Blueprint $table) {
+            $table->datetime('arrived_')->nullable();
         });
     }
 
@@ -25,8 +25,8 @@ class AddMakerIdCatetable extends Migration
      */
     public function down()
     {
-        Schema::table('categories', function (Blueprint $table) {
-            
+        Schema::table('purchases', function (Blueprint $table) {
+           //
         });
     }
 }

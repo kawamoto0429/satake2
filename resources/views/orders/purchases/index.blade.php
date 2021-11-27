@@ -46,7 +46,7 @@
             <!--<input type="tel" name="maintenance_pc" value="{{$purchase->maintenance->price_30pcs}}">円</input>-->
             <div>{{$purchase->maintenance->price_30pcs}}円</div>
             @endif
-            <div>{{$purchase->arrived_at}}日後</div>
+            <div><label>納品日</label>{{date('m月d日', strtotime($purchase->arrived_at))}}</div>
             <button type="submit">編集</button>
         </form>
         <form method="POST" action="{{route('orders_delete', $purchase)}}" onsubmit="return confirm('本気ですか？')">
