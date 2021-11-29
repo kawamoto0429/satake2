@@ -44,6 +44,7 @@ class CategoryController extends Controller
         $category = new Category();
         $category->name = $request->name;
         $category->maker_id = $request->input('maker_id');
+        $category->maker_name = Maker::find($request->input('maker_id'))->name;
         $category->save();
         
         return redirect('/products/categories');

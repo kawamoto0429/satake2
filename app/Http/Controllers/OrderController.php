@@ -32,7 +32,7 @@ class OrderController extends Controller
         
         // $maintenances = Maintenance::where('maker_id', $id)->paginate(10);
         
-        $maintenances = Maintenance::where('maker_id', $id)->paginate(100);
+        $maintenances = Maintenance::where('maker_id', $id)->paginate(10);
         
         return view('orders.home', compact('maker','maintenances'));
     }
@@ -48,14 +48,32 @@ class OrderController extends Controller
     {
         $date = new Carbon();
         
+        // $id = $request->input('maintenance_id');
+        // $day = $request->input('arrived_at');
+        // $arrived_at = $date->addDay($day);
+        // $purchase = Purchase::where('maintenance_id', $id)->whereDate('arrived_at', $arrived_at)->get();
+        // log::debug($purchase);
+        
+        // if(empty($purchase))
+        // {
+        // //     log::debug($arrived_at);
+        // //     $purchase = Purchase::where('maintenance_id', $id)->whereDate('arrived_at', $arrived_at)->get();
+        // //     log::debug($purchase);
+        // //     $add = $request->input('purchase_qty');
+        // //     // $purchase->purchase_qty = $purchase->purchase_qty + $add;
+        // //     // log::debug($purchase->purchase_qty);
+        //      return redirect()->route('orders_purchase');
+        // } 
+        
         $purchase = new Purchase();
         $purchase->purchase_qty = $request->input('purchase_qty');
         $purchase->maintenance_id = $request->input('maintenance_id');
         $purchase->maker_id = $request->input('maker_id');
-        $arrived_at = $request->input('arrived_at');
+        $arrived_at = intval($request->input('arrived_at'));
         log::debug($arrived_at);
         $purchase->arrived_at = $date->addDay($arrived_at);
-        log::debug($purchase->arrived_at->format('d'));
+        log::debug($purchase->arrived_at);
+        // log::debug($purchase->arrived_at->format('d'));
         $purchase->save();
         
         return redirect()->route('orders_purchase');
@@ -191,6 +209,9 @@ class OrderController extends Controller
         
         if(!empty($keywords)) {
             $maintenances = Maintenance::where('name', 'like', '%'.$keywords.'%')->get();
+            return $maintenances;
+        }else{
+            $maintenances = Maintenance::all();
             return $maintenances;
         }
     }

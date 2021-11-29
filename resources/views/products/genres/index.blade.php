@@ -1,63 +1,72 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container">
     <a href="/products">home</a>
-<div class="maker-home">
-    <label class="label_title">
-        ジャンル
-    </label>
-</div>
-
-<div class="maker-container">
-    <div class="maker-form">
-    <form method="POST" action="/products/genres">
-        {{ csrf_field() }}
-        <input type="text" name="name" value"{{old('name')}}">
-        <select name="maker_id" id="maker">
-        @foreach($makers as $maker)
-        
-            <option  value="{{$maker->id}}">{{$maker->name}}</option>
-            
-        @endforeach
-        </select>
-        <select name="category_id" id="category_select">
-        @foreach($categories as $category)
-        @if($category->maker_id == 1)
-            <option  value="{{$category->id}}">{{$category->name}}</option>
-            @endif
-        @endforeach
-        </select>
-        <button type="submit">Create</button>
-        @error('name')
-            <div class="error">{{$message}}</div>
-        @enderror
-    </form>
-</div>
-
- <table class="maker-table">
-        <tbody>
-            @foreach($genres as $genre)
-            <tr>
-                <td>{{$genre->category_name}}</td>
-                <td>{{$genre->maker_name}}</td>
-                <td
-                <td class="maker-name">{{ $genre->name }}</td>
-                <td>
-                    <a href="/products/genres/{{$genre->id}}/edit">編集</a>
-                </td>
-                <td>
-                    <form method="POST" action="/products/genres/{{$genre->id}}" onsubmit="return confirm('本気ですか？')">
-                        @csrf
-                        <input type="hidden" name="_method" value="DELETE">
-                        <button type="submit">delete</button>
-                    </form>
-                </td>
+    <div class="maker-home">
+        <label class="label_title">
+            ジャンル
+        </label>
+    </div>
+    
+    <div class="maker-container">
+        <div class="maker-form">
+        <form method="POST" action="/products/genres">
+            {{ csrf_field() }}
+            <div class="form-group">
+                <input type="text" name="name" value"{{old('name')}}" >
+                <select name="maker_id" id="maker">
+                @foreach($makers as $maker)
                 
+                    <option  value="{{$maker->id}}">{{$maker->name}}</option>
+                @endforeach
+                </select>
+                <select name="category_id" id="category_select">
+                @foreach($categories as $category)
+                @if($category->maker_id == 1)
+                    <option  value="{{$category->id}}">{{$category->name}}</option>
+                    @endif
+                @endforeach
+                </select>
+                <button type="submit">Create</button>
+                @error('name')
+                    <div class="error">{{$message}}</div>
+                @enderror
+            </div>
+        </form>
+    </div>
+    
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">メーカー</th>
+                <th scope="col">カテゴリー</th>
+                <th scope="col">ジャンル</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
-            @endforeach
+        </thead>
+        <tbody>
+                @foreach($genres as $genre)
+                <tr>
+                    <td>{{$genre->maker_name}}</td>
+                    <td>{{$genre->category_name}}</td>
+                    <td class="maker-name">{{ $genre->name }}</td>
+                    <td>
+                        <a href="/products/genres/{{$genre->id}}/edit">編集</a>
+                    </td>
+                    <td>
+                        <form method="POST" action="/products/genres/{{$genre->id}}" onsubmit="return confirm('本気ですか？')">
+                            @csrf
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit">delete</button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
         </tbody>
     </table>
-
+</div>
     
     
 </div>

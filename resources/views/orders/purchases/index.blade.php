@@ -1,61 +1,81 @@
 @extends('layouts.app')
 @section('content')
-<div class="orders-header">
-    <div class="orders-1">
-        <a href="{{ route("orders")}}">
-            発注
-        </a>
-    </div>
-    <div class="orders-note">
-        <div class="orders-1">
-            <a href="{{route("note_sub")}}">昨日ノート</a>
+<div class="container">
+    <nav class="navbar navbar-default mb-4">
+        <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand"  href="{{ route("orders")}}">
+                発注
+            </a>
         </div>
-        <div class="orders-1">
-            <a href="{{route("note_today")}}">今日ノート</a>
+        <div class="orders-note">
+            <div class="navbar-brand" >昨日ノート</div>
+            <div class="navbar-brand" >今日ノート</div>
+            <div class="navbar-brand" >
+                <a href="{{route('orders_purchase')}}">今日の発注</a>
+            </div>
         </div>
-    </div>
-</div>
-
-<div>
-    <a href="{{route('orders')}}">メーカー</a>
-</div>
-
-<div class="purchase_category">
+        </div>
+    </nav>
     
-    @foreach($makers as $maker)
-    <div>
-        <a href="/purchase/{{$maker->id}}/specify">{{$maker->name}}</a>
+    <div class="d-flex">
+        @foreach($makers as $maker)
+        <div class="ml-3">
+            <a href="/purchase/{{$maker->id}}/specify">{{$maker->name}}</a>
+        </div>
+        @endforeach
     </div>
-    @endforeach
-</div>
-<div>
-    @foreach($purchases as $purchase)
-    <div class="purchase_maintenance">
-        <div>{{$purchase->maintenance->name}}</div>
-        <form method="POST" action="{{route('orders_update', $purchase)}}">
-            {{ csrf_field() }}
-            <input type="hidden" name="_method" value="PUT">
-            <input type="tel" name="purchase_qty" value="{{$purchase->purchase_qty}}">個</input>
-            @if($purchase->purchase_qty < 10)
-            <!--<input type="tel" name="maintenance_pc" value="{{$purchase->maintenance->price_1pc}}">円</input>-->
-            <div>{{$purchase->maintenance->price_1pc}}円</div>
-            @elseif($purchase->purchase_qty < 30)
-            <!--<input type="tel" name="maintenance_pc" value="{{$purchase->maintenance->price_10pcs}}">円</input>-->
-            <div>{{$purchase->maintenance->price_10pcs}}円</div>
-            @elseif($purchase->purchase_qty >= 30)
-            <!--<input type="tel" name="maintenance_pc" value="{{$purchase->maintenance->price_30pcs}}">円</input>-->
-            <div>{{$purchase->maintenance->price_30pcs}}円</div>
-            @endif
-            <div><label>納品日</label>{{date('m月d日', strtotime($purchase->arrived_at))}}</div>
-            <button type="submit">編集</button>
-        </form>
-        <form method="POST" action="{{route('orders_delete', $purchase)}}" onsubmit="return confirm('本気ですか？')">
-            @csrf
-            <input type="hidden" name="_method" value="DELETE">
-            <button type="submit">削除</button>
-        </form>
-    </div>    
-    @endforeach
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach($purchases as $purchase)
+                <tr>
+                <td>{{$purchase->maintenance->name}}</td>
+                    <form method="POST" action="{{route('orders_update', $purchase)}}">
+                    <td>
+                        {{ csrf_field() }}
+                        <input type="hidden" name="_method" value="PUT">
+                        <input type="tel" name="purchase_qty" value="{{$purchase->purchase_qty}}">個</input>
+                        @if($purchase->purchase_qty < 10)
+                        <!--<input type="tel" name="maintenance_pc" value="{{$purchase->maintenance->price_1pc}}">円</input>-->
+                        <div>{{$purchase->maintenance->price_1pc}}円</div>
+                        @elseif($purchase->purchase_qty < 30)
+                        <!--<input type="tel" name="maintenance_pc" value="{{$purchase->maintenance->price_10pcs}}">円</input>-->
+                        <div>{{$purchase->maintenance->price_10pcs}}円</div>
+                        @elseif($purchase->purchase_qty >= 30)
+                        <!--<input type="tel" name="maintenance_pc" value="{{$purchase->maintenance->price_30pcs}}">円</input>-->
+                        <div>{{$purchase->maintenance->price_30pcs}}円</div>
+                        @endif
+                    </td>
+                    <td>
+                        <div><label>納品日</label>{{date('m月d日', strtotime($purchase->arrived_at))}}</div>
+                    </td>
+                    <td>
+                        <button type="submit">編集</button>
+                    </td>    
+                    </form>
+                    <form method="POST" action="{{route('orders_delete', $purchase)}}" onsubmit="return confirm('本気ですか？')">
+                        @csrf
+                    <td>
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit">削除</button>
+                    </td>    
+                    </form>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <script>
