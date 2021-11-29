@@ -91,7 +91,7 @@ class GenreController extends Controller
         $genre->category_id = $request->input('category_id');
         $genre->category_name = Category::find($request->input('category_id'))->name;
         $genre->maker_id = $request->input('maker_id');
-        $genre->maker_name = maker::find($request->input('maker_id'))->name;
+        $genre->maker_name = Maker::find($request->input('maker_id'))->name;
         $genre->update();
         
         return redirect('/products/genres');

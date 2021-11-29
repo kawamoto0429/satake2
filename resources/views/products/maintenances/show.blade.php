@@ -1,21 +1,60 @@
 @extends('layouts.app')
 
 @section('content')
-<div>
-    <a href="{{route('maintenance.index')}}">戻る</a>
-</div>
-<div>
-    <a href="{{ route('maintenance.edit', $maintenance)}}">編集</a>
-</div>
-<div>
-    <div>{{$maintenance->name}}</div>
-    <div>{{$maintenance->price_1pc}}</div>
-    <div>{{$maintenance->price_10pcs}}</div>
-    <div>{{$maintenance->price_30pcs}}</div>
-    <div>{{$maintenance->jan}}</div>
-    <div>{{$maintenance->maker_name}}</div>
-    <div>{{$maintenance->category_name}}</div>
-    <div>{{$maintenance->genre_name}}</div>
-    <div>{{$maintenance->lot}}</div>
+<div class="container">
+    <div>
+        <a href="{{route('maintenance.index')}}">戻る</a>
+    </div>
+    <div>
+        <a href="{{ route('maintenance.edit', $maintenance)}}">編集</a>
+    </div>
+    <div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                <th scope="col">概要</th>
+                <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <th scope="row">商品名</th>
+                <td>{{$maintenance->name}}</td>
+                </tr>
+                <tr>
+                <th scope="row">１個あたりの納価</th>
+                <td>{{$maintenance->price_1pc}}</td>
+                </tr>
+                <tr>
+                <th scope="row">１０個あたりの納価</th>
+                <td>{{$maintenance->price_10pcs}}</td>
+                </tr>
+                <tr>
+                <th scope="row">３０個あたりの納価</th>
+                <td>{{$maintenance->price_30pcs}}</td>
+                </tr>
+                <tr>
+                <th scope="row">JANコード</th>
+                <td>{{$maintenance->jan}}</td>
+                </tr>
+                <tr>
+                <th scope="row">メーカー名</th>
+                <td>{{$maintenance->maker_name}}</td>
+                </tr>
+                <tr>
+                <th scope="row">カテゴリー名</th>
+                <td>{{$maintenance->category_name}}</td>
+                </tr>
+                <tr>
+                <th scope="row">ジャンル名</th>
+                <td>{{$maintenance->genre_name}}</td>
+                </tr>
+                <tr>
+                <th scope="row">入数</th>
+                <td>{{$maintenance->lot}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 @endsection

@@ -20,10 +20,12 @@
 
     <!-- Styles -->
     <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ secure_asset('css/satake.css')}}" rel="stylesheet">
-    <link href="{{ secure_asset('css/note.css')}}" rel="stylesheet">
-    <link href="{{ secure_asset('css/products/product.css')}}" rel="stylesheet">
-    <link href="{{ secure_asset('css/products/maintenance.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!--<link href="{{ secure_asset('css/satake.css')}}" rel="stylesheet">-->
+    <link href="{{ secure_asset('css/bootstrap.css')}}" rel="stylesheet">
+    <!--<link href="{{ secure_asset('css/note.css')}}" rel="stylesheet">-->
+    <!--<link href="{{ secure_asset('css/products/product.css')}}" rel="stylesheet">-->
+    <!--<link href="{{ secure_asset('css/products/maintenance.css')}}" rel="stylesheet">-->
 </head>
 <body>
     <div id="app">

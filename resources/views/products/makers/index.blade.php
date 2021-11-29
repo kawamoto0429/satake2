@@ -1,44 +1,57 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container">
     <a href="/products">home</a>
-<div class="maker-home">
-    <label class="label_title">
-        メーカー
-    </label>
-</div>
-
-<div class="maker-container">
-    <div class="maker-form">
-    <form method="POST" action="/products/makers">
-        {{ csrf_field() }}
-        <input type="text" name="name" value="{{old('name')}}">
-        <button type="submit">Create</button>
-        @error('name')
-            <div class="error">{{$message}}</div>
-        @enderror
-    </form>
+    <div class="maker-home">
+        <label class="label_title">
+            メーカー
+        </label>
     </div>
-
-    <table class="maker-table">
-        <tbody>
-            @foreach($makers as $maker)
-            <tr>
-                
-                <td class="maker-name">{{ $maker->name }}</td>
-                <td>
-                    <a href="/products/makers/{{$maker->id}}/edit">編集</a>
-                </td>
-                <td>
-                    <form method="POST" action="/products/makers/{{$maker->id}}" onsubmit="return confirm('本気ですか？')">
-                        @csrf
-                        <input type="hidden" name="_method" value="DELETE">
-                        <button type="submit">delete</button>
-                    </form>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+    
+    <div class="maker-container">
+        <div class="maker-form">
+        <form method="POST" action="/products/makers">
+            {{ csrf_field() }}
+            <div class="col-sm-8 input-group mb-3">
+                <input type="text" name="name" value="{{old('name')}}" class="form-control">
+                <button type="submit">Create</button>
+            </div>
+                @error('name')
+                    <div class="error">{{$message}}</div>
+                @enderror
+            
+        </form>
+        </div>
+    
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                  　<th scope="col">メーカー</th>
+                  　<th scope="col"></th>
+                  　<th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($makers as $maker)
+                <tr>
+                    <th scope="row">{{$maker->id}}</th>
+                    <td class="maker-name">{{ $maker->name }}</td>
+                    <td>
+                        <a href="/products/makers/{{$maker->id}}/edit">編集</a>
+                    </td>
+                    <td>
+                        <form method="POST" action="/products/makers/{{$maker->id}}" onsubmit="return confirm('本気ですか？')">
+                            @csrf
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit">delete</button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>
 @endsection

@@ -1,0 +1,8 @@
+.w20{
+  width:50%;
+}
+
+.sidebar_fixed {
+  position: sticky;
+  top: 60px;
+}
