@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Models\Maker;
 use Log;
 use App\Models\Purchase;
 use App\Models\Maintenance;
@@ -66,6 +67,7 @@ class NoteController extends Controller
     public function orders($id, $day) 
     {
         $date = new Carbon();
+        $makers = Maker::all();
         
         $date->month = $id;
         
@@ -77,7 +79,7 @@ class NoteController extends Controller
         
         Log::debug($purchases);
         
-        return view('notes.orders', compact('id', 'day', 'purchases'));
+        return view('notes.orders', compact('id', 'day', 'purchases', 'makers'));
     }
     
     public function orders_sub ($id, $day) 
