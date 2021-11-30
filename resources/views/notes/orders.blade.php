@@ -8,7 +8,7 @@
     <div>
         <a href="/notes/hone/{{$id}}/{{$day}}/sub">&lt;</a>
         {{$day}}
-        <a href="">&gt;</a>
+        <a href="/notes/home/{{$id}}/{{$day+1}}">&gt;</a>
     </div>
     <div>
         <div class="navbar-header">

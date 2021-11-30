@@ -69,9 +69,11 @@ class OrderController extends Controller
         $purchase->purchase_qty = $request->input('purchase_qty');
         $purchase->maintenance_id = $request->input('maintenance_id');
         $purchase->maker_id = $request->input('maker_id');
-        $arrived_at = intval($request->input('arrived_at'));
-        log::debug($arrived_at);
-        $purchase->arrived_at = $date->addDay($arrived_at);
+        // mb_convert_kana();
+        $purchase->arrived_at = date("YYYY/mm/dd",$request->input('arrived_at'));
+        $purchase->arrived_at = date("Y-m-d", strtotime("+" . $request->input('arrived_at') . ""));
+        // log::debug($arrived_at);
+        // $purchase->arrived_at = $date->addDay($arrived_at);
         log::debug($purchase->arrived_at);
         // log::debug($purchase->arrived_at->format('d'));
         $purchase->save();

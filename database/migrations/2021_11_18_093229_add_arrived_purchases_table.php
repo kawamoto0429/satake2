@@ -14,7 +14,7 @@ class AddArrivedPurchasesTable extends Migration
     public function up()
     {
         Schema::table('purchases', function (Blueprint $table) {
-            $table->integer('arrived_at')->unsigned()->nullable();
+            $table->date('arrived_at')->unsigned()->nullable();
         });
     }
 

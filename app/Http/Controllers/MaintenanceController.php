@@ -162,15 +162,11 @@ class MaintenanceController extends Controller
         // $interpreter->unstrict();
          
         // 新規Observerとして、$dataList配列に値を代入
-        $interpreter->addObserver(function (array $rows) use (&$dataList){
+        $interpreter->addObserver(function (array $row) use (&$dataList){
             // 各列のデータを取得
-            Log::debug($rows);
-            foreach($rows as $row) {
-                Log::debug($row);
+            Log::debug($row);
                  $dataList[] = $row;
                  Log::debug($dataList);
-            }
-           
             // Log::debug($dataList);
      
         });
@@ -198,21 +194,21 @@ class MaintenanceController extends Controller
                 //                     'lot' => $row[8],
                 //                     ]);
                 Maintenance::insert([
-                                    'name' => 'ごはん',
-                                    'price_1pc' => $row[0],
-                                    'price_10pcs' => $row[1],
-                                    'price_30pcs' => $row[2],
-                                    'jan' => $row[3],
-                                    'maker_id' => $row[4],
-                                    'category_id' => $row[5],
-                                    'genre_id' => $row[6],
-                                    'lot' => $row[7],
+                                    'name' => $row[0],
+                                    'price_1pc' => $row[1],
+                                    'price_10pcs' => $row[2],
+                                    'price_30pcs' => $row[3],
+                                    'jan' => $row[4],
+                                    'maker_id' => intval($row[5]),
+                                    'category_id' => intval($row[6]),
+                                    'genre_id' => intval($row[7]),
+                                    'lot' => $row[8],
                                     ]);
                 $count++;
             
         }
      
-        // return redirect()->route('maintenance.index');
+        return redirect()->route('maintenance.index');
     }
     
     

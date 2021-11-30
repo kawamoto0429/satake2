@@ -26,7 +26,7 @@
     <div class="col sidebar">
         <ul class="navbar-nav">
             @foreach($maker->genres as $genre)
-                <li class="nav-item"><a href="">{{$genre->name}}</a></li>
+                <li class="nav-item"><a href="/1">{{$genre->name}}</a></li>
             @endforeach
         </ul>
     </div>
