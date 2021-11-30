@@ -1,15 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-<div>
+<div class="container">
     <div>
-        {{$id}}
+        <h1>{{$id}}</h1>
     </div>
     <div>
-        
-        <div>
+        <div class="">
             @foreach($days as $day)
-            <a href="/notes/home/{{$id}}/{{$day}}">{{$day}}</a>
+            <div class="w-auto p-3 mb-1" style="background: aqua" >
+                <a href="/notes/home/{{$id}}/{{$day}}">{{$day}}</a>
+            </div>
             @endforeach
         </div>
         
