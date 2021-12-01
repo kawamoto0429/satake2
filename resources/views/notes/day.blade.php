@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div>
-        <h1>{{$id}}</h1>
+        <h1><a href="/notes/home">{{$id}}</a></h1>
     </div>
     <div>
         <div class="">

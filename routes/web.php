@@ -28,7 +28,7 @@ Route::get('/', [TopController::class, 'index']);
 Route::get('/notes/home', [NoteController::class, 'note_home'])->name('note_home');
 Route::get('/notes/home/{id}', [NoteController::class, 'day']);
 Route::get('/notes/home/{id}/{day}', [NoteController::class, 'orders'])->name('home_orders');
-Route::get('/notes/home/{id}/{day}/sub', [NoteController::class, 'orders_sub']);
+// Route::get('/notes/home/{id}/{day}/sub', [NoteController::class, 'orders_sub']);
 // Route::get('/notes/home/prev/{id}/{day}', [NoteController::class, 'orders_sub'])->name('orders_sub');
 
 // Route::get('/orders/day', [OrderController::class, 'day'])->name('orders_day');
@@ -38,8 +38,9 @@ Route::get('/orders/{maker}/home', [OrderController::class, 'home'])->name('inde
 Route::get('/orders/select', [OrderController::class, 'select'])->name('orders_select');
 Route::get('/orders/{maintenance}/show', [OrderController::class, 'show'])
         ->name('home_show');
-Route::get('/orders/genre/ajax', [OrderController::class, 'genre_specify']);
+Route::get('/orders/genre/ajax', [OrderController::class, 'genre']);
 Route::get('/orders/search/ajax', [OrderController::class, 'search']);
+
         
 
 Route::get('/orders/purchase', [OrderController::class, 'purchase'])->name('orders_purchase');

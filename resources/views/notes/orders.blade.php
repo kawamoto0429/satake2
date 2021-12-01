@@ -3,11 +3,13 @@
 @section('content')
 <div class="container">
     <div>
+        <a href="/notes/home/{{$id}}">
             {{$id}}
+        </a>
     </div>
     <div>
-        <a href="/notes/hone/{{$id}}/{{$day}}/sub">&lt;</a>
-        {{$day}}
+        <a href="/notes/home/{{$id}}/{{$day-1}}">&lt;</a>
+            {{$day}}
         <a href="/notes/home/{{$id}}/{{$day+1}}">&gt;</a>
     </div>
     <div>
