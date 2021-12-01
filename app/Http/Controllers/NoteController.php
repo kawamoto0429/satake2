@@ -64,33 +64,117 @@ class NoteController extends Controller
     public function orders($id, $day) 
     {
         $date = new Carbon();
-        $makers = Maker::all();
-        // $date->month = $id;
-        log::debug($date->month);
         
+        $makers = Maker::all();
+        
+        log::debug($date);
+        
+        // log::debug($date->month);
+        log::debug($day);
         // $dates = $date->year . "-" . $date->month-1;
         
         
-        if($day == 0){
-            $dates = $date->year . "-" . $date->month-1;
+        // if($day == 0){
+        //     $date->month = $id - 1;
+        //     $dates = $date->year . "-" . $date->month;
+        //     log::debug($dates);
+        //     $date = date("Y-m-d", strtotime("last day of". $dates));
+        //     $month = date("m", strtotime("last day of". $dates));
+        //     $last_day = date("d", strtotime("last day of". $dates));
+        //     // $dates = $date->year . "-" . $date->month-1;
+        //     log::debug($last_day);
+            
+        //     $id = abs($month);
+        //     $day = $last_day;
+        //     $purchases = Purchase::whereDate('arrived_at', $date)->get();
+            
+        //     return view('notes.orders', compact('id', 'day', 'purchases', 'makers'));
+        
+        // }elseif($day == $last_day){
+        //     $date->month = $id;
+        //     $last_day = date("d", strtotime("last day of". $date));
+        //     $date->month = $id + 1;
+        //     $dates = $date->year . "-" . $date->month;
+        //     $date = date("Y-m-d", strtotime("first day of". $dates));
+        //     $month = date("m", strtotime("first day of". $dates));
+        //     $first_day = date("d", strtotime("first day of". $dates));
+        //     $id = abs($month);
+        //     $day = $first_day;
+        //     $purchases = Purchase::whereDate('arrived_at', $date)->get();
+            
+        //     return view('notes.orders', compact('id', 'day', 'purchases', 'makers'));
+        // }else{
+        //     $date->month = $id;
+        
+        //     $date->day = $day;
+            
+        //     Log::debug($date);
+            
+        //     $purchases = Purchase::whereDate('arrived_at', $date)->get();
+            
+        //     Log::debug($purchases);
+            
+        //     return view('notes.orders', compact('id', 'day', 'purchases', 'makers'));
+        // }
+            $date->month = $id;
+            $last_day = date("d", strtotime("last day of". $date));
+        
+        if($day == $last_day+1){
+            
+            $date->month = $id + 1;
+            $dates = $date->year . "-" . $date->month;
+            $date = date("Y-m-d", strtotime("first day of". $dates));
+            $month = date("m", strtotime("first day of". $dates));
+            $first_day = date("d", strtotime("first day of". $dates));
+            $id = abs($month);
+            $day = abs($first_day);
+            $purchases = Purchase::whereDate('arrived_at', $date)->get();
+            
+            return view('notes.orders', compact('id', 'day', 'purchases', 'makers'));
+        }elseif($day == 0){
+            $date->month = $id - 1;
+            $dates = $date->year . "-" . $date->month;
             log::debug($dates);
             $date = date("Y-m-d", strtotime("last day of". $dates));
+            $month = date("m", strtotime("last day of". $dates));
+            $last_day = date("d", strtotime("last day of". $dates));
             // $dates = $date->year . "-" . $date->month-1;
-            log::debug($date);
-            return view('index');
+            // log::debug($last_day);
+            $id = abs($month);
+            $day = $last_day;
+            $purchases = Purchase::whereDate('arrived_at', $date)->get();
+            
+            return view('notes.orders', compact('id', 'day', 'purchases', 'makers' ));
+        
+        }else{
+            
+            // $date->month = $id - 1;
+            // $dates = $date->year . "-" . $date->month;
+            // $last_day = date("d", strtotime("last day of". $dates));
+            $date->month = $id;
+        
+            $date->day = $day;
+            
+            Log::debug($date);
+            
+            $purchases = Purchase::whereDate('arrived_at', $date)->get();
+            
+            Log::debug($purchases);
+            
+            return view('notes.orders', compact('id', 'day', 'purchases', 'makers', 'last_day'));
         }
         
-        $date->month = $id;
+        // $date->month = $id;
         
-        $date->day = $day;
+        // $date->day = $day;
         
-        Log::debug($date);
+        // Log::debug($date);
         
-        $purchases = Purchase::whereDate('arrived_at', $date)->get();
+        // $purchases = Purchase::whereDate('arrived_at', $date)->get();
         
-        Log::debug($purchases);
+        // Log::debug($purchases);
         
-        return view('notes.orders', compact('id', 'day', 'purchases', 'makers'));
+        // return view('notes.orders', compact('id', 'day', 'purchases', 'makers'));
     }
     
     

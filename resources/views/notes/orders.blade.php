@@ -8,7 +8,11 @@
         </a>
     </div>
     <div>
+        
+        
+       
         <a href="/notes/home/{{$id}}/{{$day-1}}">&lt;</a>
+        
             {{$day}}
         <a href="/notes/home/{{$id}}/{{$day+1}}">&gt;</a>
     </div>
