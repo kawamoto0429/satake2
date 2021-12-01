@@ -46,17 +46,19 @@
                         {{ csrf_field() }}
                         <input type="hidden" name="_method" value="PUT">
                         <input type="tel" name="purchase_qty" value="{{$purchase->purchase_qty}}">個</input>
+                    </td>
+                    
                         @if($purchase->purchase_qty < 10)
                         <!--<input type="tel" name="maintenance_pc" value="{{$purchase->maintenance->price_1pc}}">円</input>-->
-                        <div>{{$purchase->maintenance->price_1pc}}円</div>
+                        <td>{{$purchase->maintenance->price_1pc}}円</td>
                         @elseif($purchase->purchase_qty < 30)
                         <!--<input type="tel" name="maintenance_pc" value="{{$purchase->maintenance->price_10pcs}}">円</input>-->
-                        <div>{{$purchase->maintenance->price_10pcs}}円</div>
+                        <td>{{$purchase->maintenance->price_10pcs}}円</td>
                         @elseif($purchase->purchase_qty >= 30)
                         <!--<input type="tel" name="maintenance_pc" value="{{$purchase->maintenance->price_30pcs}}">円</input>-->
-                        <div>{{$purchase->maintenance->price_30pcs}}円</div>
+                        <td>{{$purchase->maintenance->price_30pcs}}円</td>
                         @endif
-                    </td>
+                    
                     <td>
                         <div><label>納品日</label>{{date('m月d日', strtotime($purchase->arrived_at))}}</div>
                     </td>

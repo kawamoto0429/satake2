@@ -24,9 +24,9 @@
     <div class="row">
     <div class="clearfix"></div>
     <div class="col sidebar">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav" id="genre">
             @foreach($maker->genres as $genre)
-                <li class="nav-item"><a href="/1">{{$genre->name}}</a></li>
+                <li class="nav-item" value={{$genre->id}}>{{$genre->name}}</li>
             @endforeach
         </ul>
     </div>
@@ -39,7 +39,7 @@
             </dov>
         </form>
         </div>
-         <div class="col products-list">
+         <div class="col">
             <table class="table">
                 <thead>
                     <tr>
@@ -49,10 +49,10 @@
                         <th scope="col">数量</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody  class="products-list">
                     @foreach($maintenances as $maintenance)
                     <tr>
-                        <th scope="row"><input type="checkbox" name="" value="{{$maintenance}}"></th>
+                        <th scope="row"><input type="checkbox" name="" value="{{$maintenance->id}}"></th>
                         <td><a href="{{route('home_show', $maintenance)}}">{{$maintenance->name}}</a></td>
                         <td><input type="text" name="" value="{{$maintenance->price_1pc}}"><label>円</label></td>
                         <td><input type="text" name=""><label>個</label></td>
@@ -89,26 +89,55 @@
                 $.each(data, function (index, value) {
                 console.log(value)
                  html = `
-                    <div>
-                        <input type="checkbox" name=""><a href="/orders/${value.id}/show">${value.name}</a>
-                        <input type="text" name="" value=${value.price_1pc}><label>円</label>
-                        <input type="text" name=""><label>個</label>
-                    </div>    
+                    <tr>
+                        <th scope="row"><input type="checkbox" name=${value.id}></th>
+                        <td><a href="/orders/${value.id}/show">${value.name}</a></td>
+                        <td><input type="text" name="" value=${value.price_1pc}><label>円</label></td>
+                        <td><input type="text" name=""><label>個</label></td>
+                    </tr>    
                   `;
                   $('.products-list').append(html);
                 })
-                
-               
-               
-              
             }).fail(function() {
               console.log('失敗');
             }); 
-                 
         });
         
-        
-
+        $('#genre li').click(function(){
+        let id = $(this).val();
+        console.log(id);
+        <!--alert('テキスト:' + text);-->
+        <!--$('#genre li').on('click', () => {-->
+        <!--    let id = $('#genre li').text();-->
+            <!--console.log(id); -->
+            <!--１以外のをクリックしても１しか返ってこない-->
+            $.ajax({
+            <!--headers: {-->
+            <!--    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')-->
+            <!--}, -->
+                type: "get",
+                url: "/orders/genre/ajax",
+                data: {'id': id},
+                dataType: 'json',
+            }).done(function(data){
+                console.log(data);
+                $('.products-list').children().remove();
+                $.each(data, function (index, value) {
+                console.log(value)
+                 html = `
+                    <tr>
+                        <th scope="row"><input type="checkbox" name=${value.id}></th>
+                        <td><a href="/orders/${value.id}/show">${value.name}</a></td>
+                        <td><input type="text" name="" value=${value.price_1pc}><label>円</label></td>
+                        <td><input type="text" name=""><label>個</label></td>
+                    </tr>    
+                  `;
+                  $('.products-list').append(html);
+                })
+            }).fail(function() {
+              console.log('失敗');
+            }); 
+        });
     });
 </script>
 @endsection

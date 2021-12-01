@@ -58,9 +58,6 @@ class NoteController extends Controller
         for($i = 1; $i <= $lastday ; $i++) {
             $days[] = $i;
         }
-        
-        
-        
         return view('notes.day',  compact( 'id', 'days'));
     }
     
@@ -68,6 +65,20 @@ class NoteController extends Controller
     {
         $date = new Carbon();
         $makers = Maker::all();
+        // $date->month = $id;
+        log::debug($date->month);
+        
+        // $dates = $date->year . "-" . $date->month-1;
+        
+        
+        if($day == 0){
+            $dates = $date->year . "-" . $date->month-1;
+            log::debug($dates);
+            $date = date("Y-m-d", strtotime("last day of". $dates));
+            // $dates = $date->year . "-" . $date->month-1;
+            log::debug($date);
+            return view('index');
+        }
         
         $date->month = $id;
         
@@ -82,24 +93,5 @@ class NoteController extends Controller
         return view('notes.orders', compact('id', 'day', 'purchases', 'makers'));
     }
     
-    public function orders_sub ($id, $day) 
-    {
-        // Log::debug($id);
-        
-        // Log::debug($day);
-        
-        $date = new Carbon();
-        
-        $date->month = $id;
-        
-        $date->day = $day;
-        
-        $sub_date = $date->subDay();
-        
-        $id = $sub_date->month;
-        
-        $day = $sub_date->day;
-        
-        return redirect()->route('home_orders', ['id'=>$id, 'day'=>$day]);
-    }
+    
 }

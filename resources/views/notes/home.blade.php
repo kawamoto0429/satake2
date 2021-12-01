@@ -5,7 +5,7 @@
 
 <div class="container">
     <div class="">
-        <h1>{{$year}}</h1>
+        <h1><a href="/">{{$year}}</a></h1>
     </div>
     <div>
         
