@@ -67,10 +67,10 @@ class NoteController extends Controller
         
         $makers = Maker::all();
         
-        log::debug($date);
+        // log::debug($date);
         
         // log::debug($date->month);
-        log::debug($day);
+        // log::debug($day);
         // $dates = $date->year . "-" . $date->month-1;
         
         
@@ -134,7 +134,7 @@ class NoteController extends Controller
         }elseif($day == 0){
             $date->month = $id - 1;
             $dates = $date->year . "-" . $date->month;
-            log::debug($dates);
+            // log::debug($dates);
             $date = date("Y-m-d", strtotime("last day of". $dates));
             $month = date("m", strtotime("last day of". $dates));
             $last_day = date("d", strtotime("last day of". $dates));
@@ -155,11 +155,11 @@ class NoteController extends Controller
         
             $date->day = $day;
             
-            Log::debug($date);
+            // Log::debug($date);
             
             $purchases = Purchase::whereDate('arrived_at', $date)->get();
             
-            Log::debug($purchases);
+            // Log::debug($purchases);
             
             return view('notes.orders', compact('id', 'day', 'purchases', 'makers', 'last_day'));
         }
@@ -177,5 +177,33 @@ class NoteController extends Controller
         // return view('notes.orders', compact('id', 'day', 'purchases', 'makers'));
     }
     
+    public function maker(Request $request)
+    {
+        $date = new Carbon();
+        log::debug($request);
+        
+        $maker_id = $request['id'];
+        $month = $request['month'];
+        $day = $request['day'];
+        
+        // log::debug($maker_id);
+        // log::debug($month);
+        // log::debug($day);
+        
+        $date->month = $month;
+        
+        $date->day = $day;
+        
+        // log::debug($date);
+        
+        
+        if($maker_id == 0) {
+            $purchases = Purchase::whereDate('arrived_at', $date)->get();
+            return $purchases;
+        } else {
+            $purchases = Purchase::where('maker_id', $maker_id)->whereDate('arrived_at', $date)->get();
+            return $purchases;
+        }
+    }
     
 }

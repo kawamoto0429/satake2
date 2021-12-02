@@ -18,12 +18,14 @@
     </div>
     <div>
         <div class="navbar-header">
-            <a class="navbar-brand" href="/">すべて</a>
-            @foreach($makers as $maker)
-            <a class="navbar-brand" href="/">
-                {{$maker->name}}
-            </a>
-            @endforeach
+            <ul class="navbar-brand">
+                <li class="navbar-brand" value ="0">すべて</li>
+                @foreach($makers as $maker)
+                <li class="navbar-brand" href="/" value ="{{$maker->id}}">
+                    {{$maker->name}}
+                </li>
+                @endforeach
+            </ul>
         </div>
         <table class="table">
             <thead>
@@ -34,7 +36,7 @@
                     <th scope="col">値段</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="products-list">
                 @foreach($purchases as $purchase)
                 <tr>
                     <td>{{$purchase->maintenance->maker_name}}</td>
@@ -46,4 +48,42 @@
         </table>
     </div>
 </div>
+<script>
+    $(function(){
+    
+        $('.navbar-brand li').click(function(){
+        let id = $(this).val();
+        let month = {{$id}};
+        let day = {{$day}}
+        console.log(day);
+        console.log(id);
+            $.ajax({
+                type: "get",
+                url: "/notes/maker/ajax",
+                data: {
+                        'id': id,
+                        'day': day,
+                        'month': month,
+                      },
+                dataType: 'json',
+            }).done(function(data){
+                console.log(data);
+                $('.products-list').children().remove();
+                $.each(data, function (index, value) {
+                console.log(value)
+                 html = `
+                    <tr>
+                        <td>${value.maker_name}</td>
+                        <td>${value.maintenance_name}</td>
+                        <td>${value.purchase_qty}</td>
+                    </tr>    
+                  `;
+                  $('.products-list').append(html);
+                })
+            }).fail(function() {
+              console.log('失敗');
+            }); 
+        });
+    });
+</script>
 @endsection

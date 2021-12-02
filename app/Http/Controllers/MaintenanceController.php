@@ -74,8 +74,11 @@ class MaintenanceController extends Controller
         $maintenance->price_30pcs = $request->input('price_30pcs');
         $maintenance->jan = $request->input('jan');
         $maintenance->maker_id = $request->input('maker_id');
+        $maintenance->maker_name = maker::find($request->input('maker_id'))->name;
         $maintenance->category_id = $request->input('category_id');
+        $maintenance->category_name = Category::find($request->input('category_id'))->name;
         $maintenance->genre_id = $request->input('genre_id');
+        $maintenance->genre_name = Genre::find($request->input('genre_id'))->name;
         $maintenance->lot = $request->input('lot');
         $maintenance->update();
         

@@ -17,6 +17,8 @@ class CreatePurchasesTable extends Migration
             $table->id();
             $table->integer('purchase_qty');
             $table->integer('maintenance_id')->unsigned();
+            $table->string('maker_name');
+            $table->string('maintenance_name');
             $table->timestamps();
         });
     }

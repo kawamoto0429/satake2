@@ -51,10 +51,10 @@ class OrderController extends Controller
         $id = $request->input('maintenance_id');
         $day = date("Y-m-d", strtotime("+" . $request->input('arrived_at') . "day"));
         
-        log::debug($day);
+        // log::debug($day);
         
         
-        log::debug(Purchase::find(['arrived_at'=>$day]));
+        // log::debug(Purchase::find(['arrived_at'=>$day]));
         
         // if(Purchase::find(['maintenance_id'=>$id, 'arrived_at'=>$day]) == [])
         // {
@@ -94,22 +94,18 @@ class OrderController extends Controller
         $purchase->purchase_qty = $request->input('purchase_qty');
         $purchase->maintenance_id = $request->input('maintenance_id');
         $purchase->maker_id = $request->input('maker_id');
-        // mb_convert_kana();
-        // $purchase->arrived_at = date("YYYY/mm/dd",$request->input('arrived_at'));
+        // log::debug($purchase->maker_id);
+        $purchase->maker_name = Maker::find($request->input('maker_id'))->name;
+        $purchase->maintenance_name = Maintenance::find($request->input('maintenance_id'))->name;
         $purchase->arrived_at = date("Y-m-d", strtotime("+" . $request->input('arrived_at') . "day"));
         // log::debug($arrived_at);
         // $purchase->arrived_at = $date->addDay($arrived_at);
-        log::debug($purchase->arrived_at);
+        // log::debug($purchase->arrived_at);
         // log::debug($purchase->arrived_at->format('d'));
         $purchase->save();
         
         return redirect()->route('orders_purchase');
         
-    }
-    
-    public function genre_specify(Request $request)
-    {
-        Log::debug($request);
     }
     
     public function purchase()
@@ -144,10 +140,6 @@ class OrderController extends Controller
         return redirect()->route('orders_purchase');
     }
     
-    public function select(Request $request)
-    {
-        Log::debug($request);
-    }
     
     
     public function note_today() 
