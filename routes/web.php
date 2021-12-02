@@ -28,11 +28,9 @@ Route::get('/', [TopController::class, 'index']);
 Route::get('/notes/home', [NoteController::class, 'note_home'])->name('note_home');
 Route::get('/notes/home/{id}', [NoteController::class, 'day']);
 Route::get('/notes/home/{id}/{day}', [NoteController::class, 'orders'])->name('home_orders');
-// Route::get('/notes/home/{id}/{day}/sub', [NoteController::class, 'orders_sub']);
-// Route::get('/notes/home/prev/{id}/{day}', [NoteController::class, 'orders_sub'])->name('orders_sub');
+Route::get('/notes/maker/ajax', [NoteController::class, 'maker']);
 
-// Route::get('/orders/day', [OrderController::class, 'day'])->name('orders_day');
-// Route::post('/orders/day/store', [OrderController::class, 'day_store'])->name('day_store');
+
 Route::get('/orders', [OrderController::class, 'index'])->name('orders');
 Route::get('/orders/{maker}/home', [OrderController::class, 'home'])->name('index_home');
 Route::get('/orders/select', [OrderController::class, 'select'])->name('orders_select');
