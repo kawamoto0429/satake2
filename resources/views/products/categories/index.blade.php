@@ -29,6 +29,7 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
+                    <th scope="col">#</th>
                     <th scope="col">メーカー</th>
                     <th scope="col">カテゴリー</th>
                     <th scope="col"></th>
@@ -38,6 +39,7 @@
             <tbody>
                 @foreach($categories as $category)
                 <tr>
+                    <th>{{$category->id}}</th>
                     <td>{{$category->maker_name}}</td>
                     <td class="maker-name">{{ $category->name }}</td>
                     <td>

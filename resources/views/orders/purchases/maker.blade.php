@@ -10,7 +10,7 @@
     <div class="orders-note">
         <div class="orders-1">昨日ノート</div>
         <div class="orders-1">
-            <a href="{{route("note_today")}}">今日ノート</a>
+            <a href="/">今日ノート</a>
         </div>
         <div class="orders-1">
             <a href="{{route('orders_purchase')}}">今日の発注</a>

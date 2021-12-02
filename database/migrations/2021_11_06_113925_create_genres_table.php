@@ -17,7 +17,9 @@ class CreateGenresTable extends Migration
             $table->id();
             $table->string('name');
             $table->integer('maker_id')->unsigned();
+            $table->string('maker_name');
             $table->integer('category_id')->unsigned();
+            $table->string('category_name');
             $table->timestamps();
         });
     }

@@ -21,8 +21,11 @@ class CreateMaintenanceTable extends Migration
             $table->integer('price_30pcs');
             $table->string('jan');
             $table->integer('maker_id')->unsigned();
+            $table->string('maker_name')->nullable();
             $table->integer('category_id')->unsigned();
+            $table->string('category_name')->nullable();
             $table->integer('genre_id')->unsigned();
+            $table->string('genre_name')->nullable();
             $table->integer('lot');
             $table->timestamps();
         });

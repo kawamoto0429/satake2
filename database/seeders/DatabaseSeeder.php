@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call([
-            MakerTableSeeder::class, 
+            MakerSeeder::class, 
         ]);
         
         $this->call([
