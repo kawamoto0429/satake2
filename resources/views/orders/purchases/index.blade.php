@@ -1,20 +1,21 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-    <nav class="navbar navbar-default mb-4">
+   <nav class="navbar navbar-default mb-4">
         <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand"  href="{{ route("orders")}}">
-                発注
-            </a>
-        </div>
-        <div class="orders-note">
-            <div class="navbar-brand" >昨日ノート</div>
-            <div class="navbar-brand" >今日ノート</div>
-            <div class="navbar-brand" >
-                <a href="{{route('orders_purchase')}}">今日の発注</a>
+            <div class="navbar-header">
+                <a class="navbar-brand"  href="{{ route("orders")}}">
+                    発注
+                </a>
             </div>
-        </div>
+            <div class="orders-note">
+                <div class="navbar-brand" ><a href="/notes/home/{{$today->month}}/{{$today->day-1}}">昨日の納品</a></div>
+                <div class="navbar-brand" ><a href="/notes/home/{{$today->month}}/{{$today->day}}">今日の納品</a></div>
+                <div class="navbar-brand" ><a href="/notes/home/{{$today->month}}/{{$today->day+1}}">明日の納品</a></div>
+                <div class="navbar-brand" >
+                    <a href="{{route('orders_purchase')}}">今日の発注</a>
+                </div>
+            </div>
         </div>
     </nav>
     
@@ -24,6 +25,11 @@
             <a href="/purchase/{{$maker->id}}/specify">{{$maker->name}}</a>
         </div>
         @endforeach
+        <div class="d-flex justify-content-end">
+            <div>菓子パン○個</div>
+            <div>袋パン○個</div>
+            <div>食パン○個</div>
+        </div>
     </div>
     <div>
         <table class="table">

@@ -15,9 +15,6 @@ use Illuminate\Pagination\Paginator;
 class OrderController extends Controller
 {
     
-    
-    
-    
     public function index() {
         
         $makers = Maker::all();
@@ -28,28 +25,30 @@ class OrderController extends Controller
     
     public function home(Maker $maker) {
         
+        $date = new Carbon();
+        
         $id = $maker->id;
         
         // $maintenances = Maintenance::where('maker_id', $id)->paginate(10);
         
         $maintenances = Maintenance::where('maker_id', $id)->paginate(10);
         
-        return view('orders.home', compact('maker','maintenances'));
+        return view('orders.home', compact('maker','maintenances', 'date'));
     }
     
     public function show(Maintenance $maintenance)
     {
+        $date = new Carbon();
         
-        
-        return view('orders.show', compact('maintenance'));
+        return view('orders.show', compact('maintenance', 'date'));
     }
     
     public function store(Request $request)
     {
         $date = new Carbon();
         
-        $id = $request->input('maintenance_id');
-        $day = date("Y-m-d", strtotime("+" . $request->input('arrived_at') . "day"));
+        // $id = $request->input('maintenance_id');
+        // $day = date("Y-m-d", strtotime("+" . $request->input('arrived_at') . "day"));
         
         // log::debug($day);
         
@@ -121,7 +120,7 @@ class OrderController extends Controller
         
         // Log::debug($purchases);
         
-        return view('orders.purchases.index', compact('purchases','makers', 'categories'));
+        return view('orders.purchases.index', compact('purchases','makers', 'categories', 'today'));
     }
     
     public function update(Request $request, Purchase $purchase) 
@@ -149,17 +148,6 @@ class OrderController extends Controller
         $purchases = Purchase::whereDate('created_at', $today)->get();
         
         return view('notes.index', compact('today', "purchases"));
-    }
-    
-    public function note_sub() 
-    {
-        $day_sub = Carbon::today()->subDay(1);
-        
-        
-        
-        $purchases = Purchase::whereDate('created_at', $day_sub)->get();
-        
-        return view('notes.sub', compact('day_sub', "purchases"));
     }
     
     public function specify(Maker $maker)

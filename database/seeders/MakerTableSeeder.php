@@ -15,19 +15,6 @@ class MakerTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('makers')->insert([
-            [
-                'name' => 'ヤマザキ'
-            ],
-            [
-                'name' => '神戸屋'
-            ],
-            [
-                'name' => 'フジパン'
-            ],
-            [
-                'name' => 'パスコ'
-            ]
-        ]);
+        
     }
 }
