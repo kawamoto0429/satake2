@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\PurchaseRequest;
 use App\Models\Maker;
 use App\Models\Maintenance;
 use Log;
@@ -181,14 +182,26 @@ class OrderController extends Controller
     
     public function genre(Request $request)
     {
-        Log::debug($request);
+        // Log::debug($request);
         
-        $genre_id= $request['id'];
-        log::debug($genre_id);
+        $maker_id= $request['maker'];
+        log::debug($request['id']);
         
-        $maintenances = Maintenance::where('genre_id', $genre_id)->get();
+        if($request['id'] == -1){
+            $maintenances = Maintenance::where('maker_id', $maker_id)->get();
+            return $maintenances;
+        }elseif($request['id'] == -2){
+            $maintenances = Maintenance::where('maker_id', $maker_id)->where('tomorrow_flg', 1)->get();
+            return $maintenances;
+        }else{
+            $genre_id= $request['id'];
+            log::debug($genre_id);
+            
+            $maintenances = Maintenance::where('genre_id', $genre_id)->where('maker_id', $maker_id)->get();
+            
+            return $maintenances;
+        }
         
-        return $maintenances;
     }
     
     public function category(Request $request) {
@@ -220,15 +233,44 @@ class OrderController extends Controller
         Log::debug($request);
         
         $keywords = $request['keywords'];
+        $maker_id = $request['maker'];
         
         Log::debug($keywords);
+        Log::debug($maker_id);
         
         if(!empty($keywords)) {
-            $maintenances = Maintenance::where('name', 'like', '%'.$keywords.'%')->get();
+            $maintenances = Maintenance::where('name', 'like', '%'.$keywords.'%')->where('maker_id', $maker_id)->get();
             return $maintenances;
         }else{
-            $maintenances = Maintenance::all();
+           
+            $maintenances = Maintenance::where('maker_id', $maker_id)->get();
+            // $maintenances = Maintenance::all();
             return $maintenances;
         }
+    }
+    
+    public function conclude(PurchaseRequest $request)
+    {
+        // log::debug($request->input('conclude'));
+        // log::debug($request->input('qty'));
+        
+        $concludes = $request->input('conclude');
+        log::debug($concludes);
+        
+        foreach($concludes as $index => $conclude)
+        {
+            $maintenance = Maintenance::find($conclude);
+            log::debug($maintenance);
+            $purchase = new Purchase();
+            $purchase->maker_id = $maintenance->maker_id;
+            $purchase->maker_name = Maker::find($maintenance->maker_id)->name;
+            $purchase->maintenance_id = $maintenance->id;
+            $purchase->maintenance_name = Maintenance::find($maintenance->id)->name;
+            $purchase->purchase_qty = $request->input('purchase_qty');
+            $purchase->arrived_at = date("Y-m-d", strtotime("+" . $request->input('arrived_at') . "day"));
+            $purchase->save();
+        }
+        
+        return redirect()->route('orders_purchase');
     }
 }

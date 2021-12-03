@@ -26,6 +26,8 @@
     <div class="clearfix"></div>
     <div class="col sidebar">
         <ul class="navbar-nav" id="genre">
+            <li class="nav-item" value=-1>1便</li>
+            <li class="nav-item" value=-2>2便</li>
             @foreach($maker->genres as $genre)
                 <li class="nav-item" value={{$genre->id}}>{{$genre->name}}</li>
             @endforeach
@@ -34,35 +36,36 @@
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <div class="search">
         <form>
-            <dov class="col-xs-2">
+            <div class="col-xs-2">
                 <label>検索</label>
                 <input type="text" id="search" class="form-control w20"  placeholder="キーワードを入力してくだい">
-            </dov>
+            </div>
         </form>
         </div>
          <div class="col">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">チェック</th>
-                        <th scope="col">商品名</th>
-                        <th scope="col">納品/１個</th>
-                        <th scope="col">数量</th>
-                    </tr>
-                </thead>
-                <tbody  class="products-list">
-                    @foreach($maintenances as $maintenance)
-                    <tr>
-                        <th scope="row"><input type="checkbox" name="" value="{{$maintenance->id}}"></th>
-                        <td><a href="{{route('home_show', $maintenance)}}">{{$maintenance->name}}</a></td>
-                        <td><input type="text" name="" value="{{$maintenance->price_1pc}}"><label>円</label></td>
-                        <td><input type="text" name=""><label>個</label></td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+             <form method="POST" action="/orders/purchase/conclude">
+                 {{ csrf_field() }}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">チェック</th>
+                            <th scope="col">商品名</th>
+                            <th scope="col">納品/１個</th>
+                        </tr>
+                    </thead>
+                    <tbody  class="products-list">
+                        @foreach($maintenances as $maintenance)
+                        <tr>
+                            <th scope="row"><input type="checkbox" name="conclude[]" value="{{$maintenance->id}}"></th>
+                            <td><a href="{{route('home_show', $maintenance)}}">{{$maintenance->name}}</a></td>
+                            <td>{{$maintenance->price_1pc}}<label>円</label></td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             <!--<form method="POST" action="{{ route('orders_select') }}">-->
-            <form method="POST" action="/">
+            <input type="text" name="purchase_qty">個
+            <input type="number" min="1" name="arrived_at"> 日後
             <button type="submit">確定</button>
             </form>
             {{ $maintenances->links() }}
@@ -76,13 +79,17 @@
         $('#search').on('input', () => {
             let keywords = $('#search').val();
             console.log(keywords);
+            <!--console.log();-->
             $.ajax({
             <!--headers: {-->
             <!--    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')-->
             <!--}, -->
                 type: "get",
                 url: "/orders/search/ajax",
-                data: {'keywords': keywords},
+                data: {
+                        'keywords' : keywords,
+                        'maker': {{$maker->id}},
+                      },
                 dataType: 'json',
             }).done(function(data){
                 console.log(data);
@@ -91,10 +98,9 @@
                 console.log(value)
                  html = `
                     <tr>
-                        <th scope="row"><input type="checkbox" name=${value.id}></th>
+                        <th scope="row"><input type="checkbox" name="conclude[]" value=${value.id}></th>
                         <td><a href="/orders/${value.id}/show">${value.name}</a></td>
-                        <td><input type="text" name="" value=${value.price_1pc}><label>円</label></td>
-                        <td><input type="text" name=""><label>個</label></td>
+                        <td>${value.price_1pc}<label>円</label></td>
                     </tr>    
                   `;
                   $('.products-list').append(html);
@@ -118,7 +124,10 @@
             <!--}, -->
                 type: "get",
                 url: "/orders/genre/ajax",
-                data: {'id': id},
+                data: {
+                        'id': id,
+                        'maker': {{$maker->id}},
+                      },
                 dataType: 'json',
             }).done(function(data){
                 console.log(data);
@@ -127,11 +136,10 @@
                 console.log(value)
                  html = `
                     <tr>
-                        <th scope="row"><input type="checkbox" name=${value.id}></th>
+                        <th scope="row"><input type="checkbox" name="conclude[]" value=${value.id}></th>
                         <td><a href="/orders/${value.id}/show">${value.name}</a></td>
-                        <td><input type="text" name="" value=${value.price_1pc}><label>円</label></td>
-                        <td><input type="text" name=""><label>個</label></td>
-                    </tr>    
+                        <td>${value.price_1pc}<label>円</label></td>
+                    </tr>  
                   `;
                   $('.products-list').append(html);
                 })
