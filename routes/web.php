@@ -38,9 +38,9 @@ Route::get('/orders/{maintenance}/show', [OrderController::class, 'show'])
         ->name('home_show');
 Route::get('/orders/genre/ajax', [OrderController::class, 'genre']);
 Route::get('/orders/search/ajax', [OrderController::class, 'search']);
+Route::post('/orders/purchase/conclude', [OrderController::class, 'conclude']);
 
         
-
 Route::get('/orders/purchase', [OrderController::class, 'purchase'])->name('orders_purchase');
 Route::post('/orders/purchase/store', [OrderController::class, 'store'])->name('orders_store');
 Route::put('/orders/purchase/{purchase}/update', [OrderController::class, 'update'])

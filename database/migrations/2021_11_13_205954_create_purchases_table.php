@@ -16,10 +16,10 @@ class CreatePurchasesTable extends Migration
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
             $table->integer('purchase_qty');
-            $table->integer('maintenance_id')->unsigned();
-            $table->integer('maker_id')->unsigned();
-            $table->string('maker_name');
-            $table->string('maintenance_name');
+            $table->integer('maintenance_id')->unsigned()->nullable();
+            $table->integer('maker_id')->unsigned()->nullable();
+            $table->string('maker_name')->nullable();
+            $table->string('maintenance_name')->nullable();
             $table->date('arrived_at')->unsigned();
             $table->timestamps();
         });
