@@ -26,7 +26,7 @@ class PurchaseRequest extends FormRequest
         return [
             'purchase_qty' => 'required',
             'arrived_at' => 'required',
-            'conclude[]' => 'required',
+            // 'conclude[]' => 'required',
         ];
     }
     
