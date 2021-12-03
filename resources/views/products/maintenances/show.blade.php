@@ -53,6 +53,14 @@
                 <th scope="row">入数</th>
                 <td>{{$maintenance->lot}}</td>
                 </tr>
+                <tr>
+                <th scope="row">２便可</th>
+                @if($maintenance->tomorrow_flg == 1)
+                    <td>○</td>
+                @else
+                    <td>なし</td>
+                @endif
+                </tr>
             </tbody>
         </table>
     </div>

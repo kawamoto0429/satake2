@@ -27,6 +27,7 @@ class CreateMaintenanceTable extends Migration
             $table->integer('genre_id')->unsigned();
             $table->string('genre_name')->nullable();
             $table->integer('lot');
+            $table->boolean('tomorrow_flg')->default(0);
             $table->timestamps();
         });
     }

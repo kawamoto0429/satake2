@@ -113,6 +113,12 @@
                     <div class="error">{{$message}}</div>
                     @enderror
             </div>
+            <div class="form-group row">
+                <label class="col-sm-2">2便可</label>
+                <div class="col-sm-8">
+                    <input type="checkbox" name="tomo" class="mr-2"><label>2便ですか？</label>
+                </div>
+            </div>
             <button type="submit">Create</button>
         
         </form>

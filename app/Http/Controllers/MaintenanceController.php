@@ -46,6 +46,11 @@ class MaintenanceController extends Controller
         $maintenance->genre_id = $request->input('genre_id');
         $maintenance->genre_name = Genre::find($request->input('genre_id'))->name;
         $maintenance->lot = $request->input('lot');
+        if ($request->input('tomorrow_flg') == 'on') {
+            $maintenance->tomorrow_flg = 1;
+        } else {
+            $maintenance->tomorrow_flg = 0;
+        }
         $maintenance->save();
         
         return redirect()->route('maintenance.index');
@@ -80,6 +85,11 @@ class MaintenanceController extends Controller
         $maintenance->genre_id = $request->input('genre_id');
         $maintenance->genre_name = Genre::find($request->input('genre_id'))->name;
         $maintenance->lot = $request->input('lot');
+        if ($request->input('tomorrow_flg') == 'on') {
+            $maintenance->tomorrow_flg = 1;
+        } else {
+            $maintenance->tomorrow_flg = false;
+        }
         $maintenance->update();
         
         return redirect()->route('maintenance.show', $maintenance);
