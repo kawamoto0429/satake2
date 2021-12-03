@@ -114,6 +114,16 @@
                     <div class="error">{{$message}}</div>
                     @enderror
             </div>
+            <div class="form-group row">
+                <label class="col-sm-2">2便可</label>
+                <div class="col-sm-8">
+                    @if($maintenance->tomorrow_flg == 1)
+                        <input type="checkbox" name="tomorrow_flg" class="mr-2" checked><label>2便ですか？</label>
+                    @else
+                        <input type="checkbox" name="tomorrow_flg" class="mr-2"><label>2便ですか？</label>
+                    @endif
+                </div>
+            </div>
             <button type="submit">編集</button>
         
         </form>
