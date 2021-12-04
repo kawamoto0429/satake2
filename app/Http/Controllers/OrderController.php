@@ -141,19 +141,19 @@ class OrderController extends Controller
     }
     
     
-    
-    public function note_today() 
-    {
-        $today = Carbon::today();
+    // public function note_today() 
+    // {
+    //     $today = Carbon::today();
         
-        $purchases = Purchase::whereDate('created_at', $today)->get();
+    //     $purchases = Purchase::whereDate('created_at', $today)->get();
         
-        return view('notes.index', compact('today', "purchases"));
-    }
+    //     return view('notes.index', compact('today', "purchases"));
+    // }
     
     public function specify(Maker $maker)
     {
         $today = new Carbon('today');
+        
         $maker_id = $maker->id;
         $purchases = purchase::where('maker_id', $maker_id)->whereDate('created_at', $today)->get();
         
@@ -177,7 +177,7 @@ class OrderController extends Controller
         log::debug($purchases);
         
         // return redirect()->route('orders_purchase', $purchases);
-        return view('orders.purchases.maker', compact('purchases', 'maker'));
+        return view('orders.purchases.maker', compact('purchases', 'maker', 'today'));
     }
     
     public function genre(Request $request)
