@@ -18,9 +18,10 @@ class CreatePurchasesTable extends Migration
             $table->integer('purchase_qty');
             $table->integer('maintenance_id')->unsigned()->nullable();
             $table->integer('maker_id')->unsigned()->nullable();
-            $table->string('maker_name')->nullable();
-            $table->string('maintenance_name')->nullable();
+            $table->string('maker_name');
+            $table->string('maintenance_name');
             $table->date('arrived_at')->unsigned();
+            $table->integer('price_change')->nullable();
             $table->timestamps();
         });
     }
