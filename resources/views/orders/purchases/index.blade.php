@@ -51,20 +51,22 @@
                     <td>
                         {{ csrf_field() }}
                         <input type="hidden" name="_method" value="PUT">
-                        <input type="tel" name="purchase_qty" value="{{$purchase->purchase_qty}}">個</input>
+                        <input type="number" min="1" name="purchase_qty" value="{{$purchase->purchase_qty}}">個</input>
                     </td>
-                    
-                        @if($purchase->purchase_qty < 10)
-                        <!--<input type="tel" name="maintenance_pc" value="{{$purchase->maintenance->price_1pc}}">円</input>-->
-                        <td>{{$purchase->maintenance->price_1pc}}円</td>
-                        @elseif($purchase->purchase_qty < 30)
-                        <!--<input type="tel" name="maintenance_pc" value="{{$purchase->maintenance->price_10pcs}}">円</input>-->
-                        <td>{{$purchase->maintenance->price_10pcs}}円</td>
-                        @elseif($purchase->purchase_qty >= 30)
-                        <!--<input type="tel" name="maintenance_pc" value="{{$purchase->maintenance->price_30pcs}}">円</input>-->
-                        <td>{{$purchase->maintenance->price_30pcs}}円</td>
+                        @if($purchase->price_change != null)
+                            <td><input type="number" min="1" name="price_change" value="{{$purchase->price_change}}"><label>円</label></td>
+                        @else
+                            @if($purchase->purchase_qty < 10)
+                            <!--<input type="tel" name="maintenance_pc" value="{{$purchase->maintenance->price_1pc}}">円</input>-->
+                            <td><input type="number" min="1" name="price_change" value="{{$purchase->maintenance->price_1pc}}"><label>円</label></td>
+                            @elseif($purchase->purchase_qty < 30)
+                            <!--<input type="tel" name="maintenance_pc" value="{{$purchase->maintenance->price_10pcs}}">円</input>-->
+                            <td><input type="number" min="1" name="price_change" value="{{$purchase->maintenance->price_10pcs}}"円><label>円</label></td>
+                            @elseif($purchase->purchase_qty >= 30)
+                            <!--<input type="tel" name="maintenance_pc" value="{{$purchase->maintenance->price_30pcs}}">円</input>-->
+                            <td><input type="number" min="1" name="price_change" value="{{$purchase->maintenance->price_30pcs}}"円><label>円</label></td>
+                            @endif
                         @endif
-                    
                     <td>
                         <div><label>納品日</label>{{date('m月d日', strtotime($purchase->arrived_at))}}</div>
                     </td>

@@ -127,6 +127,7 @@ class OrderController extends Controller
     public function update(Request $request, Purchase $purchase) 
     {
         $purchase->purchase_qty = $request->input('purchase_qty');
+        $purchase->price_change = $request->input('price_change');
         // $purchase->
         $purchase->update();
         
