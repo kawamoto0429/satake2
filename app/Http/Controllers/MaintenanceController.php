@@ -213,9 +213,13 @@ class MaintenanceController extends Controller
                                     'price_30pcs' => $row[3],
                                     'jan' => $row[4],
                                     'maker_id' => intval($row[5]),
-                                    'category_id' => intval($row[6]),
-                                    'genre_id' => intval($row[7]),
-                                    'lot' => $row[8],
+                                    'maker_name' => $row[6],
+                                    'category_id' => intval($row[7]),
+                                    'category_name' => $row[8],
+                                    'genre_id' => intval($row[9]),
+                                    'genre_name' => $row[10],
+                                    'lot' => $row[11],
+                                    'tomorrow_flg' => $row[12],
                                     ]);
                 $count++;
             
