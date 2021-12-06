@@ -8,21 +8,17 @@
         </a>
     </div>
     <div>
-        
-        
-       
         <a href="/notes/home/{{$id}}/{{$day-1}}">&lt;</a>
-        
             {{$day}}
         <a href="/notes/home/{{$id}}/{{$day+1}}">&gt;</a>
     </div>
     <div>
         <div class="navbar-header">
             <ul class="navbar-brand">
-                <li class="navbar-brand" value ="0">すべて</li>
+                <li class="navbar-brand" value ="0"><a href="#">すべて</a></li>
                 @foreach($makers as $maker)
                 <li class="navbar-brand" href="/" value ="{{$maker->id}}">
-                    {{$maker->name}}
+                    <a href="#">{{$maker->name}}</a>
                 </li>
                 @endforeach
             </ul>
