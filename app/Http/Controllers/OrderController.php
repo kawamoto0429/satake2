@@ -48,47 +48,6 @@ class OrderController extends Controller
     {
         $date = new Carbon();
         
-        // $id = $request->input('maintenance_id');
-        // $day = date("Y-m-d", strtotime("+" . $request->input('arrived_at') . "day"));
-        
-        // log::debug($day);
-        
-        
-        // log::debug(Purchase::find(['arrived_at'=>$day]));
-        
-        // if(Purchase::find(['maintenance_id'=>$id, 'arrived_at'=>$day]) == [])
-        // {
-        //     $purchase = new Purchase();
-        //     $purchase->purchase_qty = $request->input('purchase_qty');
-        //     $purchase->maintenance_id = $request->input('maintenance_id');
-        //     $purchase->maker_id = $request->input('maker_id');
-        //     // mb_convert_kana();
-        //     // $purchase->arrived_at = date("YYYY/mm/dd",$request->input('arrived_at'));
-        //     $purchase->arrived_at = date("Y-m-d", strtotime("+" . $request->input('arrived_at') . "day"));
-        //     // log::debug($arrived_at);
-        //     // $purchase->arrived_at = $date->addDay($arrived_at);
-        //     log::debug($purchase->arrived_at);
-        //     // log::debug($purchase->arrived_at->format('d'));
-        //     $purchase->save();
-        //     return redirect()->route('orders_purchase');
-        // }
-        //     $purchase1 = Purchase::find(['maintenance_id'=>$id, 'arrived_at'=>$day]);
-        //     log::debug( $purchase1);
-        //     return redirect()->route('orders_purchase');
-            // $purchase1->purchase_qty = $purchase1->purchase_qty + $request->input('purchase_qty');
-            // log::debug( $purchase->purchase_qty);
-        
-        
-        // if(empty($purchase))
-        // {
-        // //     log::debug($arrived_at);
-        // //     $purchase = Purchase::where('maintenance_id', $id)->whereDate('arrived_at', $arrived_at)->get();
-        // //     log::debug($purchase);
-        // //     $add = $request->input('purchase_qty');
-        // //     // $purchase->purchase_qty = $purchase->purchase_qty + $add;
-        // //     // log::debug($purchase->purchase_qty);
-        //      return redirect()->route('orders_purchase');
-        // } 
         
         $purchase = new Purchase();
         $purchase->purchase_qty = $request->input('purchase_qty');

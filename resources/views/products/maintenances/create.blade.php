@@ -33,11 +33,11 @@
                 <label class="col-sm-2" >１個の納価</label>
                 <div class="col-sm-8">
                     <input type="text" name="price_1pc" value="{{old('price_1pc')}}" class="form-control">
-                </div>
-                    <label class="col-sm-1" >円</label>
                     @error('price_1pc')
                     <div class="error">{{$message}}</div>
                     @enderror
+                </div>
+                <label class="col-sm-1" >円</label>
             </div>
             
             <div class="form-group row">
