@@ -48,6 +48,15 @@ class OrderController extends Controller
     {
         $date = new Carbon();
         
+        // if($exist_purchase = Purchase::find($request->input('maintenance_id'))){
+        //     log::debug($exist_purchase);
+        //     if($exist_purchase->arrived_at == date("Y-m-d", strtotime("+" . $request->input('arrived_at') . "day"))){
+        //       $exist_purchase->purchase_qty = $exist_purchase->purchase_qty + $request->input('purchase_qty');
+        //       $exist_purchase->update();
+        //       return redirect()->route('orders_purchase');
+        //     }
+        // }
+        
         
         $purchase = new Purchase();
         $purchase->purchase_qty = $request->input('purchase_qty');
