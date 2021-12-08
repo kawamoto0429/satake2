@@ -58,22 +58,41 @@ class OrderController extends Controller
         // }
         
         
-        $purchase = new Purchase();
-        $purchase->purchase_qty = $request->input('purchase_qty');
-        $purchase->maintenance_id = $request->input('maintenance_id');
-        $purchase->maker_id = $request->input('maker_id');
-        // log::debug($purchase->maker_id);
-        $purchase->maker_name = Maker::find($request->input('maker_id'))->name;
-        $purchase->maintenance_name = Maintenance::find($request->input('maintenance_id'))->name;
-        $purchase->arrived_at = date("Y-m-d", strtotime("+" . $request->input('arrived_at') . "day"));
-        // log::debug($arrived_at);
-        // $purchase->arrived_at = $date->addDay($arrived_at);
-        // log::debug($purchase->arrived_at);
-        // log::debug($purchase->arrived_at->format('d'));
-        $purchase->save();
+        $exist_purchases = Purchase::where("maintenance_id", $request->input('maintenance_id'))
+                            ->whereDate('arrived_at', date("Y-m-d", strtotime("+" . $request->input('arrived_at') . "day")))
+                            ->whereDate('created_at', $date)
+                            ->get();
+        log::debug($exist_purchases);
         
-        return redirect()->route('orders_purchase');
-        
+        if(count($exist_purchases) <= 0){
+            $purchase = new Purchase();
+            $purchase->purchase_qty = $request->input('purchase_qty');
+            $purchase->maintenance_id = $request->input('maintenance_id');
+            $purchase->maker_id = $request->input('maker_id');
+            // log::debug($purchase->maker_id);
+            $purchase->maker_name = Maker::find($request->input('maker_id'))->name;
+            $purchase->maintenance_name = Maintenance::find($request->input('maintenance_id'))->name;
+            $purchase->arrived_at = date("Y-m-d", strtotime("+" . $request->input('arrived_at') . "day"));
+            // log::debug($arrived_at);
+            // $purchase->arrived_at = $date->addDay($arrived_at);
+            // log::debug($purchase->arrived_at);
+            // log::debug($purchase->arrived_at->format('d'));
+            $purchase->save();
+            
+            return redirect()->route('orders_purchase');
+        } 
+        else 
+        {
+            // $exist_purchase->purchase_qty = $exist_purchase->purchase_qty + $request->input('purchase_qty');
+            log::debug($exist_purchases);
+            foreach($exist_purchases as $exist_purchase) {
+                $exist_purchase->purchase_qty = $exist_purchase->purchase_qty + $request->input('purchase_qty');
+                $exist_purchase->update();
+            }
+            // $exist_purchase->update();
+            return redirect()->route('orders_purchase');
+        }
+       
     }
     
     public function purchase()
