@@ -241,22 +241,38 @@ class OrderController extends Controller
     {
         // log::debug($request->input('conclude'));
         // log::debug($request->input('qty'));
+        $date = new Carbon();
         
         $concludes = $request->input('conclude');
         log::debug($concludes);
         
         foreach($concludes as $index => $conclude)
         {
-            $maintenance = Maintenance::find($conclude);
-            log::debug($maintenance);
-            $purchase = new Purchase();
-            $purchase->maker_id = $maintenance->maker_id;
-            $purchase->maker_name = Maker::find($maintenance->maker_id)->name;
-            $purchase->maintenance_id = $maintenance->id;
-            $purchase->maintenance_name = Maintenance::find($maintenance->id)->name;
-            $purchase->purchase_qty = $request->input('purchase_qty');
-            $purchase->arrived_at = date("Y-m-d", strtotime("+" . $request->input('arrived_at') . "day"));
-            $purchase->save();
+            $exist_purchases = Purchase::where("maintenance_id", $conclude)
+                            ->whereDate('arrived_at', date("Y-m-d", strtotime("+" . $request->input('arrived_at') . "day")))
+                            ->whereDate('created_at', $date)
+                            ->get();
+            log::debug($exist_purchases); 
+            if(count($exist_purchases) > 0)
+            {
+                foreach($exist_purchases as $exist_purchase) {
+                    $exist_purchase->purchase_qty = $exist_purchase->purchase_qty + $request->input('purchase_qty');
+                    $exist_purchase->update();
+                    // return redirect()->route('orders_purchase');
+                }
+            } else {
+                $maintenance = Maintenance::find($conclude);
+                log::debug($maintenance);
+                $purchase = new Purchase();
+                $purchase->maker_id = $maintenance->maker_id;
+                $purchase->maker_name = Maker::find($maintenance->maker_id)->name;
+                $purchase->maintenance_id = $maintenance->id;
+                $purchase->maintenance_name = Maintenance::find($maintenance->id)->name;
+                $purchase->purchase_qty = $request->input('purchase_qty');
+                $purchase->arrived_at = date("Y-m-d", strtotime("+" . $request->input('arrived_at') . "day"));
+                $purchase->save();
+            }
+            
         }
         
         return redirect()->route('orders_purchase');
