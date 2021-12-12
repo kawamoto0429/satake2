@@ -124,6 +124,16 @@
                     @endif
                 </div>
             </div>
+            <div class="form-group row">
+                <label class="col-sm-2">表示しない</label>
+                <div class="col-sm-8">
+                    @if($maintenance->nodisplay_flg == 1)
+                        <input type="checkbox" name="nodisplay_flg" class="mr-2" checked><label>表示しないですか？</label>
+                    @else
+                        <input type="checkbox" name="nodisplay_flg" class="mr-2"><label>表示しないですか？</label>
+                    @endif
+                </div>
+            </div>
             <button type="submit">編集</button>
         
         </form>

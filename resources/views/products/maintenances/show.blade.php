@@ -61,6 +61,13 @@
                     <td>なし</td>
                 @endif
                 </tr>
+                <th scope="row">表示</th>
+                @if($maintenance->nodisplay_flg == 1)
+                    <td>なし</td>
+                @else
+                    <td>あり</td>
+                @endif
+                </tr>
             </tbody>
         </table>
     </div>

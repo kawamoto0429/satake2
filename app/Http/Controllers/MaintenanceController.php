@@ -51,6 +51,11 @@ class MaintenanceController extends Controller
         } else {
             $maintenance->tomorrow_flg = 0;
         }
+        if ($request->input('nodisplay_flg') == 'on') {
+            $maintenance->nodisplay_flg = 1;
+        } else {
+            $maintenance->nodisplay_flg = 0;
+        }
         $maintenance->save();
         
         return redirect()->route('maintenance.index');
@@ -89,6 +94,11 @@ class MaintenanceController extends Controller
             $maintenance->tomorrow_flg = 1;
         } else {
             $maintenance->tomorrow_flg = false;
+        }
+        if ($request->input('nodisplay_flg') == 'on') {
+            $maintenance->nodisplay_flg = 1;
+        } else {
+            $maintenance->nodisplay_flg = false;
         }
         $maintenance->update();
         
@@ -219,7 +229,8 @@ class MaintenanceController extends Controller
                                     'genre_id' => intval($row[9]),
                                     'genre_name' => $row[10],
                                     'lot' => $row[11],
-                                    'tomorrow_flg' => $row[12],
+                                    'tomorrow_flg' => mb_convert_kana($row[12], "KVn"),
+                                    'nodisplay_flg' => mb_convert_kana($row[13], "KVn"),
                                     ]);
                 $count++;
             
