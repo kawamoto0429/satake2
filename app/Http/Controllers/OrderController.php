@@ -32,7 +32,7 @@ class OrderController extends Controller
         
         // $maintenances = Maintenance::where('maker_id', $id)->paginate(10);
         
-        $maintenances = Maintenance::where('maker_id', $id)->paginate(10);
+        $maintenances = Maintenance::where('maker_id', $id)->where('nodisplay_flg', false)->paginate(10);
         
         return view('orders.home', compact('maker','maintenances', 'date'));
     }
@@ -173,20 +173,28 @@ class OrderController extends Controller
         // Log::debug($request);
         
         $maker_id= $request['maker'];
-        log::debug($request['id']);
+        log::debug($request['name']);
         
-        if($request['id'] == -1){
-            $maintenances = Maintenance::where('maker_id', $maker_id)->get();
+        if($request['name'] == "1便"){
+            $maintenances = Maintenance::where('maker_id', $maker_id)
+                                        ->where('nodisplay_flg', false)
+                                        ->get();
             return $maintenances;
-        }elseif($request['id'] == -2){
-            $maintenances = Maintenance::where('maker_id', $maker_id)->where('tomorrow_flg', 1)->get();
+        }elseif($request['name'] == "2便"){
+            $maintenances = Maintenance::where('maker_id', $maker_id)
+                                        ->where('tomorrow_flg', true)
+                                        ->where('nodisplay_flg', false)
+                                        ->get();
             return $maintenances;
         }else{
-            $genre_id= $request['id'];
-            log::debug($genre_id);
+            $genre_name= $request['name'];
+            log::debug($genre_name);
             
-            $maintenances = Maintenance::where('genre_id', $genre_id)->where('maker_id', $maker_id)->get();
-            
+            $maintenances = Maintenance::where('genre_name', $genre_name)
+                                        ->where('maker_id', $maker_id)
+                                        ->where('nodisplay_flg', false)
+                                        ->get();
+            log::debug($maintenances);
             return $maintenances;
         }
         
@@ -199,15 +207,17 @@ class OrderController extends Controller
         
         Log::debug($category);
          
-        $maintenance_id = Maintenance::where('category_id', $category)->get('id');
+        $maintenance_id = Maintenance::where('category_id', $category)
+                                      ->where('nodisplay_flg', false)
+                                      ->get('id');
          
         Log::debug($maintenance_id);
         
-        for($i = 1; $i <= $maintenance_id.count(); $i++) {
-            $maintenance = $maintenance_id[$i].value();
-        }
+        // for($i = 1; $i <= $maintenance_id.count(); $i++) {
+        //     $maintenance = $maintenance_id[$i].value();
+        // }
         
-        log::debug($maintenance);
+        // log::debug($maintenance);
         
         // Log::debug($purchases);
          
@@ -227,11 +237,16 @@ class OrderController extends Controller
         Log::debug($maker_id);
         
         if(!empty($keywords)) {
-            $maintenances = Maintenance::where('name', 'like', '%'.$keywords.'%')->where('maker_id', $maker_id)->get();
+            $maintenances = Maintenance::where('name', 'like', '%'.$keywords.'%')
+                                        ->where('maker_id', $maker_id)
+                                        ->where('nodisplay_flg', false)
+                                        ->get();
             return $maintenances;
         }else{
            
-            $maintenances = Maintenance::where('maker_id', $maker_id)->get();
+            $maintenances = Maintenance::where('maker_id', $maker_id)
+                                        ->where('nodisplay_flg', false)
+                                        ->get();
             // $maintenances = Maintenance::all();
             return $maintenances;
         }

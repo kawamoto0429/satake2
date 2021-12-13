@@ -56,7 +56,7 @@ Route::get('/orders/purchase/note', [OrderController::class, 'note_today'])->nam
 Route::get('/orders/purchase/note_sub', [OrderController::class, 'note_sub'])->name('note_sub');
 
 
-Route::get('/purchase/category/ajax', [OrderController::class, 'category']);
+// Route::get('/purchase/category/ajax', [OrderController::class, 'category']);
 
 
 Route::get('/products', [ProductController::class, 'index'])->name('products');
@@ -76,6 +76,8 @@ Route::get('/products/maintenances/{maintenance}/show', [MaintenanceController::
     ->where('maintenance', '[0-9]+');
 Route::get('/products/maintenances/csv', [MaintenanceController::class, 'csv']); 
 Route::post('/products/maintenances/csv/store', [MaintenanceController::class, 'csv_store'])->name('csv_store');
+Route::get('/products/maintenances/maker/{maker}', [MaintenanceController::class, 'maker_index']);
+Route::get('/maintenances/search/ajax', [MaintenanceController::class, 'search']);
 
 Route::get('/products/maintenances/{maintenance}/edit', [MaintenanceController::class, 'edit'])
     ->name('maintenance.edit')

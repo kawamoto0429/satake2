@@ -17,10 +17,19 @@ class MaintenanceController extends Controller
 {
     public function index() 
     {
+        $makers = Maker::all();
         $maintenances = Maintenance::all();
         
-        return view('products.maintenances.index', compact('maintenances'));
+        return view('products.maintenances.index', compact('maintenances', 'makers'));
     }
+    
+    public function maker_index(Maker $maker)
+    {
+        $maintenances = Maintenance::where('maker_id', $maker->id)->get();
+        
+        return view('products.maintenances.maker', compact('maintenances', 'maker'));
+    }
+    
     
     public function create() 
     {
@@ -239,6 +248,26 @@ class MaintenanceController extends Controller
         return redirect()->route('maintenance.index');
     }
     
+    public function search(Request $request)
+    {
+        Log::debug($request);
+        
+        $keywords = $request['keywords'];
+        $maker_id = $request['maker'];
+        
+        Log::debug($keywords);
+        Log::debug($maker_id);
+        
+        if(!empty($keywords)) {
+            $maintenances = Maintenance::where('name', 'like', '%'.$keywords.'%')->get();
+            return $maintenances;
+        }else{
+            $maintenances = Maintenance::all();
+                                        
+            // $maintenances = Maintenance::all();
+            return $maintenances;
+        }
+    }
     
 
 }

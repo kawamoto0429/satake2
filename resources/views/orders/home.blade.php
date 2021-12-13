@@ -111,8 +111,8 @@
         });
         
         $('#genre li').click(function(){
-        let id = $(this).val();
-        console.log(id);
+        let name = $(this).text();
+        console.log(name);
         <!--alert('テキスト:' + text);-->
         <!--$('#genre li').on('click', () => {-->
         <!--    let id = $('#genre li').text();-->
@@ -125,7 +125,7 @@
                 type: "get",
                 url: "/orders/genre/ajax",
                 data: {
-                        'id': id,
+                        'name': name,
                         'maker': {{$maker->id}},
                       },
                 dataType: 'json',
