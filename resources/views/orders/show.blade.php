@@ -63,6 +63,7 @@
             <input type="number" min="1" name="arrived_at"> 日後
             <input type="hidden" name="maintenance_id" value="{{$maintenance->id}}">
             <input type="hidden" name="maker_id" value="{{$maintenance->maker_id}}">
+            <input type="hidden" name="category_id" value="{{$maintenance->category_id}}">
             <button type="submit">発注</button>
             </form>
         </div>
