@@ -16,9 +16,31 @@ class PDFController extends Controller
         
         $id = $maker->id;
         
-        $purchases = Purchase::whereDate('created_at', $today)->where('maker_id', $id)->orderBy('arrived_at', 'desc')->get();
-
-    	$pdf = PDF::loadView('hello', compact('purchases', 'maker'));
+        $purchases_kasi = Purchase::whereDate('created_at', $today)
+                                    ->where('maker_id', $id)
+                                    ->where('category_name', "菓子パン")
+                                    ->orderBy('arrived_at', 'desc')
+                                    ->get();
+                                    
+        $purchases_huku = Purchase::whereDate('created_at', $today)
+                                    ->where('maker_id', $id)
+                                    ->where('category_name', "袋パン")
+                                    ->orderBy('arrived_at', 'desc')
+                                    ->get();
+                                    
+        $purchases_syoku = Purchase::whereDate('created_at', $today)
+                                    ->where('maker_id', $id)
+                                    ->where('category_name', "食パン")
+                                    ->orderBy('arrived_at', 'desc')
+                                    ->get();
+                                    
+        $purchases_you = Purchase::whereDate('created_at', $today)
+                                    ->where('maker_id', $id)
+                                    ->where('category_name', "洋菓子")
+                                    ->orderBy('arrived_at', 'desc')
+                                    ->get();
+        
+    	$pdf = PDF::loadView('hello', compact('maker','purchases_kasi', 'purchases_huku', 'purchases_syoku', 'purchases_you'));
 
     	return $pdf->download('hello.pdf');
     }

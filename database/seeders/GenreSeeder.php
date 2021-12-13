@@ -58,6 +58,13 @@ class GenreSeeder extends Seeder
                 'category_name' => '菓子パン',
             ],
             [
+                'name' => 'ドーナツ',
+                'maker_id' => 1,
+                'maker_name' => 'ヤマザキ',
+                'category_id' => 2,
+                'category_name' => '袋パン',
+            ],
+            [
                 'name' => 'BAKEONE',
                 'maker_id' => 1,
                 'maker_name' => 'ヤマザキ',

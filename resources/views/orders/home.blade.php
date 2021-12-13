@@ -28,8 +28,8 @@
         <ul class="navbar-nav" id="genre">
             <li class="nav-item" value=-1><a href="#">1便</a></li>
             <li class="nav-item" value=-2><a href="#">2便</a></li>
-            @foreach($maker->genres as $genre)
-                <li class="nav-item" value={{$genre->id}}><a href="#">{{$genre->name}}</a></li>
+            @foreach($unique_genres as $genre)
+                <li class="nav-item" value={{$genre}}><a href="#">{{$genre}}</a></li>
             @endforeach
         </ul>
     </div>

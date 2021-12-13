@@ -23,4 +23,9 @@ class Category extends Model
     {
         return $this->belongsTo(Maker::class);
     }
+    
+    public function purchases()
+    {
+        return $this->hasMany(Purchases::class);
+    }
 }

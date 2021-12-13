@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\PurchaseRequest;
 use App\Models\Maker;
+use App\Models\Genre;
 use App\Models\Maintenance;
 use Log;
 use App\Models\Purchase;
@@ -30,16 +31,37 @@ class OrderController extends Controller
         
         $id = $maker->id;
         
+        $genres = Genre::where('maker_id', $id)->get();
+        log::debug($genres);
+        
+        $unique = [];
+        
+        foreach($genres as $genre)
+        {
+            $unique[] = $genre->name;
+        }
+        
+        
+        // $unique = array_unique($array);
+        
+        log::debug($unique);
+        
+        $unique_genres = array_unique($unique);
+        
+        log::debug($unique_genres);
+        
         // $maintenances = Maintenance::where('maker_id', $id)->paginate(10);
         
         $maintenances = Maintenance::where('maker_id', $id)->where('nodisplay_flg', false)->paginate(10);
         
-        return view('orders.home', compact('maker','maintenances', 'date'));
+        return view('orders.home', compact('maker','maintenances', 'date', "unique_genres"));
     }
     
     public function show(Maintenance $maintenance)
     {
         $date = new Carbon();
+        
+        // log::debug($maintenance);
         
         return view('orders.show', compact('maintenance', 'date'));
     }
@@ -69,8 +91,10 @@ class OrderController extends Controller
             $purchase->purchase_qty = $request->input('purchase_qty');
             $purchase->maintenance_id = $request->input('maintenance_id');
             $purchase->maker_id = $request->input('maker_id');
+            $purchase->maker_id = $request->input('category_id');
             // log::debug($purchase->maker_id);
             $purchase->maker_name = Maker::find($request->input('maker_id'))->name;
+            $purchase->maker_name = Maker::find($request->input('category_id'))->name;
             $purchase->maintenance_name = Maintenance::find($request->input('maintenance_id'))->name;
             $purchase->arrived_at = date("Y-m-d", strtotime("+" . $request->input('arrived_at') . "day"));
             // log::debug($arrived_at);
@@ -200,31 +224,31 @@ class OrderController extends Controller
         
     }
     
-    public function category(Request $request) {
-        Log::debug($request);
+    // public function category(Request $request) {
+    //     Log::debug($request);
         
-        $category = $request['category_id'];
+    //     $category = $request['category_id'];
         
-        Log::debug($category);
+    //     Log::debug($category);
          
-        $maintenance_id = Maintenance::where('category_id', $category)
-                                      ->where('nodisplay_flg', false)
-                                      ->get('id');
+    //     $maintenance_id = Maintenance::where('category_id', $category)
+    //                                   ->where('nodisplay_flg', false)
+    //                                   ->get('id');
          
-        Log::debug($maintenance_id);
+    //     Log::debug($maintenance_id);
         
-        // for($i = 1; $i <= $maintenance_id.count(); $i++) {
-        //     $maintenance = $maintenance_id[$i].value();
-        // }
+    //     // for($i = 1; $i <= $maintenance_id.count(); $i++) {
+    //     //     $maintenance = $maintenance_id[$i].value();
+    //     // }
         
-        // log::debug($maintenance);
+    //     // log::debug($maintenance);
         
-        // Log::debug($purchases);
+    //     // Log::debug($purchases);
          
-         $purchases = Purchase::where('maintenance_id', $maintenance_id)->get();
+    //      $purchases = Purchase::where('maintenance_id', $maintenance_id)->get();
          
-         return $purchases;
-    }
+    //      return $purchases;
+    // }
     
     public function search(Request $request)
     {
@@ -281,6 +305,8 @@ class OrderController extends Controller
                 $purchase = new Purchase();
                 $purchase->maker_id = $maintenance->maker_id;
                 $purchase->maker_name = Maker::find($maintenance->maker_id)->name;
+                $purchase->category_id = $maintenance->category_id;
+                $purchase->category_name = Category::find($maintenance->category_id)->name;
                 $purchase->maintenance_id = $maintenance->id;
                 $purchase->maintenance_name = Maintenance::find($maintenance->id)->name;
                 $purchase->purchase_qty = $request->input('purchase_qty');
