@@ -25,24 +25,14 @@
             <a href="/purchase/{{$maker->id}}/specify">{{$maker->name}}</a>
         </div>
         @endforeach
-        <div class="d-flex justify-content-end ml-2">
-            @if($c1 > 0)
-            <div>菓子パン{{$c1}}個</div>
-            @else
-            <div>菓子パン0個</div>
-            @endif
-            
-            @if($c2 > 0)
-            <div>袋パン{{$c2}}個</div>
-            @else
-            <div>袋パン0個</div>
-            @endif
-            
-            @if($c3 > 0)
-            <div>食パン{{$c3}}個</div>
-            @else
-            <div>食パン0個</div>
-            @endif
+        <div class="d-flex  ml-4">
+            @foreach($counting as $category => $c)
+            <div class="ml-4">
+                <label>{{$category}}</label>
+                <label>{{$c}}</label>
+                <label>個</label>
+            </div>
+            @endforeach
         </div>
     </div>
     <div>

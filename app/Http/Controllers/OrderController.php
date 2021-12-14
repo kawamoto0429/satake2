@@ -130,13 +130,16 @@ class OrderController extends Controller
         
         $purchases = Purchase::whereDate('created_at', $today)->get();
         
-        $c1 = count(Purchase::where('category_name', "菓子パン")->whereDate('created_at', $today)->get());
-        $c2 = count(Purchase::where('category_name', "袋パン")->whereDate('created_at', $today)->get());
-        $c3 = count(Purchase::where('category_name', "食パン")->whereDate('created_at', $today)->get());
+        $counting = [];
         
-        // Log::debug($purchases);
+        foreach ($categories as $category)
+        {
+            $counting[$category->name] = count(Purchase::where('category_name', $category->name )->whereDate('created_at', $today)->get());
+        }
         
-        return view('orders.purchases.index', compact('purchases','makers', 'categories', 'today', "c1", 'c2', "c3"));
+        Log::debug($counting);
+        
+        return view('orders.purchases.index', compact('purchases','makers', 'categories', 'today', "counting"));
     }
     
     public function update(Request $request, Purchase $purchase) 
@@ -157,43 +160,33 @@ class OrderController extends Controller
     }
     
     
-    // public function note_today() 
-    // {
-    //     $today = Carbon::today();
-        
-    //     $purchases = Purchase::whereDate('created_at', $today)->get();
-        
-    //     return view('notes.index', compact('today', "purchases"));
-    // }
-    
     public function specify(Maker $maker)
     {
         $today = new Carbon('today');
         
         $maker_id = $maker->id;
-        $purchases = purchase::where('maker_id', $maker_id)->whereDate('created_at', $today)->get();
+        $purchases = purchase::where('maker_id', $maker_id)
+                                ->whereDate('created_at', $today)
+                                ->orderBy('arrived_at', 'asc')
+                                ->get();
         
+        $categories = Category::all();
         
-        // foreach($maintenances as $maintenance) {
-        //     $purchases[] = $maintenace->purchases::where('maintenance_id', $maintenace)
-        // }
+        $counting = [];
         
-        // for($i = 0; $i < count($maintenances); $i++){
-        //     if($maintenances[$i]->id == $i+1){
-        //          $purchases[$i] = $maintenances[$i]->purchases::find('maintenance_id', $i);
-        //     }
-        // }
+        foreach ($categories as $category)
+        {
+            $counting[$category->name] = count(Purchase::where('category_name', $category->name)
+                                                        ->whereDate('created_at', $today)
+                                                        ->where('maker_id', $maker_id)
+                                                        ->get());
+        }
         
-        
-        
-        // $purchases = Purchase::wherehas('maintenance_id', function($query){
-        //         $query->where('maker_id', $maker_id);
-        //     } )->get();
             
         log::debug($purchases);
         
         // return redirect()->route('orders_purchase', $purchases);
-        return view('orders.purchases.maker', compact('purchases', 'maker', 'today'));
+        return view('orders.purchases.maker', compact('purchases', 'maker', 'today', 'counting'));
     }
     
     public function genre(Request $request)
