@@ -25,10 +25,24 @@
             <a href="/purchase/{{$maker->id}}/specify">{{$maker->name}}</a>
         </div>
         @endforeach
-        <div class="d-flex justify-content-end">
-            <div>菓子パン○個</div>
-            <div>袋パン○個</div>
-            <div>食パン○個</div>
+        <div class="d-flex justify-content-end ml-2">
+            @if($c1 > 0)
+            <div>菓子パン{{$c1}}個</div>
+            @else
+            <div>菓子パン0個</div>
+            @endif
+            
+            @if($c2 > 0)
+            <div>袋パン{{$c2}}個</div>
+            @else
+            <div>袋パン0個</div>
+            @endif
+            
+            @if($c3 > 0)
+            <div>食パン{{$c3}}個</div>
+            @else
+            <div>食パン0個</div>
+            @endif
         </div>
     </div>
     <div>

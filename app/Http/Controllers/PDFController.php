@@ -41,7 +41,6 @@ class PDFController extends Controller
                                     ->get();
         
     	$pdf = PDF::loadView('hello', compact('maker','purchases_kasi', 'purchases_huku', 'purchases_syoku', 'purchases_you'));
-
     	return $pdf->download('hello.pdf');
     }
 }

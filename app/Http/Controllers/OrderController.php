@@ -91,10 +91,10 @@ class OrderController extends Controller
             $purchase->purchase_qty = $request->input('purchase_qty');
             $purchase->maintenance_id = $request->input('maintenance_id');
             $purchase->maker_id = $request->input('maker_id');
-            $purchase->maker_id = $request->input('category_id');
+            $purchase->category_id = $request->input('category_id');
             // log::debug($purchase->maker_id);
             $purchase->maker_name = Maker::find($request->input('maker_id'))->name;
-            $purchase->maker_name = Maker::find($request->input('category_id'))->name;
+            $purchase->category_name = category::find($request->input('category_id'))->name;
             $purchase->maintenance_name = Maintenance::find($request->input('maintenance_id'))->name;
             $purchase->arrived_at = date("Y-m-d", strtotime("+" . $request->input('arrived_at') . "day"));
             // log::debug($arrived_at);
@@ -130,9 +130,13 @@ class OrderController extends Controller
         
         $purchases = Purchase::whereDate('created_at', $today)->get();
         
+        $c1 = count(Purchase::where('category_name', "菓子パン")->whereDate('created_at', $today)->get());
+        $c2 = count(Purchase::where('category_name', "袋パン")->whereDate('created_at', $today)->get());
+        $c3 = count(Purchase::where('category_name', "食パン")->whereDate('created_at', $today)->get());
+        
         // Log::debug($purchases);
         
-        return view('orders.purchases.index', compact('purchases','makers', 'categories', 'today'));
+        return view('orders.purchases.index', compact('purchases','makers', 'categories', 'today', "c1", 'c2', "c3"));
     }
     
     public function update(Request $request, Purchase $purchase) 
