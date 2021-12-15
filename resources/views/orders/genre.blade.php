@@ -26,7 +26,9 @@
     <div class="row">
     <div class="clearfix"></div>
     <div class="col sidebar">
-        <ul class="navbar-nav " id="category">
+        <ul class="navbar-nav " id="genre">
+            <li class="nav-item" value=-1><a href="#">1便</a></li>
+            <li class="nav-item" value=-2><a href="#">2便</a></li>
         @foreach($categories as $category)
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -148,12 +150,6 @@
             }).fail(function() {
               console.log('失敗');
             }); 
-        });
-        
-        $('#category li').click(function(){
-            alert("aa");
-            $(this)..slideToggle();
-            return false;
         });
     });
 </script>

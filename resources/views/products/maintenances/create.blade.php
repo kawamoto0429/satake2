@@ -125,6 +125,12 @@
                     <input type="checkbox" name="nodisplay_flg" class="mr-2"><label>表示しないですか？</label>
                 </div>
             </div>
+            <div class="form-group row">
+                <label class="col-sm-2">新商品</label>
+                <div class="col-sm-8">
+                    <input type="checkbox" name="new_flg" class="mr-2"><label>新商品</label>
+                </div>
+            </div>
             <button type="submit">Create</button>
         
         </form>

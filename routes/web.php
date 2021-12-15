@@ -33,7 +33,8 @@ Route::get('/notes/maker/ajax', [NoteController::class, 'maker']);
 
 Route::get('/orders', [OrderController::class, 'index'])->name('orders');
 Route::get('/orders/{maker}/home', [OrderController::class, 'home'])->name('index_home');
-Route::get('/orders/select', [OrderController::class, 'select'])->name('orders_select');
+Route::get('/orders/{maker}/{genre}/home', [OrderController::class, 'genre_home']);
+// Route::get('/orders/select', [OrderController::class, 'select'])->name('orders_select');
 Route::get('/orders/{maintenance}/show', [OrderController::class, 'show'])
         ->name('home_show');
 Route::get('/orders/genre/ajax', [OrderController::class, 'genre']);
