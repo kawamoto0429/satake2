@@ -36,6 +36,11 @@ class CategorySeeder extends Seeder
                 'maker_name' => 'ヤマザキ',
             ],
             [
+                'name' => '和菓子',
+                'maker_id' => 1,
+                'maker_name' => 'ヤマザキ',
+            ],
+            [
                 'name' => '菓子パン',
                 'maker_id' => 2,
                 'maker_name' => '神戸屋',

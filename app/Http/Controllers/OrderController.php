@@ -52,7 +52,7 @@ class OrderController extends Controller
         
         // $maintenances = Maintenance::where('maker_id', $id)->paginate(10);
         
-        $maintenances = Maintenance::where('maker_id', $id)->where('nodisplay_flg', false)->paginate(10);
+        $maintenances = Maintenance::where('maker_id', $id)->where('nodisplay_flg', 0)->paginate(10);
         
         return view('orders.home', compact('maker','maintenances', 'date', "unique_genres"));
     }
