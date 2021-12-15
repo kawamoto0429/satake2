@@ -68,6 +68,13 @@
                     <td>あり</td>
                 @endif
                 </tr>
+                <th scope="row">新商品</th>
+                @if($maintenance->new_flg == 1)
+                    <td>○</td>
+                @else
+                    <td>✖️</td>
+                @endif
+                </tr>
             </tbody>
         </table>
     </div>

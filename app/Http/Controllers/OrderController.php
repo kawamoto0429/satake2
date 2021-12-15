@@ -31,30 +31,29 @@ class OrderController extends Controller
         
         $id = $maker->id;
         
-        $genres = Genre::where('maker_id', $id)->get();
-        log::debug($genres);
         
-        $unique = [];
+        $categories = Category::where('maker_id', $id)->get();
         
-        foreach($genres as $genre)
-        {
-            $unique[] = $genre->name;
-        }
+
+        $maintenances = Maintenance::where('maker_id', $id)->where('nodisplay_flg', 0)->where('new_flg', 1)->paginate(10);
+        
+        return view('orders.home', compact('maker','maintenances', 'date', 'categories'));
+    }
+    
+    public function genre_home(Maker $maker, Genre $genre)
+    {
+        $date = new Carbon();
+
+        $id = $maker->id;
+        
+        $genre_id = $genre->id;
+        
+        $categories = Category::where('maker_id', $id)->get();
         
         
-        // $unique = array_unique($array);
+        $maintenances = Maintenance::where('maker_id', $id)->where('genre_id', $genre_id)->where('nodisplay_flg', 0)->paginate(10);
         
-        log::debug($unique);
-        
-        $unique_genres = array_unique($unique);
-        
-        log::debug($unique_genres);
-        
-        // $maintenances = Maintenance::where('maker_id', $id)->paginate(10);
-        
-        $maintenances = Maintenance::where('maker_id', $id)->where('nodisplay_flg', 0)->paginate(10);
-        
-        return view('orders.home', compact('maker','maintenances', 'date', "unique_genres"));
+        return view('orders.genre', compact('maker','maintenances', 'date', 'categories'));
     }
     
     public function show(Maintenance $maintenance)

@@ -65,6 +65,11 @@ class MaintenanceController extends Controller
         } else {
             $maintenance->nodisplay_flg = 0;
         }
+        if ($request->input('new_flg') == 'on') {
+            $maintenance->new_flg = 1;
+        } else {
+            $maintenance->new_flg = false;
+        }
         $maintenance->save();
         
         return redirect()->route('maintenance.index');
@@ -108,6 +113,11 @@ class MaintenanceController extends Controller
             $maintenance->nodisplay_flg = 1;
         } else {
             $maintenance->nodisplay_flg = false;
+        }
+        if ($request->input('new_flg') == 'on') {
+            $maintenance->new_flg = 1;
+        } else {
+            $maintenance->new_flg = false;
         }
         $maintenance->update();
         
@@ -240,6 +250,7 @@ class MaintenanceController extends Controller
                                     'lot' => $row[11],
                                     'tomorrow_flg' => mb_convert_kana($row[12], "KVn"),
                                     'nodisplay_flg' => mb_convert_kana($row[13], "KVn"),
+                                    'new_flg' => mb_convert_kana($row[14], "KVn"),
                                     ]);
                 $count++;
             
