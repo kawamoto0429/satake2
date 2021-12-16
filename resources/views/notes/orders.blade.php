@@ -13,7 +13,7 @@
         <a href="/notes/home/{{$id}}/{{$day+1}}">&gt;</a>
     </div>
     <div>
-        <div class="navbar-header">
+        <div class="navbar-header d-flex">
             <ul class="navbar-brand">
                 <li class="navbar-brand" value ="0"><a href="#">すべて</a></li>
                 @foreach($makers as $maker)
@@ -22,6 +22,15 @@
                 </li>
                 @endforeach
             </ul>
+            <div class="d-flex  ml-4">
+                @foreach($counting as $category => $c)
+                <div class="ml-4">
+                    <label>{{$category}}</label>
+                    <label>{{$c}}</label>
+                    <label>個</label>
+                </div>
+                @endforeach
+            </div>
         </div>
         <table class="table">
             <thead>
