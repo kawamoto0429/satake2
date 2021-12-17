@@ -52,6 +52,9 @@
             </tbody>
         </table>
     </div>
+    <div>
+        <a href="/pdf/{{$id}}/{{$day}}">確定</a>
+    </div>
 </div>
 <script>
     $(function(){

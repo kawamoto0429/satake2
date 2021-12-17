@@ -29,6 +29,7 @@ Route::get('/notes/home', [NoteController::class, 'note_home'])->name('note_home
 Route::get('/notes/home/{id}', [NoteController::class, 'day']);
 Route::get('/notes/home/{id}/{day}', [NoteController::class, 'orders'])->name('home_orders');
 Route::get('/notes/maker/ajax', [NoteController::class, 'maker']);
+Route::get('/pdf/{id}/{day}',[PDFController::class, 'note'])->name('pdf');
 
 
 Route::get('/orders', [OrderController::class, 'index'])->name('orders');
@@ -77,7 +78,8 @@ Route::get('/products/maintenances/{maintenance}/show', [MaintenanceController::
     ->where('maintenance', '[0-9]+');
 Route::get('/products/maintenances/csv', [MaintenanceController::class, 'csv']); 
 Route::post('/products/maintenances/csv/store', [MaintenanceController::class, 'csv_store'])->name('csv_store');
-Route::get('/products/maintenances/maker/{maker}', [MaintenanceController::class, 'maker_index']);
+Route::get('/products/maintenances/maker/{maker}', [MaintenanceController::class, 'maker_index'])
+        ->where('maker', '[0-9]+');
 Route::get('/maintenances/search/ajax', [MaintenanceController::class, 'search']);
 
 Route::get('/products/maintenances/{maintenance}/edit', [MaintenanceController::class, 'edit'])

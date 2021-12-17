@@ -75,7 +75,7 @@
                 </table>
             
             <input type="text" name="purchase_qty">個
-            <input type="number"  name="arrived_at"> 日後
+            <input type="number" min="1" name="arrived_at"> 日後
             <button type="submit">確定</button>
             </form>
             {{ $maintenances->links() }}

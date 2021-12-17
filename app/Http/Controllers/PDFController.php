@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Purchase;
 use App\Models\Maker;
 use Carbon\Carbon;
+use Log;
 use PDF;
 
 class PDFController extends Controller
@@ -42,5 +43,23 @@ class PDFController extends Controller
         
     	$pdf = PDF::loadView('hello', compact('maker','purchases_kasi', 'purchases_huku', 'purchases_syoku', 'purchases_you'));
     	return $pdf->download('hello.pdf');
+    }
+    
+    public function note($id, $day)
+    {
+        $makers = Maker::all();
+        
+        $date = new Carbon();
+        
+        $date->month = $id;
+        
+        $date->day = $day;
+        
+        $purchases = Purchase::whereDate('arrived_at', $date)->orderBy('maker_id', 'asc')->get();
+        
+        log::debug($purchases);
+        
+        $pdf = PDF::loadView('note', compact('purchases', 'makers'));
+    	return $pdf->download('note.pdf');
     }
 }
