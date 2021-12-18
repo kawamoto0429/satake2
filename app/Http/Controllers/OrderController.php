@@ -69,6 +69,8 @@ class OrderController extends Controller
     {
         $date = new Carbon();
         
+        $week_names = ['日', '月', '火', '水', '木', '金', '土'];
+        
         // if($exist_purchase = Purchase::find($request->input('maintenance_id'))){
         //     log::debug($exist_purchase);
         //     if($exist_purchase->arrived_at == date("Y-m-d", strtotime("+" . $request->input('arrived_at') . "day"))){
@@ -96,6 +98,10 @@ class OrderController extends Controller
             $purchase->category_name = category::find($request->input('category_id'))->name;
             $purchase->maintenance_name = Maintenance::find($request->input('maintenance_id'))->name;
             $purchase->arrived_at = date("Y-m-d", strtotime("+" . $request->input('arrived_at') . "day"));
+            $week = date('w', strtotime($purchase->arrived_at));
+            log::debug($week);
+            
+            $purchase->week_name = $week_names[$week];
             // log::debug($arrived_at);
             // $purchase->arrived_at = $date->addDay($arrived_at);
             // log::debug($purchase->arrived_at);

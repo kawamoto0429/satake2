@@ -45,6 +45,7 @@ font-family: ipag;
             <tr>
                 <td>
                     {{date('m/d', strtotime($purchase->arrived_at))}}
+                    <label>({{$purchase->week_name}})</label>
                 </td>
                 <td height="20px">
                     {{$purchase->maintenance->name}}
@@ -80,6 +81,7 @@ font-family: ipag;
         <table border="1" >
             <tr>
                 <th>納品日</th>
+                <th>曜日</th>
                 <th width="200px" height="20px">商品名</th>
                 <th>発注数量</th>
                 <th>入数</th>
@@ -90,6 +92,10 @@ font-family: ipag;
             <tr>
                 <td>
                     {{date('m/d', strtotime($purchase->arrived_at))}}
+                    <label>({{$purchase->week_name}})</label>
+                </td>
+                <td>
+                    {{$purchase->week_name}}
                 </td>
                 <td height="20px">
                     {{$purchase->maintenance->name}}
@@ -135,6 +141,7 @@ font-family: ipag;
             <tr>
                 <td>
                     {{date('m/d', strtotime($purchase->arrived_at))}}
+                    <label>{{$purchase->week_name}}</label>
                 </td>
                 <td height="20px">
                     {{$purchase->maintenance->name}}
@@ -177,9 +184,11 @@ font-family: ipag;
             </tr>
             
             @foreach($purchases_you as $purchase)
+            
             <tr>
                 <td>
                     {{date('m/d', strtotime($purchase->arrived_at))}}
+                    <label>{{$purchase->week_name}}</label>
                 </td>
                 <td height="20px">
                     {{$purchase->maintenance->name}}

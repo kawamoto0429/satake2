@@ -23,6 +23,7 @@ class CreatePurchasesTable extends Migration
             $table->string('category_name');
             $table->string('maintenance_name');
             $table->date('arrived_at')->unsigned()->nullable();
+            $table->string('week_name');
             $table->integer('price_change')->nullable();
             $table->timestamps();
         });
