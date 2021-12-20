@@ -282,6 +282,7 @@ class OrderController extends Controller
     {
         // log::debug($request->input('conclude'));
         // log::debug($request->input('qty'));
+        $week_names = ['日', '月', '火', '水', '木', '金', '土'];
         $date = new Carbon();
         
         $concludes = $request->input('conclude');
@@ -313,6 +314,10 @@ class OrderController extends Controller
                 $purchase->maintenance_name = Maintenance::find($maintenance->id)->name;
                 $purchase->purchase_qty = $request->input('purchase_qty');
                 $purchase->arrived_at = date("Y-m-d", strtotime("+" . $request->input('arrived_at') . "day"));
+                $week = date('w', strtotime($purchase->arrived_at));
+                log::debug($week);
+                
+                $purchase->week_name = $week_names[$week];
                 $purchase->save();
             }
             

@@ -53,12 +53,12 @@
          <div class="col">
              <form method="POST" action="/orders/purchase/conclude">
                  {{ csrf_field() }}
-                <table class="table">
+                <table class="table text-center">
                     <thead>
                         <tr>
-                            <th scope="col">チェック</th>
-                            <th scope="col">商品名</th>
-                            <th scope="col">納品/１個</th>
+                            <th scope="col" class="w10px"></th>
+                            <th scope="col" class="">商品名</th>
+                            <th scope="col" class="w150px">納品/１個</th>
                         </tr>
                     </thead>
                     <tbody  class="products-list">
