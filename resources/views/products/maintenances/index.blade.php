@@ -23,16 +23,16 @@
         </form>
     </div>
     <div>
-        <table class="table table-bordered">
+        <table class="table table-bordered text-center">
             <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">メーカー</th>
+                <th scope="col" class="w100px">#</th>
+                <th scope="col" class="w150px">メーカー</th>
                 <th scope="col">商品名</th>
-                <th scope="col">納価/1個</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
+                <th scope="col" class="w100px">納価/1個</th>
+                <th scope="col" class="w80px"></th>
+                <th scope="col" class="w80px"></th>
+                <th scope="col" class="w80px"></th>
             </tr>
             </thead>
             <tbody class="products-list">
@@ -42,8 +42,8 @@
                 <td>{{$maintenance->maker_name}}</td>
                 <td>{{$maintenance->name}}</td>
                 <td>{{$maintenance->price_1pc}}円</td>
-                <td><a href="{{ route('maintenance.show', $maintenance)}}">詳細</a></td>
-                <td><a href="{{ route('maintenance.edit', $maintenance)}}">編集</a></td>
+                <td ><a href="{{ route('maintenance.show', $maintenance)}}">詳細</a></td>
+                <td ><a href="{{ route('maintenance.edit', $maintenance)}}">編集</a></td>
                 <td>
                     <form method="POST" action="{{route('maintenance.delete', $maintenance)}}" onsubmit="return confirm('本気ですか？')">
                     @csrf
