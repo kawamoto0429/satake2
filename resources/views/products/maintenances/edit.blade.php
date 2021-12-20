@@ -26,32 +26,38 @@
                 <label class="col-sm-2" >１個の納価</label>
                 <div class="col-sm-8">
                     <input type="text" name="price_1pc" value="{{$maintenance->price_1pc}}" class="form-control">
-                </div>
-                    <label class="col-sm-1" >円</label>
                     @error('price_1pc')
                     <div class="error">{{$message}}</div>
                     @enderror
+                </div>
+                <div>
+                    円
+                </div>
             </div>
             
             <div class="form-group row">
                 <label class="col-sm-2" >１０個の納価</label>
                 <div class="col-sm-8">
                     <input type="text" name="price_10pcs" value={{$maintenance->price_10pcs}} class="form-control">
-                </div>
-                    <label class="col-sm-1" >円</label>
                     @error('price_10pcs')
                     <div class="error">{{$message}}</div>
                     @enderror
+                </div>    
+                <div>
+                    円
+                </div>    
             </div>
             <div class="form-group row">
                 <label class="col-sm-2" >３０個の納価</label>
                 <div class="col-sm-8">
                     <input type="text" name="price_30pcs" value={{$maintenance->price_30pcs}} class="form-control">
-                </div>
-                    <label class="col-sm-1" >円</label>
                     @error('price_30pcs')
                     <div class="error">{{$message}}</div>
                     @enderror
+                </div>
+                <div>
+                    円
+                </div>    
             </div>
             <div class="form-group row">
                 <label class="col-sm-2" >JANコード</label>
@@ -108,11 +114,15 @@
                 <label class="col-sm-2">入数</label>
                 <div class="col-sm-8">
                     <input type="text" name="lot" value="{{$maintenance->lot}}" class="form-control">
-                </div>
-                <label>個</label>
+                
+               
                     @error('lot')
                     <div class="error">{{$message}}</div>
                     @enderror
+                </div>
+                <div>
+                    個
+                </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2">2便可</label>

@@ -15,13 +15,13 @@
         <table class="table table-bordered">
             <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">メーカー</th>
+                <th scope="col" class="w100px">#</th>
+                <th scope="col" class="w150px">メーカー</th>
                 <th scope="col">商品名</th>
-                <th scope="col">納価/1個</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
+                <th scope="col" class="w100px">納価/1個</th>
+                <th scope="col" class="w80px"></th>
+                <th scope="col" class="w80px"></th>
+                <th scope="col" class="w80px"></th>
             </tr>
             </thead>
             <tbody>

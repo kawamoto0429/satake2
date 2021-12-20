@@ -11,6 +11,30 @@
   width: 10px;
 }
 
+.w50px {
+  width: 50px;
+}
+
+.w80px {
+  width: 80px;
+}
+
+.w100px {
+  width: 100px;
+}
+
 .w150px {
   width: 150px;
+}
+
+.w-700px {
+  width: 700px;
+}
+
+.m-auto {
+  margin: auto;
+}
+
+.error {
+  color: red;
 }
