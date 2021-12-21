@@ -39,6 +39,10 @@
   margin: auto;
 }
 
+.p-auto {
+  padding: 25px;
+}
+
 .error {
   color: red;
 }
