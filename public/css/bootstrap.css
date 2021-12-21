@@ -27,8 +27,12 @@
   width: 150px;
 }
 
-.w-700px {
-  width: 700px;
+.w-600px {
+  width: 600px;
+}
+
+.h-80px {
+  height: 80px;
 }
 
 .m-auto {

@@ -53,7 +53,7 @@
          <div class="col">
              <form method="POST" action="/orders/purchase/conclude">
                  {{ csrf_field() }}
-                <table class="table text-center">
+                <table class="table text-center table-bordered">
                     <thead>
                         <tr>
                             <th scope="col" class="w10px"></th>

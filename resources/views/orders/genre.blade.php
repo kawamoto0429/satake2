@@ -27,10 +27,10 @@
     <div class="clearfix"></div>
     <div class="col sidebar">
         <ul class="navbar-nav " id="genre">
-            <li class="nav-item" value=-1><a href="#">1便</a></li>
-            <li class="nav-item" value=-2><a href="#">2便</a></li>
+            <li class="nav-item" value="-1"><a href="#">1便</a></li>
+            <li class="nav-item" value="-2"><a href="#">2便</a></li>
         @foreach($categories as $category)
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown " value="{{$genre_id}}">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {{$category->name}}
                 </a>
@@ -55,12 +55,12 @@
          <div class="col">
              <form method="POST" action="/orders/purchase/conclude">
                  {{ csrf_field() }}
-                <table class="table">
+                <table class="table text-center table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col">チェック</th>
-                            <th scope="col">商品名</th>
-                            <th scope="col">納品/１個</th>
+                            <th scope="col" class="w10px"></th>
+                            <th scope="col" class="">商品名</th>
+                            <th scope="col" class="w150px">納品/１個</th>
                         </tr>
                     </thead>
                     <tbody  class="products-list">
@@ -121,7 +121,7 @@
         });
         
         $('#genre li').click(function(){
-        let name = $(this).text();
+        let name = $(this).val();
         console.log(name);
         
             $.ajax({

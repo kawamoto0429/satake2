@@ -53,7 +53,7 @@ class OrderController extends Controller
         
         $maintenances = Maintenance::where('maker_id', $id)->where('genre_id', $genre_id)->where('nodisplay_flg', 0)->paginate(10);
         
-        return view('orders.genre', compact('maker','maintenances', 'date', 'categories'));
+        return view('orders.genre', compact('maker','maintenances', 'date', 'categories', 'genre_id'));
     }
     
     public function show(Maintenance $maintenance)
@@ -201,22 +201,22 @@ class OrderController extends Controller
         $maker_id= $request['maker'];
         log::debug($request['name']);
         
-        if($request['name'] == "1便"){
+        if($request['name'] == -1){
             $maintenances = Maintenance::where('maker_id', $maker_id)
                                         ->where('nodisplay_flg', false)
                                         ->get();
             return $maintenances;
-        }elseif($request['name'] == "2便"){
+        }elseif($request['name'] == -2){
             $maintenances = Maintenance::where('maker_id', $maker_id)
                                         ->where('tomorrow_flg', true)
                                         ->where('nodisplay_flg', false)
                                         ->get();
             return $maintenances;
         }else{
-            $genre_name= $request['name'];
-            log::debug($genre_name);
+            $genre_id = $request['name'];
+            log::debug($genre_id);
             
-            $maintenances = Maintenance::where('genre_name', $genre_name)
+            $maintenances = Maintenance::where('genre_id', $genre_id)
                                         ->where('maker_id', $maker_id)
                                         ->where('nodisplay_flg', false)
                                         ->get();
@@ -226,31 +226,7 @@ class OrderController extends Controller
         
     }
     
-    // public function category(Request $request) {
-    //     Log::debug($request);
-        
-    //     $category = $request['category_id'];
-        
-    //     Log::debug($category);
-         
-    //     $maintenance_id = Maintenance::where('category_id', $category)
-    //                                   ->where('nodisplay_flg', false)
-    //                                   ->get('id');
-         
-    //     Log::debug($maintenance_id);
-        
-    //     // for($i = 1; $i <= $maintenance_id.count(); $i++) {
-    //     //     $maintenance = $maintenance_id[$i].value();
-    //     // }
-        
-    //     // log::debug($maintenance);
-        
-    //     // Log::debug($purchases);
-         
-    //      $purchases = Purchase::where('maintenance_id', $maintenance_id)->get();
-         
-    //      return $purchases;
-    // }
+    
     
     public function search(Request $request)
     {
