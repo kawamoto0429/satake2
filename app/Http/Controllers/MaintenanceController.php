@@ -142,9 +142,15 @@ class MaintenanceController extends Controller
         // $callback = $request['callback'];
         
         // return $maker;
+        $category = Category::where('maker_id', $maker)->first();
+        
         $categories = Category::where('maker_id', $maker)->get();
         
-        $genres = Genre::where('maker_id', $maker)->get();
+        log::debug($category);
+        
+        $genres = Genre::where('maker_id', $maker)->where('category_id', $category->id)->get();
+        
+        log::debug($genres);
         
         $data = ['genres' => $genres, 'categories' => $categories];
         
