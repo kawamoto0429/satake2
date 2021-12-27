@@ -5,7 +5,7 @@
 
 <div class="orders-container w-600px m-auto ">
     <div class="orders-top mb-2 ">
-        <a class="btn btn-primary btn-lg w-100 h-80px p-auto" href="/">
+        <a class="btn btn-secondary btn-lg w-100 h-80px p-auto" href="/">
             メーカーを選んでください
         </a>
     </div>

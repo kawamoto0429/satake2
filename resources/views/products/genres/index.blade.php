@@ -50,13 +50,35 @@
         <tbody>
                 @foreach($genres as $genre)
                 <tr>
+                    <form method="POST" action="/products/genres/{{$genre->id}}">
+                    @csrf
+                    <input type="hidden" name="_method" value="PUT">
                     <th>{{$genre->id}}</th>
-                    <td>{{$genre->maker_name}}</td>
-                    <td>{{$genre->category_name}}</td>
-                    <td class="maker-name">{{ $genre->name }}</td>
+                    <td><select name="maker_id" class="maker_name">
+                    @foreach($makers as $maker)
+                    @if($maker->id == $genre->maker_id)
+                    <option value="{{$genre->maker_id}}"selected>{{$genre->maker_name}}</option>
+                    @else
+                    <option value="{{$maker->id}}">{{$maker->name}}</option>
+                    @endif
+                    @endforeach
+                    </select></td>
+                    <td><select name="category_id" class="category_name">
+                    @foreach($makers as $maker)
+                    @foreach($maker->categories as $category)
+                    @if($category->id == $genre->category_id)
+                    <option value="{{$genre->category_id}}"selected>{{$genre->category_name}}</option>
+                    @elseif($category->maker_id == $genre->maker_id)
+                    <option value="{{$category->id}}">{{$category->name}}</option>
+                    @endif
+                    @endforeach
+                    @endforeach
+                    </select></td>
+                    <td><input name="name" value="{{ $genre->name }}"></td>
                     <td>
-                        <a href="/products/genres/{{$genre->id}}/edit">編集</a>
+                        <button type="submit">編集</button>
                     </td>
+                    </form>
                     <td>
                         <form method="POST" action="/products/genres/{{$genre->id}}" onsubmit="return confirm('本気ですか？')">
                             @csrf
@@ -103,6 +125,35 @@
             }); 
                  
         });
+        
+        <!--$('.maker_name').on('input', () => {-->
+        <!--    let maker = $('.maker_name').val();-->
+        <!--    console.log(maker);-->
+        <!--    $.ajax({-->
+        <!--    headers: {-->
+        <!--        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')-->
+        <!--    }, -->
+        <!--        type: "get",-->
+        <!--        url: "/products/genres/category/ajax",-->
+        <!--        data: {'maker_id': maker},-->
+        <!--        dataType: 'json',-->
+        <!--    }).done(function(data){-->
+        <!--        console.log(data)-->
+        <!--       $('.category_name').children().remove();-->
+        <!--       $.each(data['categories'], function (index, value) {-->
+        <!--        html = `-->
+        <!--              <option value=${value.id}>${value.name}</option>-->
+        <!--         `;-->
+        <!--         $('.category_name').append(html);-->
+        <!--       })-->
+               
+               
+              
+        <!--    }).fail(function() {-->
+        <!--      console.log('失敗');-->
+        <!--    }); -->
+                 
+        <!--});-->
 
     });
 </script>

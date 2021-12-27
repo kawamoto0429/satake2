@@ -21,7 +21,7 @@ class GenreController extends Controller
     {
         $makers = Maker::all();
         $categories = Category::all();
-        $genres = Genre::all();
+        $genres = Genre::orderBy('created_at', 'asc')->get();
         return view('products.genres.index', compact('makers', 'categories', 'genres'));
     }
 
