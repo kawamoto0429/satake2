@@ -57,7 +57,7 @@
                     <td><select name="maker_id" class="maker_name">
                     @foreach($makers as $maker)
                     @if($maker->id == $genre->maker_id)
-                    <option value="{{$genre->maker_id}}"selected>{{$genre->maker_name}}</option>
+                    <option value="{{$genre->maker_id}}" selected>{{$genre->maker_name}}</option>
                     @else
                     <option value="{{$maker->id}}">{{$maker->name}}</option>
                     @endif
@@ -126,8 +126,8 @@
                  
         });
         
-        <!--$('.maker_name').on('input', () => {-->
-        <!--    let maker = $('.maker_name').val();-->
+        <!--$('.maker_name').change(function() {-->
+        <!--    let maker = $(this).val();-->
         <!--    console.log(maker);-->
         <!--    $.ajax({-->
         <!--    headers: {-->
@@ -139,7 +139,8 @@
         <!--        dataType: 'json',-->
         <!--    }).done(function(data){-->
         <!--        console.log(data)-->
-        <!--       $('.category_name').children().remove();-->
+               <!--$(".category_name").children().remove();-->
+               <!--$(".category_name").closest('tr').children('td').children("opit").remove();-->
         <!--       $.each(data['categories'], function (index, value) {-->
         <!--        html = `-->
         <!--              <option value=${value.id}>${value.name}</option>-->

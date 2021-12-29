@@ -101,7 +101,7 @@ Route::get('/products/maintenances/category/ajax', [MaintenanceController::class
 
 Route::get('/pops',[PopController::class, 'index']);
 
-// Auth::routes();
+Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 

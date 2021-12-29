@@ -199,15 +199,19 @@ class OrderController extends Controller
         // Log::debug($request);
         
         $maker_id= $request['maker'];
+        $genre_id= $request['genre'];
+        log::debug($genre_id);
         log::debug($request['name']);
         
         if($request['name'] == -1){
             $maintenances = Maintenance::where('maker_id', $maker_id)
+                                        ->where('genre_id', $genre_id)
                                         ->where('nodisplay_flg', false)
                                         ->get();
             return $maintenances;
         }elseif($request['name'] == -2){
             $maintenances = Maintenance::where('maker_id', $maker_id)
+                                        ->where('genre_id', $genre_id)
                                         ->where('tomorrow_flg', true)
                                         ->where('nodisplay_flg', false)
                                         ->get();

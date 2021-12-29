@@ -131,6 +131,7 @@
                 data: {
                         'name': name,
                         'maker': {{$maker->id}},
+                        'genre': {{$genre_id}},
                       },
                 dataType: 'json',
             }).done(function(data){

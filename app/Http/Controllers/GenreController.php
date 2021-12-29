@@ -132,6 +132,8 @@ class GenreController extends Controller
         
         // return $maker;
         
+        $genre_id = Genre::where('maker_id', $maker)->get();
+        
         $categories = Category::where('maker_id', $maker)->get();
         
         Log::debug($categories);
