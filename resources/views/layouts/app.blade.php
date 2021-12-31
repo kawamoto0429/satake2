@@ -49,20 +49,12 @@
                     <ul class="navbar-nav mr-auto">
 
                     </ul>
-
-                     Right Side Of Navbar 
                     <ul class="navbar-nav ml-auto">
                          Authentication Links 
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
@@ -86,6 +78,18 @@
                         @endguest
                     </ul>
                 </div>
+                <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         発注
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        @foreach(Maker::all() as $maker)
+                        <li><a class="dropdown-item" href="#">{{$maker->name}}</a></li>
+                       @endforeach
+                    </ul>
+                </div>
+                    
+                
             </div>
         </nav>
         

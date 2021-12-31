@@ -69,5 +69,6 @@
         </div>
     </div>
     
+    
     @endsection
     @endauth

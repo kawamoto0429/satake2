@@ -94,6 +94,7 @@
     
     
 </div>
+<!--<script type="module" src="{{ secure_asset('/js/genre.js') }}"></script>-->
 <script>
     $(function(){
     
@@ -139,14 +140,14 @@
         <!--        dataType: 'json',-->
         <!--    }).done(function(data){-->
         <!--        console.log(data)-->
-               <!--$(".category_name").children().remove();-->
-               <!--$(".category_name").closest('tr').children('td').children("opit").remove();-->
-        <!--       $.each(data['categories'], function (index, value) {-->
+        <!--      $(".category_name").children().remove();-->
+        <!--      $(".category_name").closest('tr').children('td').children("opit").remove();-->
+        <!--      $.each(data['categories'], function (index, value) {-->
         <!--        html = `-->
         <!--              <option value=${value.id}>${value.name}</option>-->
         <!--         `;-->
         <!--         $('.category_name').append(html);-->
-        <!--       })-->
+        <!--      })-->
                
                
               
@@ -157,5 +158,7 @@
         <!--});-->
 
     });
+    
+    
 </script>
 @endsection
