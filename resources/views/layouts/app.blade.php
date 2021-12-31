@@ -38,7 +38,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'Satake') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -46,11 +46,7 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                      Left Side Of Navbar 
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
                     <ul class="navbar-nav ml-auto">
-                         Authentication Links 
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -75,26 +71,45 @@
                                     </form>
                                 </div>
                             </li>
+                            <div class="dropdown">
+                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                     ノート
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li>
+                                    <a class="dropdown-item" href="{{ route('note_home')}}">
+                                    ノート確認
+                                    </a>
+                                    </li>
+                                        <li><a class="dropdown-item" href="/notes/home/{{$date->month}}/{{$date->day-1}}">昨日の納品</a></li>
+                                        <li><a class="dropdown-item" href="/notes/home/{{$date->month}}/{{$date->day}}">今日の納品</a></li>
+                                        <li><a class="dropdown-item" href="/notes/home/{{$date->month}}/{{$date->day+1}}">明日の納品</a></li>
+                                </ul>
+                            </div>
+                            <div class="dropdown">
+                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                     発注
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    @foreach($makers as $maker)
+                                    <li><a class="dropdown-item" href="/orders/{{$maker->id}}/home">{{$maker->name}}</a></li>
+                                    @endforeach
+                                    <li><a class="dropdown-item" href="{{route('orders_purchase')}}">今日の発注</a></li>
+                                </ul>
+                            </div>
                         @endguest
                     </ul>
                 </div>
-                <div class="dropdown">
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                         発注
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        @foreach(Maker::all() as $maker)
-                        <li><a class="dropdown-item" href="#">{{$maker->name}}</a></li>
-                       @endforeach
-                    </ul>
-                </div>
+                
                     
                 
             </div>
         </nav>
         
         <main class="py-4">
+            
             @yield('content')
+            
         </main>
     </div>
 </body>

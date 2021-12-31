@@ -3,25 +3,9 @@
 
 @section('content')
 <div class="container">
-    <nav class="navbar navbar-default mb-4">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand"  href="{{ route("orders")}}">
-                    発注
-                </a>
-            </div>
-            <div class="orders-note">
-                <div class="navbar-brand" ><a href="/notes/home/{{$date->month}}/{{$date->day-1}}">昨日の納品</a></div>
-                <div class="navbar-brand" ><a href="/notes/home/{{$date->month}}/{{$date->day}}">今日の納品</a></div>
-                <div class="navbar-brand" ><a href="/notes/home/{{$date->month}}/{{$date->day+1}}">明日の納品</a></div>
-                <div class="navbar-brand" >
-                    <a href="{{route('orders_purchase')}}">今日の発注</a>
-                </div>
-            </div>
-        </div>
-    </nav>
     
-    <h1><a href="{{route('index_home', $maker)}}">{{$maker->name}}</a></h1>
+    
+    <h1>{{$maker->name}}</h1>
     <div class="container-fluid mt-4">
     <div class="row">
     <div class="clearfix"></div>

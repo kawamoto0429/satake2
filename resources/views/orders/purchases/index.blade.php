@@ -1,23 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-   <nav class="navbar navbar-default mb-4">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand"  href="{{ route("orders")}}">
-                    発注
-                </a>
-            </div>
-            <div class="orders-note">
-                <div class="navbar-brand" ><a href="/notes/home/{{$today->month}}/{{$today->day-1}}">昨日の納品</a></div>
-                <div class="navbar-brand" ><a href="/notes/home/{{$today->month}}/{{$today->day}}">今日の納品</a></div>
-                <div class="navbar-brand" ><a href="/notes/home/{{$today->month}}/{{$today->day+1}}">明日の納品</a></div>
-                <div class="navbar-brand" >
-                    <a href="{{route('orders_purchase')}}">今日の発注</a>
-                </div>
-            </div>
-        </div>
-    </nav>
+   
     
     <div class="d-flex">
         @foreach($makers as $maker)
