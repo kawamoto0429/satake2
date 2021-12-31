@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Satake'),
 
     /*
     |--------------------------------------------------------------------------
@@ -162,7 +162,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
-
+        App\Providers\ViewServiceProvider::class,
         /*
          * Package Service Providers...
          */
