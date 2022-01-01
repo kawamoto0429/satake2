@@ -11,6 +11,7 @@
   width: 10px;
 }
 
+
 .w50px {
   width: 50px;
 }
@@ -31,6 +32,14 @@
   width: 600px;
 }
 
+.w-900px {
+  width: 900px;
+}
+
+.w-1000px {
+  width: 1000px;
+}
+
 .h-80px {
   height: 80px;
 }
@@ -45,4 +54,40 @@
 
 .error {
   color: red;
+}
+
+.background-g {
+  background: #00473F;
+}
+
+.h-38 {
+  height: 38px;
+}
+
+.h-100px {
+  height:100px;
+}
+
+
+
+.sticky_table_wrapper {
+  overflow: scroll;
+  /*width: calc(100vw - 1rem);*/
+  height: 75vh;
+}
+
+table.st-tbl1 {
+	text-align: left;
+	position: relative;
+	border-collapse: collapse; 
+}
+table.st-tbl1 th,
+table.st-tbl1 td{
+	padding: 1rem;
+	border: solid 1px #ddd;
+}
+table.st-tbl1 th {
+	background: green;
+	position: sticky;
+	top: 0;
 }

@@ -26,18 +26,33 @@ class OrderController extends Controller
     }
     
     public function home(Maker $maker) {
+        log::debug($maker);
         
-        $date = new Carbon();
-        
-        $id = $maker->id;
-        
-        
-        $categories = Category::where('maker_id', $id)->get();
-        
-
-        $maintenances = Maintenance::where('maker_id', $id)->where('nodisplay_flg', 0)->where('new_flg', 1)->paginate(10);
-        
-        return view('orders.home', compact('maker','maintenances', 'date', 'categories'));
+        if(collect($maker)->isEmpty()){
+            $date = new Carbon();
+            
+            $maker = Maker::all()->first();
+            $id = $maker->id;
+            Log::debug($id);
+            $categories = Category::where('maker_id', $id)->get();
+            $maintenances = Maintenance::where('maker_id', $id)->where('nodisplay_flg', 0)->where('new_flg', 1)->get();
+            
+            return view('orders.home', compact('maker','maintenances', 'date', 'categories'));
+        }
+            
+            $date = new Carbon();
+            
+            $id = $maker->id;
+            
+            // Log::debug($id);
+            
+            $categories = Category::where('maker_id', $id)->get();
+            
+    
+            $maintenances = Maintenance::where('maker_id', $id)->where('nodisplay_flg', 0)->where('new_flg', 1)->paginate(10);
+            
+            return view('orders.home', compact('maker','maintenances', 'date', 'categories'));
+         
     }
     
     public function genre_home(Maker $maker, Genre $genre)
@@ -51,7 +66,7 @@ class OrderController extends Controller
         $categories = Category::where('maker_id', $id)->get();
         
         
-        $maintenances = Maintenance::where('maker_id', $id)->where('genre_id', $genre_id)->where('nodisplay_flg', 0)->paginate(10);
+        $maintenances = Maintenance::where('maker_id', $id)->where('genre_id', $genre_id)->where('nodisplay_flg', 0)->get();
         
         return view('orders.genre', compact('maker','maintenances', 'date', 'categories', 'genre_id'));
     }
@@ -216,16 +231,6 @@ class OrderController extends Controller
                                         ->where('nodisplay_flg', false)
                                         ->get();
             return $maintenances;
-        }else{
-            $genre_id = $request['name'];
-            log::debug($genre_id);
-            
-            $maintenances = Maintenance::where('genre_id', $genre_id)
-                                        ->where('maker_id', $maker_id)
-                                        ->where('nodisplay_flg', false)
-                                        ->get();
-            log::debug($maintenances);
-            return $maintenances;
         }
         
     }
@@ -238,19 +243,23 @@ class OrderController extends Controller
         
         $keywords = $request['keywords'];
         $maker_id = $request['maker'];
+        $genre_id = $request['genre'];
         
         Log::debug($keywords);
         Log::debug($maker_id);
+        Log::debug($genre_id);
         
         if(!empty($keywords)) {
             $maintenances = Maintenance::where('name', 'like', '%'.$keywords.'%')
                                         ->where('maker_id', $maker_id)
+                                        ->where('genre_id', $genre_id)
                                         ->where('nodisplay_flg', false)
                                         ->get();
             return $maintenances;
         }else{
            
             $maintenances = Maintenance::where('maker_id', $maker_id)
+                                        ->where('genre_id', $genre_id)
                                         ->where('nodisplay_flg', false)
                                         ->get();
             // $maintenances = Maintenance::all();
