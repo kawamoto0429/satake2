@@ -72,6 +72,21 @@
                             </div>
                             <div class="dropdown">
                                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                     商品管理
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li>
+                                    <a class="dropdown-item" href="{{route('maintenance.index')}}">
+                                    商品メンテナンス
+                                    </a>
+                                    </li>
+                                        <li><a class="dropdown-item" href="/products/makers">メーカー</a></li>
+                                        <li><a class="dropdown-item" href="/products/categories">カテゴリー</a></li>
+                                        <li><a class="dropdown-item" href="/products/genres">ジャンル</a></li>
+                                </ul>
+                            </div>
+                            <div class="dropdown">
+                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                      ノート
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">

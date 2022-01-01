@@ -36,15 +36,15 @@
         </form>
     </div>
     
-    <table class="table table-bordered">
+    <table class="table table-bordered text-center">
         <thead>
             <tr>
-                <th scope="col">#</th>
+                <th scope="col" class="w100px">#</th>
                 <th scope="col">メーカー</th>
                 <th scope="col">カテゴリー</th>
                 <th scope="col">ジャンル</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
+                <th scope="col" class="w80px"></th>
+                <th scope="col" class="w80px"></th>
             </tr>
         </thead>
         <tbody>
@@ -74,7 +74,7 @@
                     @endforeach
                     @endforeach
                     </select></td>
-                    <td><input name="name" value="{{ $genre->name }}"></td>
+                    <td><input name="name" class="w-300px" value="{{ $genre->name }}"></td>
                     <td>
                         <button type="submit">編集</button>
                     </td>

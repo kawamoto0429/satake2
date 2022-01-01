@@ -24,13 +24,13 @@
         </form>
         </div>
     
-        <table class="table table-bordered">
+        <table class="table table-bordered text-center">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col" class="w100px">#</th>
                   　<th scope="col">メーカー</th>
-                  　<th scope="col"></th>
-                  　<th scope="col"></th>
+                  　<th scope="col" class="w80px"></th>
+                  　<th scope="col" class="w80px"></th>
                 </tr>
             </thead>
             <tbody>
