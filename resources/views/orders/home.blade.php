@@ -34,33 +34,36 @@
             </div>
         </form>
         </div>
-         <div class="col">
-             <form method="POST" action="/orders/purchase/conclude">
-                 {{ csrf_field() }}
-                <table class="table text-center table-bordered">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="w10px"></th>
-                            <th scope="col" class="">商品名</th>
-                            <th scope="col" class="w150px">納品/１個</th>
-                        </tr>
-                    </thead>
-                    <tbody  class="products-list">
-                        @foreach($maintenances as $maintenance)
-                        <tr>
-                            <th scope="row"><input type="checkbox" name="conclude[]" value="{{$maintenance->id}}"></th>
-                            <td><a href="{{route('home_show', $maintenance)}}">{{$maintenance->name}}</a></td>
-                            <td>{{$maintenance->price_1pc}}<label>円</label></td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+        <div>
             
+            <form method="POST" action="/orders/purchase/conclude">
+                 {{ csrf_field() }}
+                <div class="sticky_table_wrapper w-900px">
+                    <table class="st-tbl1 table text-center">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="w10px"></th>
+                                <th scope="col" class="">商品名</th>
+                                <th scope="col" class="w150px">納品/１個</th>
+                            </tr>
+                        </thead>
+                        <tbody class="products-list">
+                            @foreach($maintenances as $maintenance)
+                            <tr>
+                                <td scope="row"><input type="checkbox" name="conclude[]" value="{{$maintenance->id}}"></td>
+                                <td><a href="{{route('home_show', $maintenance)}}">{{$maintenance->name}}</a></td>
+                                <td>{{$maintenance->price_1pc}}<label>円</label></td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    
+                </div> 
             <input type="text" name="purchase_qty">個
             <input type="number" min="1" name="arrived_at"> 日後
             <button type="submit">確定</button>
             </form>
-            {{ $maintenances->links() }}
+           
         
         </div>
     </div>
@@ -90,7 +93,7 @@
                 console.log(value)
                  html = `
                     <tr>
-                        <th scope="row"><input type="checkbox" name="conclude[]" value=${value.id}></th>
+                        <td scope="row"><input type="checkbox" name="conclude[]" value=${value.id}></td>
                         <td><a href="/orders/${value.id}/show">${value.name}</a></td>
                         <td>${value.price_1pc}<label>円</label></td>
                     </tr>    
@@ -102,43 +105,13 @@
             }); 
         });
         
-        $('#genre li').click(function(){
-        let name = $(this).text();
-        console.log(name);
         
-            $.ajax({
-            
-                type: "get",
-                url: "/orders/genre/ajax",
-                data: {
-                        'name': name,
-                        'maker': {{$maker->id}},
-                      },
-                dataType: 'json',
-            }).done(function(data){
-                console.log(data);
-                $('.products-list').children().remove();
-                $.each(data, function (index, value) {
-                console.log(value)
-                 html = `
-                    <tr>
-                        <th scope="row"><input type="checkbox" name="conclude[]" value=${value.id}></th>
-                        <td><a href="/orders/${value.id}/show">${value.name}</a></td>
-                        <td>${value.price_1pc}<label>円</label></td>
-                    </tr>  
-                  `;
-                  $('.products-list').append(html);
-                })
-            }).fail(function() {
-              console.log('失敗');
-            }); 
-        });
         
-        $('#category li').click(function(){
-            alert("aa");
-            $(this)..slideToggle();
-            return false;
-        });
+        <!--$('#category li').click(function(){-->
+        <!--    alert("aa");-->
+        <!--    $(this)..slideToggle();-->
+        <!--    return false;-->
+        <!--});-->
     });
 </script>
 @endsection

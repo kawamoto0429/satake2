@@ -35,27 +35,26 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+        <nav class="navbar navbar-expand-md navbar-light background-g shadow-sm ">
+            <div class="container background-g ">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Satake') }}
+                    <img class="satakeLog" src="{{ secure_asset('img/satake2.gif')}}">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                     Left Side Of Navbar 
                     <ul class="navbar-nav ml-auto">
                         @guest
                             @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
+                                <div class="nav-item">
+                                    <a class="btn btn-secondary" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </div>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <div class="dropdown ">
+                                <a id="navbarDropdown" class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
 
@@ -70,7 +69,7 @@
                                         @csrf
                                     </form>
                                 </div>
-                            </li>
+                            </div>
                             <div class="dropdown">
                                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                      ノート

@@ -22,8 +22,9 @@ use App\Http\Controllers\PDFController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', [TopController::class, 'index']);
+Route::group(['middleware' => ['auth']], function() {
+    // your routes
+    Route::get('/', [OrderController::class, 'home']);
 
 Route::get('/notes/home', [NoteController::class, 'note_home'])->name('note_home');
 Route::get('/notes/home/{id}', [NoteController::class, 'day']);
@@ -101,11 +102,14 @@ Route::get('/products/maintenances/category/ajax', [MaintenanceController::class
 
 Route::get('/pops',[PopController::class, 'index']);
 
-Auth::routes();
+
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/pdf/{maker}',[PDFController::class, 'index'])->name('pdf');
+  });
+
+Auth::routes();
 
 Route::get('/hello', function () {
         $pdf = PDF::loadHTML('<h1>こんにちは</h1>');
