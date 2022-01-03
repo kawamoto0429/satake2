@@ -8,7 +8,7 @@
     
     <div class="d-flex">
         <!--<div><img src="..." alt="..." class="img-thumbnail"></div>-->
-        <div style="width: 200px; height:200px; background:blue;">image</div>
+        <div style="width: 250px; height:180px; background:blue;"><img style="width: 250px; height:180px;" class="satakeLog" src="{{ secure_asset('img/no_image.jpeg')}}"></div>
         <div class="ml-5">
             <table class="table">
                 <thead>
