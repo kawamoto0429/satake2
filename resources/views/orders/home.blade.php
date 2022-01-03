@@ -50,7 +50,7 @@
                         <tbody class="products-list">
                             @foreach($maintenances as $maintenance)
                             <tr>
-                                <td scope="row"><input type="checkbox" name="conclude[]" value="{{$maintenance->id}}"></td>
+                                <td scope="row"><input type="checkbox" name="conclude[]" class="check" value="{{$maintenance->id}}"></td>
                                 <td><a href="{{route('home_show', $maintenance)}}">{{$maintenance->name}}</a></td>
                                 <td>{{$maintenance->price_1pc}}<label>円</label></td>
                             </tr>
@@ -61,7 +61,7 @@
                 </div> 
             <input type="text" name="purchase_qty">個
             <input type="number" min="1" name="arrived_at"> 日後
-            <button type="submit">確定</button>
+            <button type="submit" class="button" disabled>確定</button>
             </form>
            
         
@@ -93,7 +93,7 @@
                 console.log(value)
                  html = `
                     <tr>
-                        <td scope="row"><input type="checkbox" name="conclude[]" value=${value.id}></td>
+                        <td scope="row"><input type="checkbox" name="conclude[]" class="check" value=${value.id}></td>
                         <td><a href="/orders/${value.id}/show">${value.name}</a></td>
                         <td>${value.price_1pc}<label>円</label></td>
                     </tr>    
@@ -112,6 +112,14 @@
         <!--    $(this)..slideToggle();-->
         <!--    return false;-->
         <!--});-->
+        
+        $('.check').change(function() {
+            if($(".check").is(':checked')){
+                $('.button').prop('disabled', false);
+            }else{
+                $('.button').prop('disabled', true); 
+            }
+        })
     });
 </script>
 @endsection

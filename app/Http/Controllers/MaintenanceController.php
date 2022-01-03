@@ -179,10 +179,6 @@ class MaintenanceController extends Controller
         return $genres;
     }
     
-    public function csv()
-    {
-        return view('products.maintenances.csv');
-    }
     
     public function csv_store(Request $request)
     {

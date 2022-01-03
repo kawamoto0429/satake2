@@ -65,7 +65,6 @@ class OrderController extends Controller
         
         $categories = Category::where('maker_id', $id)->get();
         
-        
         $maintenances = Maintenance::where('maker_id', $id)->where('genre_id', $genre_id)->where('nodisplay_flg', 0)->get();
         
         return view('orders.genre', compact('maker','maintenances', 'date', 'categories', 'genre_id'));

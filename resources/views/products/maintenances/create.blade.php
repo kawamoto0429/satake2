@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <a href="/products">home</a>
+    
     <div class="maker-home">
         <label>
             商品追加
