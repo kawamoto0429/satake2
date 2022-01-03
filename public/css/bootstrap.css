@@ -91,7 +91,8 @@ table.st-tbl1 td{
 	border: solid 1px #ddd;
 }
 table.st-tbl1 th {
-	background: green;
+	background: #00473F;
 	position: sticky;
+	color: white;
 	top: 0;
 }
