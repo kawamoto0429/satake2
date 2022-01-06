@@ -17,7 +17,7 @@
     </div>
     
     <div>
-        <form method="POST" action="{{ route('maintenance.store')}}">
+        <form method="POST" action="{{ route('maintenance.store')}}" enctype="multipart/form-data">
              {{ csrf_field() }}
             <div class="form-group row">
                 <label class="col-sm-2" >商品名</label>
@@ -147,7 +147,13 @@
                     <input type="checkbox" name="new_flg" class="mr-2"><label>新商品</label>
                 </div>
             </div>
-            <button type="submit">Create</button>
+            <div class="form-group row">
+                <label class="col-sm-2">画像アップロード</label>
+                <div class="col-sm-8">
+                    <input type="file" name="imgpath">
+                </div>
+            </div>
+            <button type="submit">作成</button>
         
         </form>
     </div>

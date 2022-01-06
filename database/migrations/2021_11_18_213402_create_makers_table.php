@@ -16,6 +16,7 @@ class CreateMakersTable extends Migration
         Schema::create('makers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('imgpath')->nullable();
             $table->timestamps();
         });
     }

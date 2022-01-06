@@ -96,3 +96,34 @@ table.st-tbl1 th {
 	color: white;
 	top: 0;
 }
+
+.yamazaki_log {
+  width: 150px;
+  height: 50px;
+}
+
+.product {
+  width: 100%;
+  height: 150px;
+}
+
+.item {
+  float: left;
+  /*max-width: 102px;*/
+  /*width: 25%;*/
+}
+
+.img {
+  width: 200px;
+  height: 180px;
+}
+
+.m {
+  width: 150px;
+  height: 100px;
+}
+
+.maintenance-img {
+  width: 200px;
+  height: 150px;
+}
