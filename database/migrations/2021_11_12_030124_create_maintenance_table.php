@@ -30,6 +30,7 @@ class CreateMaintenanceTable extends Migration
             $table->boolean('tomorrow_flg')->default(0);
             $table->boolean('nodisplay_flg')->default(0);
             $table->boolean('new_flg')->default(0);
+            $table->string('imgpath')->nullable();
             $table->timestamps();
         });
     }

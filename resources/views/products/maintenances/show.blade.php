@@ -75,6 +75,9 @@
                     <td>✖️</td>
                 @endif
                 </tr>
+                <th scope="row">画像</th>
+                <td><img class="maintenance-img" src="{{ secure_asset('storage/'.$maintenance->imgpath)}}"><label>{{$maintenance->imgpath}}</label></td>
+                </tr>
             </tbody>
         </table>
     </div>

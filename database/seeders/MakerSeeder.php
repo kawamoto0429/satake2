@@ -16,16 +16,20 @@ class MakerSeeder extends Seeder
     {
         DB::table('makers')->insert([
             [
-                'name' => 'ヤマザキ'
+                'name' => 'ヤマザキ',
+                'imgpath' => 'yamazaki.gif',
             ],
             [
-                'name' => '神戸屋'
+                'name' => '神戸屋',
+                'imgpath' => 'koubeya.png',
             ],
             [
-                'name' => 'フジパン'
+                'name' => 'フジパン',
+                'imgpath' => 'huzipan.png',
             ],
             [
-                'name' => 'パスコ'
+                'name' => 'パスコ',
+                'imgpath' => 'pasuco.png',
             ]
         ]);
     }

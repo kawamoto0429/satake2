@@ -11,15 +11,17 @@
     
     <div class="maker-container">
         <div class="maker-form">
-        <form method="POST" action="/products/makers">
+        <form method="POST" action="/products/makers" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="col-sm-8 input-group mb-3">
                 <input type="text" name="name" value="{{old('name')}}" class="form-control">
+                <input type="file" name="imgpath">
                 <button type="submit">Create</button>
             </div>
                 @error('name')
                     <div class="error">{{$message}}</div>
                 @enderror
+            
             
         </form>
         </div>

@@ -10,7 +10,7 @@
     </div>
     <div>
         
-        <form method="POST" action="{{ route('maintenance.update', $maintenance)}}">
+        <form method="POST" action="{{ route('maintenance.update', $maintenance)}}" enctype="multipart/form-data">
             <input type="hidden" name="_method" value="PUT">
              {{ csrf_field() }}
             <div class="form-group row">
@@ -152,6 +152,12 @@
                     @else
                         <input type="checkbox" name="new_flg" class="mr-2"><label>新商品</label>
                     @endif
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2">画像アップロード</label>
+                <div class="col-sm-8">
+                    <input type="file" name="imgpath">
                 </div>
             </div>
             <button type="submit">編集</button>

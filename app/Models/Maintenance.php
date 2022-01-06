@@ -8,6 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Maintenance extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name', 'price_1pc', 'price_10pcs',
+        'price_30pcs', 'jan', 'maker_id',
+        'maker_name','category_id','category_name',
+        'genre_id', 'genre_name', 'lot',
+        'tomorrow_flg', 'nodisplay_flg', 'new_flg',
+        'imgpath',
+    ];
     
     public function category()
     {

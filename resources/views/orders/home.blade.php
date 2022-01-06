@@ -4,8 +4,13 @@
 @section('content')
 <div class="container">
     
-    
+    @if(!$maker->imgpath == null)
+    <div>
+        <img class="yamazaki_log" src="{{ secure_asset('storage/'.$maker->imgpath)}}">
+    </div>
+    @else
     <h1>{{$maker->name}}</h1>
+    @endif
     <div class="container-fluid mt-4">
     <div class="row">
     <div class="clearfix"></div>
@@ -26,46 +31,44 @@
         </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <div class="search">
-        <form>
-            <div class="col-xs-2">
-                <label>検索</label>
-                <input type="text" id="search" class="form-control w20"  placeholder="キーワードを入力してくだい">
-            </div>
-        </form>
-        </div>
-        <div>
-            
-            <form method="POST" action="/orders/purchase/conclude">
-                 {{ csrf_field() }}
-                <div class="sticky_table_wrapper w-900px">
-                    <table class="st-tbl1 table text-center">
-                        <thead>
-                            <tr>
-                                <th scope="col" class="w10px"></th>
-                                <th scope="col" class="">商品名</th>
-                                <th scope="col" class="w150px">納品/１個</th>
-                            </tr>
-                        </thead>
-                        <tbody class="products-list">
-                            @foreach($maintenances as $maintenance)
-                            <tr>
-                                <td scope="row"><input type="checkbox" name="conclude[]" class="check" value="{{$maintenance->id}}"></td>
-                                <td><a href="{{route('home_show', $maintenance)}}">{{$maintenance->name}}</a></td>
-                                <td>{{$maintenance->price_1pc}}<label>円</label></td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    
-                </div> 
-            <input type="text" name="purchase_qty">個
-            <input type="number" min="1" name="arrived_at"> 日後
-            <button type="submit" class="button" disabled>確定</button>
+        <div class="search mb-2">
+            <form>
+                <div class="col-xs-2">
+                    <label>検索</label>
+                    <input type="text" id="search" class="form-control w20"  placeholder="キーワードを入力してくだい">
+                </div>
             </form>
-           
-        
         </div>
+        <h2>今月の新商品</h2>
+        <div class="w-100 d-flex"> 
+            @foreach ($maintenances as $maintenance)
+            <div class="item">
+                @if($maintenance->imgpath == null)
+                <a href="{{route('home_show', $maintenance)}}">
+                    <div>
+                        <img class="product" src="{{ secure_asset('img/no_image.jpeg')}}">
+                    </div>
+                    <div>
+                        {{$maintenance->name}}
+                    </div>
+                </a>
+                @else
+                <a href="{{route('home_show', $maintenance)}}">
+                    <div>
+                        <img class="product" src="{{ secure_asset('storage/'.$maintenance->imgpath)}}">
+                    </div>
+                    <div>
+                        {{$maintenance->name}}
+                    </div>
+                </a>
+                @endif
+            </div>    
+　          @endforeach
+        </div>
+        <div class="d-block">
+             {{ $maintenances->links() }}
+        </div>
+        
     </div>
 </div>
 <script>
