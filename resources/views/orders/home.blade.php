@@ -1,11 +1,10 @@
 @extends('layouts.app')
 
-
 @section('content')
 <div class="container">
     
     @if(!$maker->imgpath == null)
-    <div>
+    <div >
         <img class="yamazaki_log" src="{{ secure_asset('storage/'.$maker->imgpath)}}">
     </div>
     @else
@@ -15,7 +14,7 @@
     <div class="row">
     <div class="clearfix"></div>
     <div class="col sidebar">
-        <ul class="navbar-nav " id="category">
+        <ul class="navbar-nav" id="category">
         @foreach($categories as $category)
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -30,23 +29,15 @@
         @endforeach
         </ul>
     </div>
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <div class="search mb-2">
-            <form>
-                <div class="col-xs-2">
-                    <label>検索</label>
-                    <input type="text" id="search" class="form-control w20"  placeholder="キーワードを入力してくだい">
-                </div>
-            </form>
-        </div>
-        <h2>今月の新商品</h2>
-        <div class="w-100 d-flex"> 
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main ">
+        <h2 class="h1">今月の新商品</h2>
+        <div class="w-100"> 
             @foreach ($maintenances as $maintenance)
-            <div class="item">
+            <div class="item ml-2 mb-4 text-center">
                 @if($maintenance->imgpath == null)
                 <a href="{{route('home_show', $maintenance)}}">
                     <div>
-                        <img class="product" src="{{ secure_asset('img/no_image.jpeg')}}">
+                        <img class="product mb-2" src="{{ secure_asset('img/no_image.jpeg')}}">
                     </div>
                     <div>
                         {{$maintenance->name}}
@@ -55,7 +46,7 @@
                 @else
                 <a href="{{route('home_show', $maintenance)}}">
                     <div>
-                        <img class="product" src="{{ secure_asset('storage/'.$maintenance->imgpath)}}">
+                        <img class="product mb-2" src="{{ secure_asset('storage/'.$maintenance->imgpath)}}">
                     </div>
                     <div>
                         {{$maintenance->name}}
@@ -65,10 +56,9 @@
             </div>    
 　          @endforeach
         </div>
-        <div class="d-block">
-             {{ $maintenances->links() }}
-        </div>
-        
+    </div>
+    <div class="block mx-auto">
+         {{ $maintenances->links() }}
     </div>
 </div>
 <script>

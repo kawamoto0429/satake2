@@ -103,7 +103,7 @@ table.st-tbl1 th {
 }
 
 .product {
-  width: 100%;
+  width: 180px;
   height: 150px;
 }
 
@@ -126,4 +126,9 @@ table.st-tbl1 th {
 .maintenance-img {
   width: 200px;
   height: 150px;
+}
+
+.block {
+  display: block;
+  
 }
