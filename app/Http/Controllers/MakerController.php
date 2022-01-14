@@ -44,9 +44,11 @@ class MakerController extends Controller
         
         $maker = new Maker();
         $maker->name = $request->name;
-        $filename = $request->imgpath->getClientOriginalName();
-        $img = $request->imgpath->storeAs('',$filename,'public');
-        $maker->imgpath = $img;
+        if($request->imgpath){
+            $filename = $request->imgpath->getClientOriginalName();
+            $img = $request->imgpath->storeAs('',$filename,'public');
+            $maker->imgpath = $img;
+        }
         $maker->save();
         
         return redirect('/products/makers');
@@ -84,9 +86,11 @@ class MakerController extends Controller
     public function update(MakerRequest $request, Maker $maker)
     {
         $maker->name = $request->name;
-        $filename = $request->imgpath->getClientOriginalName();
-        $img = $request->imgpath->storeAs('',$filename,'public');
-        $maker->imgpath = $img;
+        if($request->imgpath){
+            $filename = $request->imgpath->getClientOriginalName();
+            $img = $request->imgpath->storeAs('',$filename,'public');
+            $maker->imgpath = $img;
+        }
         $maker->update();
         
         return redirect('/products/makers');
