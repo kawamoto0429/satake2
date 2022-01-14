@@ -86,12 +86,14 @@
                 console.log(value)
                  html = `
                     <tr>
-                        <td scope="row"><input type="checkbox" name="conclude[]" class="check" value=${value.id}></td>
+                        <td scope="row"><input type="checkbox" name="conclude[]" value=${value.id}></td>
                         <td><a href="/orders/${value.id}/show">${value.name}</a></td>
                         <td>${value.price_1pc}<label>円</label></td>
                     </tr>    
                   `;
                   $('.products-list').append(html);
+                  
+                  
                 })
             }).fail(function() {
               console.log('失敗');

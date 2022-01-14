@@ -50,8 +50,8 @@
                     </thead>
                     <tbody  class="products-list">
                         @foreach($maintenances as $maintenance)
-                        <tr>
-                            <td scope="row"><input type="checkbox" name="conclude[]" class="check" value="{{$maintenance->id}}"></td>
+                        <tr class="check_tr">
+                            <td scope="row"><input type="checkbox" name="conclude[]" class="c_input" value="{{$maintenance->id}}"></td>
                             <td><a href="{{route('home_show', $maintenance)}}">{{$maintenance->name}}</a></td>
                             <td>{{$maintenance->price_1pc}}<label>円</label></td>
                         </tr>
@@ -73,7 +73,6 @@
     
         $('#search').on('input', () => {
             let keywords = $('#search').val();
-            console.log(keywords);
             <!--console.log();-->
             $.ajax({
             <!--headers: {-->
@@ -91,15 +90,16 @@
                 console.log(data);
                 $('.products-list').children().remove();
                 $.each(data, function (index, value) {
-                console.log(value)
+                <!--console.log(value)-->
                  html = `
-                    <tr>
-                        <td scope="row"><input type="checkbox" name="conclude[]" class="check" value=${value.id}></td>
+                    <tr class="check_tr">
+                        <td scope="row"><input type="checkbox" name="conclude[]" class="c_input" value=${value.id}></td>
                         <td><a href="/orders/${value.id}/show">${value.name}</a></td>
                         <td>${value.price_1pc}<label>円</label></td>
                     </tr>    
                   `;
                   $('.products-list').append(html);
+                  
                 })
             }).fail(function() {
               console.log('失敗');
@@ -127,7 +127,7 @@
                 console.log(value)
                  html = `
                     <tr>
-                        <td scope="row"><input type="checkbox" name="conclude[]" value=${value.id}></td>
+                        <td scope="row"><input type="checkbox" name="conclude[]" class="c_input" value=${value.id}></td>
                         <td><a href="/orders/${value.id}/show">${value.name}</a></td>
                         <td>${value.price_1pc}<label>円</label></td>
                     </tr>  
@@ -139,8 +139,8 @@
             }); 
         });
         
-        $('.check').change(function() {
-            if($(".check").is(':checked')){
+        $('.c_input').change(function() {
+            if($(".c_input").is(':checked')){
                 $('.button').prop('disabled', false);
             }else{
                 $('.button').prop('disabled', true); 
