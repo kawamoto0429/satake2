@@ -4,7 +4,7 @@
 <div class="container">
     
     @if(!$maker->imgpath == null)
-    <div >
+    <div>
         <img class="yamazaki_log" src="{{ secure_asset('storage/'.$maker->imgpath)}}">
     </div>
     @else

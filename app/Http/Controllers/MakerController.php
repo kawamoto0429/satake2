@@ -90,6 +90,8 @@ class MakerController extends Controller
             $filename = $request->imgpath->getClientOriginalName();
             $img = $request->imgpath->storeAs('',$filename,'public');
             $maker->imgpath = $img;
+        }else{
+            $maker->imgpath = null;
         }
         $maker->update();
         
