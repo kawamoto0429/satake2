@@ -112,6 +112,13 @@ class OrderController extends Controller
             $purchase->category_name = category::find($request->input('category_id'))->name;
             $purchase->maintenance_name = Maintenance::find($request->input('maintenance_id'))->name;
             $purchase->arrived_at = date("Y-m-d", strtotime("+" . $request->input('arrived_at') . "day"));
+            if($request->input('purchase_qty') < 10) {
+                $purchase->price_change = Maintenance::find($purchase->maintenance_id)->price_1pc;
+            }elseif($request->input('purchase_qty') < 30){
+                $purchase->price_change = Maintenance::find($purchase->maintenance_id)->price_10pcs;
+            }elseif($request->input('purchase_qty') >= 30){
+                $purchase->price_change = Maintenance::find($purchase->maintenance_id)->price_30pcs;
+            }
             $week = date('w', strtotime($purchase->arrived_at));
             log::debug($week);
             
@@ -163,9 +170,21 @@ class OrderController extends Controller
     
     public function update(Request $request, Purchase $purchase) 
     {
+        
+        if($request->input('price_change') == null){
+            $purchase->purchase_qty = $request->input('purchase_qty');
+            if($purchase->purchase_qty < 10) {
+                $purchase->price_change = Maintenance::find($purchase->maintenance_id)->price_1pc;
+            }elseif($purchase->purchase_qty < 30){
+                $purchase->price_change = Maintenance::find($purchase->maintenance_id)->price_10pcs;
+            }elseif($purchase->purchase_qty >= 30){
+                $purchase->price_change = Maintenance::find($purchase->maintenance_id)->price_30pcs;
+            }
+            $purchase->update();
+            return redirect()->route('orders_purchase');
+        }  
         $purchase->purchase_qty = $request->input('purchase_qty');
         $purchase->price_change = $request->input('price_change');
-        // $purchase->
         $purchase->update();
         
         return redirect()->route('orders_purchase');
@@ -302,6 +321,14 @@ class OrderController extends Controller
                 $purchase->maintenance_name = Maintenance::find($maintenance->id)->name;
                 $purchase->purchase_qty = $request->input('purchase_qty');
                 $purchase->arrived_at = date("Y-m-d", strtotime("+" . $request->input('arrived_at') . "day"));
+                $purchase->arrived_at = date("Y-m-d", strtotime("+" . $request->input('arrived_at') . "day"));
+                if($request->input('purchase_qty') < 10) {
+                $purchase->price_change = Maintenance::find($purchase->maintenance_id)->price_1pc;
+                }elseif($request->input('purchase_qty') < 30){
+                    $purchase->price_change = Maintenance::find($purchase->maintenance_id)->price_10pcs;
+                }elseif($request->input('purchase_qty') >= 30){
+                    $purchase->price_change = Maintenance::find($purchase->maintenance_id)->price_30pcs;
+                }
                 $week = date('w', strtotime($purchase->arrived_at));
                 log::debug($week);
                 

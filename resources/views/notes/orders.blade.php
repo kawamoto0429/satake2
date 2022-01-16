@@ -47,6 +47,7 @@
                     <td>{{$purchase->maintenance->maker_name}}</td>
                     <td>{{$purchase->maintenance->name}}</td>
                     <td>{{$purchase->purchase_qty}}</td>
+                    <td>{{floor(round($purchase->price_change / 0.8) / 10)}}8</td>
                 </tr>
                 @endforeach 
             </tbody>
