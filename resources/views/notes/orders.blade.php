@@ -38,16 +38,23 @@
                     <th scope="col">メーカー</th>
                     <th scope="col">商品名</th>
                     <th scope="col">個数</th>
+                    <th scope="col ">粗利割</th>
                     <th scope="col">値段</th>
                 </tr>
             </thead>
             <tbody class="products-list">
                 @foreach($purchases as $purchase)
                 <tr>
+                    <input type="hidden" value="{{$purchase->id}}" class="id">
                     <td>{{$purchase->maintenance->maker_name}}</td>
                     <td>{{$purchase->maintenance->name}}</td>
                     <td>{{$purchase->purchase_qty}}</td>
-                    <td>{{floor(round($purchase->price_change / 0.8) / 10)}}8</td>
+                    <td><select class="gain" name="percent">
+                        <option value=0.20>20%</option>
+                        <option value=0.25>25%</option>
+                        <option value=0.30>30%</option>
+                    </select></td>
+                    <td class="price">{{$purchase->gain_price}}8</td>
                 </tr>
                 @endforeach 
             </tbody>
@@ -63,7 +70,7 @@
         $('.navbar-brand li').click(function(){
         let id = $(this).val();
         let month = {{$id}};
-        let day = {{$day}}
+        let day = {{$day}};
         console.log(day);
         console.log(id);
             $.ajax({
@@ -93,6 +100,37 @@
               console.log('失敗');
             }); 
         });
+        
+        $('.gain').change(function(){
+            let select = $(this).closest('tr').children('td').find('select');
+            let p = $(this).closest('tr')
+            let percent = $(this).closest('tr').children('td').find('select').val();
+            let id = $(this).closest('tr').find('input').val();
+            console.log(price);
+            $.ajax({
+                type: "get",
+                url: "/notes/gain/ajax",
+                data: {
+                        'id': id,
+                        'percent': percent,
+                      },
+                dataType: 'json',
+            }).done(function(data){
+                console.log(data)
+                let percent = data['percent'];
+                console.log(percent)
+                p.find("td.price").remove();
+                data['purchase']
+                console.log(data['purchase']['gain_price'])
+                 html = `
+                        <td class="price">${data['purchase']['gain_price']}8</td>
+                  `;
+                  p.append(html);
+                
+            }).fail(function() {
+              console.log('失敗');
+            }); 
+        })
     });
 </script>
 @endsection

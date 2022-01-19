@@ -85,15 +85,6 @@ class OrderController extends Controller
         
         $week_names = ['日', '月', '火', '水', '木', '金', '土'];
         
-        // if($exist_purchase = Purchase::find($request->input('maintenance_id'))){
-        //     log::debug($exist_purchase);
-        //     if($exist_purchase->arrived_at == date("Y-m-d", strtotime("+" . $request->input('arrived_at') . "day"))){
-        //       $exist_purchase->purchase_qty = $exist_purchase->purchase_qty + $request->input('purchase_qty');
-        //       $exist_purchase->update();
-        //       return redirect()->route('orders_purchase');
-        //     }
-        // }
-        
         
         $exist_purchases = Purchase::where("maintenance_id", $request->input('maintenance_id'))
                             ->whereDate('arrived_at', date("Y-m-d", strtotime("+" . $request->input('arrived_at') . "day")))
@@ -123,10 +114,7 @@ class OrderController extends Controller
             log::debug($week);
             
             $purchase->week_name = $week_names[$week];
-            // log::debug($arrived_at);
-            // $purchase->arrived_at = $date->addDay($arrived_at);
-            // log::debug($purchase->arrived_at);
-            // log::debug($purchase->arrived_at->format('d'));
+            $purchase->gain_price = floor(round($purchase->price_change / 0.8) / 10);
             $purchase->save();
             
             return redirect()->route('orders_purchase');
@@ -137,6 +125,14 @@ class OrderController extends Controller
             log::debug($exist_purchases);
             foreach($exist_purchases as $exist_purchase) {
                 $exist_purchase->purchase_qty = $exist_purchase->purchase_qty + $request->input('purchase_qty');
+                if($exist_purchase->purchase_qty < 10) {
+                $purchase->price_change = Maintenance::find($exist_purchase->maintenance_id)->price_1pc;
+                }elseif($exist_purchase->purchase_qty < 30){
+                    $purchase->price_change = Maintenance::find($exist_purchase->maintenance_id)->price_10pcs;
+                }elseif($exist_purchase->purchase_qty >= 30){
+                    $purchase->price_change = Maintenance::find($exist_purchase->maintenance_id)->price_30pcs;
+                }
+                $purchase->gain_price = floor(round($purchase->price_change / 0.8) / 10);
                 $exist_purchase->update();
             }
             // $exist_purchase->update();
@@ -180,11 +176,13 @@ class OrderController extends Controller
             }elseif($purchase->purchase_qty >= 30){
                 $purchase->price_change = Maintenance::find($purchase->maintenance_id)->price_30pcs;
             }
+            $purchase->gain_price = floor(round($purchase->price_change / 0.8) / 10);
             $purchase->update();
             return redirect()->route('orders_purchase');
         }  
         $purchase->purchase_qty = $request->input('purchase_qty');
         $purchase->price_change = $request->input('price_change');
+        $purchase->gain_price = floor(round($purchase->price_change / 0.8) / 10);
         $purchase->update();
         
         return redirect()->route('orders_purchase');
@@ -306,6 +304,15 @@ class OrderController extends Controller
             {
                 foreach($exist_purchases as $exist_purchase) {
                     $exist_purchase->purchase_qty = $exist_purchase->purchase_qty + $request->input('purchase_qty');
+                    $exist_purchase->purchase_qty = $exist_purchase->purchase_qty + $request->input('purchase_qty');
+                    if($exist_purchase->purchase_qty < 10) {
+                        $exist_purchase->price_change = Maintenance::find($exist_purchase->maintenance_id)->price_1pc;
+                    }elseif($exist_purchase->purchase_qty < 30){
+                        $exist_purchase->price_change = Maintenance::find($exist_purchase->maintenance_id)->price_10pcs;
+                    }elseif($exist_purchase->purchase_qty >= 30){
+                        $exist_purchase->price_change = Maintenance::find($exist_purchase->maintenance_id)->price_30pcs;
+                    }
+                    $exist_purchase->gain_price = floor(round($exist_purchase->price_change / 0.8) / 10);
                     $exist_purchase->update();
                     // return redirect()->route('orders_purchase');
                 }
@@ -329,6 +336,8 @@ class OrderController extends Controller
                 }elseif($request->input('purchase_qty') >= 30){
                     $purchase->price_change = Maintenance::find($purchase->maintenance_id)->price_30pcs;
                 }
+                
+                $purchase->gain_price = floor(round($purchase->gain_price / 0.8) / 10);
                 $week = date('w', strtotime($purchase->arrived_at));
                 log::debug($week);
                 

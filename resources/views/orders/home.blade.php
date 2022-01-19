@@ -39,7 +39,7 @@
                     <div>
                         <img class="product mb-2" src="{{ secure_asset('img/no_image.jpeg')}}">
                     </div>
-                    <div>
+                    <div class="mozi">
                         {{$maintenance->name}}
                     </div>
                 </a>
@@ -48,7 +48,7 @@
                     <div>
                         <img class="product mb-2" src="{{ secure_asset('storage/'.$maintenance->imgpath)}}">
                     </div>
-                    <div>
+                    <div class="mozi">
                         {{$maintenance->name}}
                     </div>
                 </a>
