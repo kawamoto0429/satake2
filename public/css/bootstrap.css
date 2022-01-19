@@ -132,3 +132,10 @@ table.st-tbl1 th {
   display: block;
   
 }
+
+.mozi {
+  width:180px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

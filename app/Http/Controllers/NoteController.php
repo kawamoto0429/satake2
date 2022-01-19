@@ -166,4 +166,24 @@ class NoteController extends Controller
         }
     }
     
+    public function gain(Request $request)
+    {
+        log::debug($request);
+        
+        $id = $request['id'];
+        $percent = 1 - $request['percent'];
+        
+        
+        $purchase = Purchase::find($id);
+        log::debug($percent);
+        
+        $purchase->gain_price = floor(round($purchase->price_change / $percent) / 10);
+        log::debug($purchase->gain_price);
+        $purchase->update();
+        
+        $data = ['purchase' => $purchase, 'percent' => $percent];
+        
+        return $data;
+    }
+    
 }

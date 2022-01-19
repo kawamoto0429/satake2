@@ -30,6 +30,7 @@ Route::get('/notes/home', [NoteController::class, 'note_home'])->name('note_home
 Route::get('/notes/home/{id}', [NoteController::class, 'day']);
 Route::get('/notes/home/{id}/{day}', [NoteController::class, 'orders'])->name('home_orders');
 Route::get('/notes/maker/ajax', [NoteController::class, 'maker']);
+Route::get('/notes/gain/ajax', [NoteController::class, 'gain']);
 Route::get('/pdf/{id}/{day}',[PDFController::class, 'note'])->name('pdf');
 
 

@@ -143,7 +143,7 @@
             }).done(function(data){
                 console.log(data)
                 target_td.children().remove();
-                target_td.closest('tr').children('td').children("opit").remove();
+                <!--target_td.closest('tr').children('td').children("opit").remove();-->
                 $.each(data['categories'], function (index, value) {
                 console.log(this)
                 html = `
