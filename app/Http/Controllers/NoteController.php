@@ -137,6 +137,137 @@ class NoteController extends Controller
         
     }
     
+    public function new($y, $m, $d) {
+        log::debug($m);
+        $makers = Maker::all();
+        $categories = Category::all();
+        $counting = [];
+        $date = new Carbon();
+        $da = new Carbon();
+        log::debug($da);
+
+        $da->year = $y;
+        $da->month = $m - 1;
+        log::debug($da);
+        
+        $date->year = $y;
+        $date->month = $m;
+        $date->day = $d;
+        
+        $last_day = date("d", strtotime("last day of". $date));
+        $l_d = date("d", strtotime("last day of". $da));
+        
+        // log::debug($last_day);
+        
+        $purchases = Purchase::whereDate('arrived_at', $date)->get();
+        log::debug($purchases);
+        
+        $purchases = Purchase::whereDate('arrived_at', $date)->get();
+            foreach ($categories as $category)
+            {
+                $counting[$category->name] = count(Purchase::where('category_name', $category->name )->whereDate('arrived_at', $date)->get());
+            }
+            return view('notes.new', compact('y', "m", 'd','da', 'last_day', 'l_d', 'purchases', 'makers', "counting"));
+            
+        // }
+        // if($s->year == $y && $s->month == $m && $s->day+1 == $d){
+        // if($d == $last_day+1 && $m == 12 && $y == 2021){
+        //     $date->year = $y + 1;
+        //     $date->month = $m + 1;
+        //     $dates = $date->year . "-" . $date->month;
+        //     $date = date("Y-m-d", strtotime("first day of". $dates));
+        //     $year = date("Y", strtotime("first day of". $dates));
+        //     $month = date("m", strtotime("first day of". $dates));
+        //     $first_day = date("d", strtotime("first day of". $dates));
+        //     $y = abs($year);
+        //     $m = abs($month);
+        //     $d = abs($first_day);
+        //     $purchases = Purchase::whereDate('arrived_at', $date)->get();
+        //     foreach ($categories as $category)
+        //     {
+        //         $counting[$category->name] = count(Purchase::where('category_name', $category->name )->whereDate('arrived_at', $date)->get());
+        //     }
+        //     return view('notes.new', compact('y', "m", 'd', 'purchases', 'makers', "counting"));
+        // // }elseif($l->year == $y && $l->month == $m && $l->day-1 == $d){
+        // }elseif($d == 0 && $m == 1 && $y == 2022){
+        //     $date->year = $y - 1;
+        //     $date->month = $m - 1;
+        //     $dates = $date->year . "-" . $date->month;
+        //     $date = date("Y-m-d", strtotime("first day of". $dates));
+        //     $year = date("Y", strtotime("first day of". $dates));
+        //     $month = date("m", strtotime("first day of". $dates));
+        //     $first_day = date("d", strtotime("first day of". $dates));
+        //     $y = abs($year);
+        //     $m = abs($month);
+        //     $d = abs($first_day);
+        //     $purchases = Purchase::whereDate('arrived_at', $date)->get();
+        //     foreach ($categories as $category)
+        //     {
+        //         $counting[$category->name] = count(Purchase::where('category_name', $category->name )->whereDate('arrived_at', $date)->get());
+        //     }
+            
+            
+        //     return view('notes.new', compact('y', "m", 'd', 'purchases', 'makers', "counting"));
+        
+        // }elseif($d == $last_day+1){
+            
+        //     $date->month = $m + 1;
+        //     $dates = $date->year . "-" . $date->month;
+        //     $date = date("Y-m-d", strtotime("first day of". $dates));
+        //     $month = date("m", strtotime("first day of". $dates));
+        //     $first_day = date("d", strtotime("first day of". $dates));
+        //     $m = abs($month);
+        //     $d = abs($first_day);
+        //     $purchases = Purchase::whereDate('arrived_at', $date)->get();
+        //     foreach ($categories as $category)
+        //     {
+        //         $counting[$category->name] = count(Purchase::where('category_name', $category->name )->whereDate('arrived_at', $date)->get());
+        //     }
+            
+            
+        //     return view('notes.new', compact('y', "m", 'd', 'purchases', 'makers', "counting"));
+        // }elseif($d == 0){
+        //     $date->month = $m - 1;
+        //     $dates = $date->year . "-" . $date->month;
+        //     // log::debug($dates);
+        //     $date = date("Y-m-d", strtotime("last day of". $dates));
+        //     $month = date("m", strtotime("last day of". $dates));
+        //     $last_day = date("d", strtotime("last day of". $dates));
+        //     // $dates = $date->year . "-" . $date->month-1;
+        //     // log::debug($last_day);
+        //     $m = abs($month);
+        //     $d = $last_day;
+        //     $purchases = Purchase::whereDate('arrived_at', $date)->get();
+            
+        //     foreach ($categories as $category)
+        //     {
+        //         $counting[$category->name] = count(Purchase::where('category_name', $category->name )->whereDate('arrived_at', $date)->get());
+        //     }
+            
+        //     return view('notes.new', compact('y', "m", 'd', 'purchases', 'makers', "counting"));
+        
+        // }else{
+            
+            
+        //     $date->month = $m;
+        
+        //     $date->day = $d;
+            
+        //     // Log::debug($date);
+            
+        //     $purchases = Purchase::whereDate('arrived_at', $date)->get();
+            
+        //     // Log::debug($purchases);
+            
+        //     foreach ($categories as $category)
+        //     {
+        //         $counting[$category->name] = count(Purchase::where('category_name', $category->name )->whereDate('arrived_at', $date)->get());
+        //     }
+            
+        //     return view('notes.new', compact('y', "m", 'd', 'purchases', 'makers', "counting"));
+        // }
+    }
+    
     public function maker(Request $request)
     {
         $date = new Carbon();
