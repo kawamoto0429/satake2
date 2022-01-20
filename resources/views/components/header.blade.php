@@ -55,16 +55,9 @@
                                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                      ノート
                                 </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li>
-                                    <a class="dropdown-item" href="{{ route('note_home')}}">
-                                    ノート確認
-                                    </a>
-                                    </li>
-                                        <li><a class="dropdown-item" href="/notes/home/{{$date->month}}/{{$date->day-1}}">昨日の納品</a></li>
-                                        <li><a class="dropdown-item" href="/notes/home/{{$date->month}}/{{$date->day}}">今日の納品</a></li>
-                                        <li><a class="dropdown-item" href="/notes/home/{{$date->month}}/{{$date->day+1}}">明日の納品</a></li>
-                                </ul>
+                                <div class="dropdown-menu dropdown-menu-right calendar" aria-labelledby="dropdownMenuLink" id="datepicker"></div>
+                                    
+                                </div>
                             </div>
                             <div class="dropdown">
                                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -85,4 +78,24 @@
                 
             </div>
         </nav>
+        <script>
+        //   $("#datepicker").datepicker({ dateFormat: "yy-mm-dd" });
+          $("#datepicker").datepicker({
+                dateFormat: "yy-mm-dd", 
+                onSelect: function() { 
+                let date = $(this).datepicker('getDate');
+                let y = date.getFullYear();
+                let m = date.getMonth()+1;
+                let d = date.getDate();
+                console.log(y);
+                console.log(m);
+                console.log(d);
+                window.location.href = `/notes/home/${y}/${m}/${d}`;
+            }
+          })
+          $(".dropdown-menu-right").on("click", function (e) {
+              e.stopPropagation();
+              
+            });
+        </script>
         </header>
