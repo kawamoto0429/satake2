@@ -56,9 +56,6 @@
                         <input type="hidden" name="_method" value="DELETE">
                         <button type="submit">削除</button>
                     </td>
-                    <td>
-                        {{$purchase->gain_price}}
-                    </td>
                     </form>
                 </tr>
             @endforeach

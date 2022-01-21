@@ -110,6 +110,7 @@ class OrderController extends Controller
             }elseif($request->input('purchase_qty') >= 30){
                 $purchase->price_change = Maintenance::find($purchase->maintenance_id)->price_30pcs;
             }
+            $purchase->gain_price = floor(round($purchase->gain_price / 0.8) / 10);
             $week = date('w', strtotime($purchase->arrived_at));
             log::debug($week);
             
@@ -126,13 +127,13 @@ class OrderController extends Controller
             foreach($exist_purchases as $exist_purchase) {
                 $exist_purchase->purchase_qty = $exist_purchase->purchase_qty + $request->input('purchase_qty');
                 if($exist_purchase->purchase_qty < 10) {
-                $purchase->price_change = Maintenance::find($exist_purchase->maintenance_id)->price_1pc;
+                    $exist_purchase->price_change = Maintenance::find($exist_purchase->maintenance_id)->price_1pc;
                 }elseif($exist_purchase->purchase_qty < 30){
-                    $purchase->price_change = Maintenance::find($exist_purchase->maintenance_id)->price_10pcs;
+                    $exist_purchase->price_change = Maintenance::find($exist_purchase->maintenance_id)->price_10pcs;
                 }elseif($exist_purchase->purchase_qty >= 30){
-                    $purchase->price_change = Maintenance::find($exist_purchase->maintenance_id)->price_30pcs;
+                    $exist_purchase->price_change = Maintenance::find($exist_purchase->maintenance_id)->price_30pcs;
                 }
-                $purchase->gain_price = floor(round($purchase->price_change / 0.8) / 10);
+                $exist_purchase->gain_price = floor(round($exist_purchase->price_change / 0.8) / 10);
                 $exist_purchase->update();
             }
             // $exist_purchase->update();
@@ -234,17 +235,17 @@ class OrderController extends Controller
         log::debug($genre_id);
         log::debug($request['name']);
         
-        if($request['name'] == -1){
+        if($request['name'] == 1){
             $maintenances = Maintenance::where('maker_id', $maker_id)
                                         ->where('genre_id', $genre_id)
-                                        ->where('nodisplay_flg', false)
+                                        ->where('nodisplay_flg', 0)
                                         ->get();
             return $maintenances;
-        }elseif($request['name'] == -2){
+        }elseif($request['name'] == 2){
             $maintenances = Maintenance::where('maker_id', $maker_id)
                                         ->where('genre_id', $genre_id)
-                                        ->where('tomorrow_flg', true)
-                                        ->where('nodisplay_flg', false)
+                                        ->where('tomorrow_flg', 1)
+                                        ->where('nodisplay_flg', 0)
                                         ->get();
             return $maintenances;
         }

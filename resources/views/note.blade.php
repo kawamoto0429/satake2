@@ -27,7 +27,7 @@ font-family: ipag;
     @foreach($makers as $maker)
         @foreach($purchases as $purchase)
             @if($purchase->maker_id == $maker->id)
-                <div><lable>{{$maker->name}}</lable>{{$purchase->maintenance_name}}</div> 
+                <div><lable>{{$maker->name}}</lable>{{$purchase->maintenance_name}}<label>{{$purchase->gain_price}}8</label></div> 
             @endif
         @endforeach
     @endforeach
