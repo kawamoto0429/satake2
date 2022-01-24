@@ -20,18 +20,18 @@
         </div>
     </div>
     <div>
-        <table class="table">
-            <thead>
+        <table class="table table-bordered">
+            <thead class="text-center">
                 <tr>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
+                    <th scope="col">商品名</th>
+                    <th scope="col" class="w120px">数量</th>
+                    <th scope="col" class="w120px">納価</th>
+                    <th scope="col">納品日</th>
+                    <th scope="col" class="w80px"></th>
+                    <th scope="col" class="w80px"></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="text-center">
             @foreach($purchases as $purchase)
                 <tr>
                 <td>{{$purchase->maintenance->name}}</td>
@@ -39,10 +39,11 @@
                     <td>
                         {{ csrf_field() }}
                         <input type="hidden" name="_method" value="PUT">
-                        <input type="number" min="1" name="purchase_qty" value="{{$purchase->purchase_qty}}">個</input>
+                        <input type="number" min="1" name="purchase_qty" value="{{$purchase->purchase_qty}}" class="w60px">個</input>
                     </td>
-                        
-                            <td><input type="number" min="1" name="price_change" value="{{$purchase->price_change}}"><label>円</label></td>
+                    <td>
+                        <input type="number" min="1" name="price_change" value="{{$purchase->price_change}}" class="w60px"><label>円</label>
+                    </td>
                     <td>
                         <div><label>納品日</label>{{date('m月d日', strtotime($purchase->arrived_at))}}</div>
                     </td>
@@ -60,7 +61,11 @@
                 </tr>
             @endforeach
             </tbody>
+            
         </table>
+        <div class="mt-1 mb-1 row justify-content-center">
+            {{ $purchases->links() }}
+        </div>
     </div>
 </div>
 

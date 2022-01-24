@@ -137,7 +137,7 @@ class NoteController extends Controller
         
     }
     
-    public function new($y, $m, $d) {
+    public function order($y, $m, $d) {
         log::debug($m);
         $makers = Maker::all();
         $categories = Category::all();
@@ -157,9 +157,8 @@ class NoteController extends Controller
         $last_day = date("d", strtotime("last day of". $date));
         $l_d = date("d", strtotime("last day of". $da));
         
-        // log::debug($last_day);
-        
         $purchases = Purchase::whereDate('arrived_at', $date)->get();
+        
         log::debug($purchases);
         
         $purchases = Purchase::whereDate('arrived_at', $date)->get();
@@ -190,7 +189,6 @@ class NoteController extends Controller
         $date->day = $day;
         
         // log::debug($date);
-        
         
         if($maker_id == 0) {
             $purchases = Purchase::whereDate('arrived_at', $date)->get();

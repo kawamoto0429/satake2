@@ -90,6 +90,7 @@ class OrderController extends Controller
                             ->whereDate('arrived_at', date("Y-m-d", strtotime("+" . $request->input('arrived_at') . "day")))
                             ->whereDate('created_at', $date)
                             ->get();
+                            
         log::debug($exist_purchases);
         
         if(count($exist_purchases) <= 0){
@@ -98,7 +99,6 @@ class OrderController extends Controller
             $purchase->maintenance_id = $request->input('maintenance_id');
             $purchase->maker_id = $request->input('maker_id');
             $purchase->category_id = $request->input('category_id');
-            // log::debug($purchase->maker_id);
             $purchase->maker_name = Maker::find($request->input('maker_id'))->name;
             $purchase->category_name = category::find($request->input('category_id'))->name;
             $purchase->maintenance_name = Maintenance::find($request->input('maintenance_id'))->name;
@@ -110,7 +110,6 @@ class OrderController extends Controller
             }elseif($request->input('purchase_qty') >= 30){
                 $purchase->price_change = Maintenance::find($purchase->maintenance_id)->price_30pcs;
             }
-            $purchase->gain_price = floor(round($purchase->gain_price / 0.8) / 10);
             $week = date('w', strtotime($purchase->arrived_at));
             log::debug($week);
             
@@ -122,7 +121,7 @@ class OrderController extends Controller
         } 
         else 
         {
-            // $exist_purchase->purchase_qty = $exist_purchase->purchase_qty + $request->input('purchase_qty');
+            
             log::debug($exist_purchases);
             foreach($exist_purchases as $exist_purchase) {
                 $exist_purchase->purchase_qty = $exist_purchase->purchase_qty + $request->input('purchase_qty');
@@ -136,7 +135,6 @@ class OrderController extends Controller
                 $exist_purchase->gain_price = floor(round($exist_purchase->price_change / 0.8) / 10);
                 $exist_purchase->update();
             }
-            // $exist_purchase->update();
             return redirect()->route('orders_purchase');
         }
        
@@ -144,14 +142,12 @@ class OrderController extends Controller
     
     public function purchase()
     {
-        
         $today = Carbon::today();
         
-        // Log::debug($today);
         $makers = Maker::all();
         $categories = Category::all();
         
-        $purchases = Purchase::whereDate('created_at', $today)->get();
+        $purchases = Purchase::whereDate('created_at', $today)->paginate(20);
         
         $counting = [];
         
@@ -205,7 +201,7 @@ class OrderController extends Controller
         $purchases = purchase::where('maker_id', $maker_id)
                                 ->whereDate('created_at', $today)
                                 ->orderBy('arrived_at', 'asc')
-                                ->get();
+                                ->paginate(15);
         
         $categories = Category::all();
         
@@ -219,10 +215,8 @@ class OrderController extends Controller
                                                         ->get());
         }
         
-            
         log::debug($purchases);
         
-        // return redirect()->route('orders_purchase', $purchases);
         return view('orders.purchases.maker', compact('purchases', 'maker', 'today', 'counting'));
     }
     
@@ -238,15 +232,17 @@ class OrderController extends Controller
         if($request['name'] == 1){
             $maintenances = Maintenance::where('maker_id', $maker_id)
                                         ->where('genre_id', $genre_id)
-                                        ->where('nodisplay_flg', 0)
+                                        ->where('nodisplay_flg', false)
                                         ->get();
+            log::debug($maintenances);                            
             return $maintenances;
         }elseif($request['name'] == 2){
             $maintenances = Maintenance::where('maker_id', $maker_id)
                                         ->where('genre_id', $genre_id)
-                                        ->where('tomorrow_flg', 1)
-                                        ->where('nodisplay_flg', 0)
+                                        ->where('tomorrow_flg', true)
+                                        ->where('nodisplay_flg', false)
                                         ->get();
+            log::debug($maintenances);   
             return $maintenances;
         }
         
@@ -304,7 +300,7 @@ class OrderController extends Controller
             if(count($exist_purchases) > 0)
             {
                 foreach($exist_purchases as $exist_purchase) {
-                    $exist_purchase->purchase_qty = $exist_purchase->purchase_qty + $request->input('purchase_qty');
+                    
                     $exist_purchase->purchase_qty = $exist_purchase->purchase_qty + $request->input('purchase_qty');
                     if($exist_purchase->purchase_qty < 10) {
                         $exist_purchase->price_change = Maintenance::find($exist_purchase->maintenance_id)->price_1pc;
@@ -329,7 +325,6 @@ class OrderController extends Controller
                 $purchase->maintenance_name = Maintenance::find($maintenance->id)->name;
                 $purchase->purchase_qty = $request->input('purchase_qty');
                 $purchase->arrived_at = date("Y-m-d", strtotime("+" . $request->input('arrived_at') . "day"));
-                $purchase->arrived_at = date("Y-m-d", strtotime("+" . $request->input('arrived_at') . "day"));
                 if($request->input('purchase_qty') < 10) {
                 $purchase->price_change = Maintenance::find($purchase->maintenance_id)->price_1pc;
                 }elseif($request->input('purchase_qty') < 30){
@@ -338,7 +333,7 @@ class OrderController extends Controller
                     $purchase->price_change = Maintenance::find($purchase->maintenance_id)->price_30pcs;
                 }
                 
-                $purchase->gain_price = floor(round($purchase->gain_price / 0.8) / 10);
+                $purchase->gain_price = floor(round($purchase->price_change / 0.8) / 10);
                 $week = date('w', strtotime($purchase->arrived_at));
                 log::debug($week);
                 

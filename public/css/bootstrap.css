@@ -11,9 +11,17 @@
   width: 10px;
 }
 
+.w40px {
+  width: 40px;
+}
+
 
 .w50px {
   width: 50px;
+}
+
+.w60px {
+  width: 60px;
 }
 
 .w80px {
@@ -22,6 +30,10 @@
 
 .w100px {
   width: 100px;
+}
+
+.w120px {
+  width: 120px;
 }
 
 .w150px {

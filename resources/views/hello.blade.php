@@ -12,6 +12,7 @@
 }
 body {
 font-family: ipag;
+page-break-inside: avoid;
 }
 
 /*.container {*/
@@ -25,21 +26,23 @@ font-family: ipag;
 </head>
 <body>
     <header>
-        <div><label>取引様：</label><label>{{$maker->name}}</label><label>担当者様</label></div>
-        <div><label>発注店舗名：</label><label>佐竹食品朝日町本店</label></div>
+        <h2><label>取引様：</label><label>{{$maker->name}}</label><label>担当者様</label></h2>
+        <h2><label>発注店舗名：</label><label>佐竹食品朝日町本店</label></h2>
     </header>
    
     <div class="container">
         @foreach ($categories as $category)
-            
-            <div>{{$category->name}}</div>
-            <table border="1" >
+            @foreach($counting as $category_name => $c)
+                @if($category_name == $category->name)
+                    <div>{{$category_name}}<label>{{$c}}個</label></div>
+                @endif    
+            @endforeach
+            <table border="1">
                 <tr>
                     <th width="100px" height="20px">納品日</th>
-                    <th width="130px" height="20px">JANコード</th>
-                    <th width="200px" height="20px">商品名</th>
-                    <th width="80px" height="20px">発注数量</th>
+                    <th width="300px" height="20px">商品名</th>
                     <th width="50px" height="20px">入数</th>
+                    <th width="80px" height="20px">発注数量</th>
                     <th width="50px" height="20px">納価</th>
                 </tr>
                 
@@ -51,16 +54,13 @@ font-family: ipag;
                             <label>({{$purchase->week_name}})</label>
                         </td>
                         <td>
-                            {{$purchase->maintenance->jan}}
-                        </td>
-                        <td>
                             {{$purchase->maintenance->name}}
                         </td>
                         <td>
-                            {{$purchase->purchase_qty}}
+                            {{$purchase->maintenance->lot}}
                         </td>
                         <td>
-                            {{$purchase->maintenance->lot}}
+                            {{$purchase->purchase_qty}}
                         </td>
                         @if($purchase->purchase_qty < 10)
                             <td>
@@ -79,10 +79,7 @@ font-family: ipag;
                     
                     @endif
                 @endforeach
-                    
-                
             </table>
-           
         @endforeach
     </div>
 </div>
