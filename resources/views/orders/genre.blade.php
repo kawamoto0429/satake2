@@ -11,8 +11,8 @@
     <div class="clearfix"></div>
     <div class="col sidebar">
         <ul class="navbar-nav " id="genre">
-            <!--<li class="nav-item" value=1><a href="#">1便</a></li>-->
-            <!--<li class="nav-item" value=2><a href="#">2便</a></li>-->
+            <li class="nav-item" value=1><a href="#">1便</a></li>
+            <li class="nav-item" value=2><a href="#">2便</a></li>
         @foreach($categories as $category)
             <li class="nav-item dropdown " value="{{$genre_id}}">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -117,7 +117,7 @@
                 data: {
                         'name': name,
                         'maker': {{$maker->id}},
-                        'genre': {{$genre->id}},
+                        'genre': {{$genre_id}},
                       },
                 dataType: 'json',
             }).done(function(data){

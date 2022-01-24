@@ -19,7 +19,7 @@
                                 </div>
                             @endif
                         @else
-                            <div class="dropdown ">
+                            <div class="dropdown">
                                 <a id="navbarDropdown" class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
@@ -40,7 +40,7 @@
                                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                      商品管理
                                 </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
                                     <li>
                                     <a class="dropdown-item" href="{{route('maintenance.index')}}">
                                     商品メンテナンス
@@ -55,7 +55,7 @@
                                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                      ノート
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-right calendar" aria-labelledby="dropdownMenuLink" id="datepicker"></div>
+                                <div class="dropdown-menu dropdown-menu-right calendar" aria-labelledby="dropdownMenuLink" id="datepicker">
                                     
                                 </div>
                             </div>
@@ -63,7 +63,7 @@
                                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                      発注
                                 </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
                                     @foreach($makers as $maker)
                                     <li><a class="dropdown-item" href="/orders/{{$maker->id}}/home">{{$maker->name}}</a></li>
                                     @endforeach

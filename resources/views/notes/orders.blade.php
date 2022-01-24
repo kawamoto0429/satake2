@@ -38,7 +38,7 @@
                     <th scope="col">メーカー</th>
                     <th scope="col">商品名</th>
                     <th scope="col">個数</th>
-                    <th scope="col ">粗利割</th>
+                    <th scope="col">粗利割</th>
                     <th scope="col">値段</th>
                 </tr>
             </thead>
@@ -50,9 +50,6 @@
                     <td>{{$purchase->maintenance->name}}</td>
                     <td>{{$purchase->purchase_qty}}</td>
                     <td><select class="gain" name="percent">
-                        <option value=0.20>20%</option>
-                        <option value=0.25>25%</option>
-                        <option value=0.30>30%</option>
                     </select></td>
                     <td class="price">{{$purchase->gain_price}}8</td>
                 </tr>

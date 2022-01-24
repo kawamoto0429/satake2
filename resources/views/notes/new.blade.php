@@ -68,9 +68,19 @@
                     <td>{{$purchase->maintenance->name}}</td>
                     <td>{{$purchase->purchase_qty}}</td>
                     <td><select class="gain" name="percent">
-                        <option value=0.20>20%</option>
-                        <option value=0.25>25%</option>
-                        <option value=0.30>30%</option>
+                    @if(floor(round($purchase->price_change / (1 - 0.2)) / 10) == $purchase->gain_price)
+                        <option value=0.20 selected >20%</option>
+                        <option value=0.25 >25%</option>
+                        <option value=0.30 >30%</option>
+                    @elseif(floor(round($purchase->price_change / (1 - 0.25)) / 10) == $purchase->gain_price)
+                        <option value=0.20 >20%</option>
+                        <option value=0.25 selected >25%</option>
+                        <option value=0.30 >30%</option>
+                    @elseif(floor(round($purchase->price_change / (1 - 0.3)) / 10) == $purchase->gain_price)
+                        <option value=0.20 >20%</option>
+                        <option value=0.25 >25%</option>
+                        <option value=0.30 selected>30%</option>
+                    @endif
                     </select></td>
                     <td class="price">{{$purchase->gain_price}}8</td>
                 </tr>
