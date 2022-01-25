@@ -40,8 +40,8 @@ class PDFController extends Controller
                                                         ->get());
         }
         
-    	$pdf = PDF::loadView('hello', compact('maker', 'purchases', 'categories', 'counting'));
-    	return $pdf->download('hello.pdf');
+    	$pdf = PDF::loadView('pdf', compact('maker', 'purchases', 'categories', 'counting'));
+    	return $pdf->download('pdf.pdf');
     }
     
     public function note($id, $day)

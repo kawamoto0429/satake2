@@ -12,47 +12,125 @@
 }
 body {
 font-family: ipag;
+page-break-inside: avoid;
 }
-
-<style> 
-    @page { margin: 180px 50px; } 
-    #header { position: fixed; left: 0px; top: -180px; right: 0px; height: 150px; background-color: orange; text-align: center; } 
-    #footer { position: fixed; left: 0px; bottom: -180px; right: 0px; height: 150px; background-color: lightblue; } 
-    #footer .page:after { content: counter(page, upper-roman); } 
-    </style> 
 
 </style>
 </head>
-<body> 
-    <div id="div1"></div>
-    <div id="header"> 
-    <h1>Widgets Express</h1> 
-    </div> 
-    <div id="footer"> 
-    <p class="page">Page <?php $PAGE_NUM ?></p> 
-    </div> 
-    <div id="content"> 
-    <p>the first page</p> 
-    <p style="page-break-before: always;">the second page</p> 
-    </div> 
+<body>
+    <div>
+        <div>
+            <h2><label>取引様：</label><label>{{$maker->name}}</label><label>担当者様</label></h2>
+            <h2><label>発注店舗名：</label><label>佐竹食品朝日町本店</label><label>1ページ</label></h2>
+        </div>
+        
+        <div class="container">
+                <div>
+                    @foreach($counting as $category_name => $c)
+                      <label>{{$category_name}}</label><label>{{$c}}個</label>
+                    @endforeach
+                </div>
+                <table border="1">
+                    <tr>
+                        <th width="100px" height="20px">納品日</th>
+                        <th width="300px" height="20px">商品名</th>
+                        <th width="50px" height="20px">入数</th>
+                        <th width="80px" height="20px">発注数量</th>
+                        <th width="50px" height="20px">納価</th>
+                    </tr>
+                    
+                    @foreach($purchases as $n => $purchase)
+                        @if( $n < 45 )
+                        <tr>
+                            <td>
+                                {{date('m/d', strtotime($purchase->arrived_at))}}
+                                <label>({{$purchase->week_name}})</label>
+                            </td>
+                            <td>
+                                {{$purchase->maintenance->name}}
+                            </td>
+                            <td>
+                                {{$purchase->maintenance->lot}}
+                            </td>
+                            <td>
+                                {{$purchase->purchase_qty}}
+                            </td>
+                            @if($purchase->purchase_qty < 10)
+                                <td>
+                                     {{$purchase->maintenance->price_1pc}}円
+                                </td>
+                            @elseif($purchase->purchase_qty < 30)
+                                <td>
+                                    {{$purchase->maintenance->price_10pcs}}円
+                                </td>
+                            @elseif($purchase->purchase_qty >= 30)
+                                <td>
+                                    {{$purchase->maintenance->price_30pcs}}円
+                                </td>
+                            @endif
+                        </tr>
+                        @endif
+                    @endforeach
+                </table>
+            </div>
+        </div>
+    </div>
+    <div style="page-break-after: always"></div>
+    <div>
+        <div>
+            <h2><label>取引様：</label><label>{{$maker->name}}</label><label>担当者様</label></h2>
+            <h2><label>発注店舗名：</label><label>佐竹食品朝日町本店</label><label>２ページ</label></h2>
+        </div>
+       
+        <div>
+            <div>
+                @foreach($counting as $category_name => $c)
+                  <label>{{$category_name}}</label><label>{{$c}}個</label>
+                @endforeach
+            </div>
+            <table border="1">
+                <tr>
+                    <th width="100px" height="20px">納品日</th>
+                    <th width="300px" height="20px">商品名</th>
+                    <th width="50px" height="20px">入数</th>
+                    <th width="80px" height="20px">発注数量</th>
+                    <th width="50px" height="20px">納価</th>
+                </tr>
+                
+                @foreach($purchases as $n => $purchase)
+                    @if( $n >= 45 && $n < 90)
+                    <tr>
+                        <td>
+                            {{date('m/d', strtotime($purchase->arrived_at))}}
+                            <label>({{$purchase->week_name}})</label>
+                        </td>
+                        <td>
+                            {{$purchase->maintenance->name}}
+                        </td>
+                        <td>
+                            {{$purchase->maintenance->lot}}
+                        </td>
+                        <td>
+                            {{$purchase->purchase_qty}}
+                        </td>
+                        @if($purchase->purchase_qty < 10)
+                            <td>
+                                 {{$purchase->maintenance->price_1pc}}円
+                            </td>
+                        @elseif($purchase->purchase_qty < 30)
+                            <td>
+                                {{$purchase->maintenance->price_10pcs}}円
+                            </td>
+                        @elseif($purchase->purchase_qty >= 30)
+                            <td>
+                                {{$purchase->maintenance->price_30pcs}}円
+                            </td>
+                        @endif
+                    </tr>
+                    @endif
+                @endforeach
+            </table>
+        </div>
+    </div>
 </body>
-<script>
-  function clickBtn1() {
-    const div1 = document.getElementById("div1");
-    // 要素の追加
-    if (!div1.hasChildNodes()) {
-      const p1 = document.createElement("p");
-      const text1 = document.createTextNode("テスト");
-      p1.appendChild(text1);
-      div1.appendChild(p1);
-    }
-  }
-  function clickBtn2() {
-    // 要素の削除
-    const div1 = document.getElementById("div1");
-    if (div1.hasChildNodes()) {
-      div1.removeChild(div1.firstChild);
-    }
-  }
-</script>
 </html>
