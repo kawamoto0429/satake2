@@ -222,7 +222,6 @@ class OrderController extends Controller
     
     public function genre(Request $request)
     {
-        // Log::debug($request);
         
         $maker_id= $request['maker'];
         $genre_id= $request['genre'];
@@ -247,8 +246,6 @@ class OrderController extends Controller
         }
         
     }
-    
-    
     
     public function search(Request $request)
     {
