@@ -45,6 +45,7 @@
                         <tr>
                             <th scope="col" class="w10px"></th>
                             <th scope="col" class="">商品名</th>
+                            <th scope="col" class="w80px">入数</th>
                             <th scope="col" class="w150px">納品/１個</th>
                         </tr>
                     </thead>
@@ -53,6 +54,7 @@
                         <tr class="check_tr">
                             <td scope="row"><input type="checkbox" name="conclude[]" class="c_input" value="{{$maintenance->id}}"></td>
                             <td><a href="{{route('home_show', $maintenance)}}">{{$maintenance->name}}</a></td>
+                            <td>{{$maintenance->lot}}</td>
                             <td>{{$maintenance->price_1pc}}<label>円</label></td>
                         </tr>
                         @endforeach
@@ -95,6 +97,7 @@
                     <tr class="check_tr">
                         <td scope="row"><input type="checkbox" name="conclude[]" class="c_input" value=${value.id}></td>
                         <td><a href="/orders/${value.id}/show">${value.name}</a></td>
+                        <td>${value.lot}</td>
                         <td>${value.price_1pc}<label>円</label></td>
                     </tr>    
                   `;
@@ -129,6 +132,7 @@
                     <tr>
                         <td scope="row"><input type="checkbox" name="conclude[]" class="c_input" value=${value.id}></td>
                         <td><a href="/orders/${value.id}/show">${value.name}</a></td>
+                        <td>${value.lot}</td>
                         <td>${value.price_1pc}<label>円</label></td>
                     </tr>  
                   `;

@@ -245,7 +245,7 @@ class GenreSeeder extends Seeder
                 'maker_id' => 1,
                 'maker_name' => 'ヤマザキ',
                 'category_id' => 5,
-                'category_name' => '洋菓子',
+                'category_name' => '和菓子',
             ],
             [
                 'name' => 'フランスシリーズ',
@@ -388,6 +388,27 @@ class GenreSeeder extends Seeder
                 'category_id' => 14,
                 'category_name' => '菓子パン',
             ],
+            [
+                'name' => 'ラベル',
+                'maker_id'=> 1,
+                'maker_name'=> 'ヤマザキ',
+                'category_id'=> 1,
+                'category_name'=> '菓子パン',
+            ],
+            [
+                'name' => '中華まん',
+                'maker_id'=> 1,
+                'maker_name'=> 'ヤマザキ',
+                'category_id'=> 2,
+                'category_name'=> '袋パン',
+            ],
+            [
+                'name' => '菓子ケーキ',
+                'maker_id'=> 1,
+                'maker_name'=> 'ヤマザキ',
+                'category_id'=> 1,
+                'category_name'=> '菓子パン',
+            ]
             
             
             
