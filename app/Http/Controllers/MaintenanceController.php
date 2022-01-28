@@ -125,8 +125,8 @@ class MaintenanceController extends Controller
         } else {
             $maintenance->new_flg = false;
         }
-        if ($request->input('imgpath') != null) {
-            $filename = $request->imgpath->getClientOriginalName();
+        if ($request->input('imgpath')) {
+            $filename = $request->input('imgpath')->getClientOriginalName();
             $img = $request->imgpath->storeAs('',$filename,'public');
             $maintenance->imgpath = $img;
         }
@@ -236,28 +236,6 @@ class MaintenanceController extends Controller
         // 登録処理
         $count = 0;
         foreach($dataList as $row){
-            // if(isset($row[15])){
-            //     $filename = $row[15]->getClientOriginalName();
-            //     $img = $row[15]->storeAs('',$filename,'public');
-            //      Maintenance::create([
-            //                         'name' => $row[0],
-            //                         'price_1pc' => $row[1],
-            //                         'price_10pcs' => $row[2],
-            //                         'price_30pcs' => $row[3],
-            //                         'jan' => $row[4],
-            //                         'maker_id' => mb_convert_kana($row[5], "KVn"),
-            //                         'maker_name' => $row[6],
-            //                         'category_id' => mb_convert_kana($row[7], "KVn"),
-            //                         'category_name' => $row[8],
-            //                         'genre_id' => mb_convert_kana($row[9], "KVn"),
-            //                         'genre_name' => $row[10],
-            //                         'lot' => $row[11],
-            //                         'tomorrow_flg' => mb_convert_kana($row[12], "KVn"),
-            //                         'nodisplay_flg' => mb_convert_kana($row[13], "KVn"),
-            //                         'new_flg' => mb_convert_kana($row[14], "KVn"),
-            //                         'imgpath' => $img
-            //                         ]);
-            // }
 
                 Log::debug($row[0]);
                 
