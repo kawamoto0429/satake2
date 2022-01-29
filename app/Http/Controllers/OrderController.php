@@ -35,7 +35,7 @@ class OrderController extends Controller
             $id = $maker->id;
             Log::debug($id);
             $categories = Category::where('maker_id', $id)->get();
-            $maintenances = Maintenance::where('maker_id', $id)->where('nodisplay_flg', 0)->where('new_flg', 1)->paginate(8);
+            $maintenances = Maintenance::where('maker_id', $id)->where('nodisplay_flg', 0)->where('new_flg', 1)->paginate(16);
             
             return view('orders.home', compact('maker','maintenances', 'date', 'categories'));
         }
@@ -49,7 +49,7 @@ class OrderController extends Controller
             $categories = Category::where('maker_id', $id)->get();
             
     
-            $maintenances = Maintenance::where('maker_id', $id)->where('nodisplay_flg', 0)->where('new_flg', 1)->paginate(8);
+            $maintenances = Maintenance::where('maker_id', $id)->where('nodisplay_flg', 0)->where('new_flg', 1)->paginate(16);
             
             return view('orders.home', compact('maker','maintenances', 'date', 'categories'));
          
@@ -79,7 +79,7 @@ class OrderController extends Controller
         return view('orders.show', compact('maintenance', 'date'));
     }
     
-    public function store(Request $request)
+    public function store(PurchaseRequest $request)
     {
         $date = new Carbon();
         

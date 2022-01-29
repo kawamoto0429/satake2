@@ -125,10 +125,13 @@ class MaintenanceController extends Controller
         } else {
             $maintenance->new_flg = false;
         }
-        if ($request->input('imgpath')) {
-            $filename = $request->input('imgpath')->getClientOriginalName();
+        // dd($request->imgpath);
+        if ($request->imgpath) {
+            $filename = $request->imgpath->getClientOriginalName();
             $img = $request->imgpath->storeAs('',$filename,'public');
             $maintenance->imgpath = $img;
+        }else{
+            $maintenance->imgpath = null;
         }
         $maintenance->update();
         

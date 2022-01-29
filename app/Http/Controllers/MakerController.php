@@ -86,6 +86,7 @@ class MakerController extends Controller
     public function update(MakerRequest $request, Maker $maker)
     {
         $maker->name = $request->name;
+        // dd($request->imgpath);
         if($request->imgpath){
             $filename = $request->imgpath->getClientOriginalName();
             $img = $request->imgpath->storeAs('',$filename,'public');
