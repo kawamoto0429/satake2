@@ -20,15 +20,16 @@ class PDFController extends Controller
         
         $categories = Category::where('maker_id', $id)->get();
         
-        Log::debug($categories);
+        // Log::debug($categories);
             
         $purchases = Purchase::whereDate('created_at', $today)
                                 ->where('maker_id', $id)
-                                ->orderBy('cateroy_id', "asc")
+                                ->orderBy('category_id', "asc")
                                 ->orderBy('arrived_at', 'desc')
                                 ->get(); 
 
         Log::debug($purchases);
+        Log::debug($today);
         
         $counting = [];
         
@@ -40,7 +41,7 @@ class PDFController extends Controller
                                                         ->get());
         }
         
-    	$pdf = PDF::loadView('pdf', compact('maker', 'purchases', 'categories', 'counting'));
+    	$pdf = PDF::loadView('pdf', compact('maker', 'purchases', 'categories', 'counting', 'today'));
     	return $pdf->download('pdf.pdf');
     }
     

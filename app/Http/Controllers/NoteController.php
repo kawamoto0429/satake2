@@ -151,11 +151,16 @@ class NoteController extends Controller
         log::debug($da);
         
         $date->year = $y;
-        $date->month = $m;
         $date->day = $d;
+        $date->month = $m;
+        log::debug($date);
+        
+        log::debug($date->month);
         
         $last_day = date("d", strtotime("last day of". $date));
         $l_d = date("d", strtotime("last day of". $da));
+        
+        log::debug($date);
         
         $purchases = Purchase::whereDate('arrived_at', $date)->get();
         
