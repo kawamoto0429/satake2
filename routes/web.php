@@ -11,6 +11,7 @@ use App\Http\Controllers\PopController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NoteController;
+use App\Http\Controllers\MemoController;
 use App\Http\Controllers\PDFController;
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,8 @@ Route::get('/notes/home/{y}/{m}/{d}',[NoteController::class, 'order'])->name('ho
 Route::get('/notes/maker/ajax', [NoteController::class, 'maker']);
 Route::get('/notes/gain/ajax', [NoteController::class, 'gain']);
 Route::get('/pdf/{id}/{day}',[PDFController::class, 'note'])->name('pdf');
+Route::post('/memos/{y}/{m}/{d}/store', [MemoController::class, 'store'])->name('memos_store');
+Route::delete('/memos/{y}/{m}/{d}/{id}', [MemoController::class, 'delete'])->name("memos_delete");
 
 
 Route::get('/orders', [OrderController::class, 'index'])->name('orders');

@@ -3,9 +3,7 @@
 @section('content')
 <div class="container">
     <div>
-        
-            {{$m}}
-        
+        {{$m}}
     </div>
     <div>
         @if($d == $last_day)
@@ -29,6 +27,9 @@
                 {{$d}}
             <a href="/notes/home/{{$y}}/{{$m}}/{{$d+1}}">&gt;</a>
         @endif
+    </div>
+    <div>
+        <a href="/pdf/{{$m}}/{{$d}}">確定</a>
     </div>
     <div>
         <div class="navbar-header d-flex">
@@ -87,10 +88,33 @@
                 @endforeach 
             </tbody>
         </table>
+        <div class="border-top mt-3">
+            <div>
+                <form method="POST" action="{{ route('memos_store', [$y, $m, $d])}}">
+                    {{ csrf_field() }}
+                    <input type="text" name="text">
+                    <button type="submit">Create</button>
+                </form>
+            </div>
+            <div>
+                <ul>
+                    @foreach($memos as $memo)
+                    <li class="d-flex">
+                        <div>{{$memo->text}}</div>
+                        <div>
+                        <form method="POST" action="{{ route('memos_delete', [$memo->id, $y, $m, $d])}}">
+                            @csrf
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit">[x]</button>
+                        </form>
+                        </div>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
     </div>
-    <div>
-        <a href="/pdf/{{$m}}/{{$d}}">確定</a>
-    </div>
+    
 </div>
 <script>
      $(function(){
