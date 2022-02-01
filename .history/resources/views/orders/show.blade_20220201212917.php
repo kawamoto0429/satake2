@@ -11,7 +11,7 @@
         @if($maintenance->imgpath == null)
         <div style="width: 250px; height:180px; background:blue;"><img style="width: 250px; height:180px;" src="{{ asset('img/no_image.jpeg')}}"></div>
         @else
-        <div style="width: 250px; height:180px; background:blue;"><img style="width: 250px; height:180px;" src="{{ asset('storage/'.$maintenance->imgpath)}}"></div>
+        <div style="width: 250px; height:180px; background:blue;"><img style="width: 250px; height:180px;" src="{{ secure_asset('storage/'.$maintenance->imgpath)}}"></div>
         @endif
         <div class="ml-5">
             <table class="table">

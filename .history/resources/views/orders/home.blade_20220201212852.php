@@ -37,7 +37,7 @@
                 @if($maintenance->imgpath == null)
                 <a href="{{route('home_show', $maintenance)}}">
                     <div>
-                        <img class="product mb-2" src="{{ asset('img/no_image.jpeg')}}">
+                        <img class="product mb-2" src="{{ secure_asset('img/no_image.jpeg')}}">
                     </div>
                     <div class="mozi">
                         {{$maintenance->name}}
@@ -46,7 +46,7 @@
                 @else
                 <a href="{{route('home_show', $maintenance)}}">
                     <div>
-                        <img class="product mb-2" src="{{ asset('storage/'.$maintenance->imgpath)}}">
+                        <img class="product mb-2" src="{{ secure_asset('storage/'.$maintenance->imgpath)}}">
                     </div>
                     <div class="mozi">
                         {{$maintenance->name}}
@@ -54,7 +54,7 @@
                 </a>
                 @endif
             </div>
-           @endforeach
+　          @endforeach
         </div>
     </div>
     <div class="block mx-auto">

@@ -4,7 +4,7 @@
         <nav class="navbar navbar-expand-md navbar-light background-g shadow-sm ">
             <div class="container background-g ">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img class="satakeLog" src="{{ asset('img/satake2.gif')}}">
+                    <img class="satakeLog" src="{{ secure_asset('img/satake2.gif')}}">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -56,7 +56,7 @@
                                      ノート
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right calendar" aria-labelledby="dropdownMenuLink" id="datepicker">
-
+                                    
                                 </div>
                             </div>
                             <div class="dropdown">
@@ -73,16 +73,16 @@
                         @endguest
                     </ul>
                 </div>
-
-
-
+                
+                    
+                
             </div>
         </nav>
         <script>
         //   $("#datepicker").datepicker({ dateFormat: "yy-mm-dd" });
           $("#datepicker").datepicker({
-                dateFormat: "yy-mm-dd",
-                onSelect: function() {
+                dateFormat: "yy-mm-dd", 
+                onSelect: function() { 
                 let date = $(this).datepicker('getDate');
                 let y = date.getFullYear();
                 let m = date.getMonth()+1;
@@ -95,7 +95,7 @@
           })
           $(".dropdown-menu-right").on("click", function (e) {
               e.stopPropagation();
-
+              
             });
         </script>
         </header>

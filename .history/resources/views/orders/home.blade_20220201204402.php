@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="container">
-
+    
     @if(!$maker->imgpath == null)
     <div>
-        <img class="yamazaki_log" src="{{ asset('storage/'.$maker->imgpath)}}">
+        <img class="yamazaki_log" src="{{ secure_asset('storage/'.$maker->imgpath)}}">
     </div>
     @else
     <h1>{{$maker->name}}</h1>
@@ -23,7 +23,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     @foreach($category->genres as $genre)
                       <a class="dropdown-item" href="/orders/{{$maker->id}}/{{$genre->id}}/home">{{$genre->name}}</a>
-                    @endforeach
+                    @endforeach  
                 </div>
             </li>
         @endforeach
@@ -31,13 +31,13 @@
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main ">
         <h2 class="h1">今月の新商品</h2>
-        <div class="w-100">
+        <div class="w-100"> 
             @foreach ($maintenances as $maintenance)
             <div class="item ml-2 mb-4 text-center">
                 @if($maintenance->imgpath == null)
                 <a href="{{route('home_show', $maintenance)}}">
                     <div>
-                        <img class="product mb-2" src="{{ asset('img/no_image.jpeg')}}">
+                        <img class="product mb-2" src="{{ secure_asset('img/no_image.jpeg')}}">
                     </div>
                     <div class="mozi">
                         {{$maintenance->name}}
@@ -46,15 +46,15 @@
                 @else
                 <a href="{{route('home_show', $maintenance)}}">
                     <div>
-                        <img class="product mb-2" src="{{ asset('storage/'.$maintenance->imgpath)}}">
+                        <img class="product mb-2" src="{{ secure_asset('storage/'.$maintenance->imgpath)}}">
                     </div>
                     <div class="mozi">
                         {{$maintenance->name}}
                     </div>
                 </a>
                 @endif
-            </div>
-           @endforeach
+            </div>    
+　          @endforeach
         </div>
     </div>
     <div class="block mx-auto">
@@ -63,7 +63,7 @@
 </div>
 <script>
     $(function(){
-
+    
         $('#search').on('input', () => {
             let keywords = $('#search').val();
             console.log(keywords);
@@ -89,30 +89,30 @@
                         <td scope="row"><input type="checkbox" name="conclude[]" value=${value.id}></td>
                         <td><a href="/orders/${value.id}/show">${value.name}</a></td>
                         <td>${value.price_1pc}<label>円</label></td>
-                    </tr>
+                    </tr>    
                   `;
                   $('.products-list').append(html);
-
-
+                  
+                  
                 })
             }).fail(function() {
               console.log('失敗');
-            });
+            }); 
         });
-
-
-
+        
+        
+        
         <!--$('#category li').click(function(){-->
         <!--    alert("aa");-->
         <!--    $(this)..slideToggle();-->
         <!--    return false;-->
         <!--});-->
-
+        
         $('.check').change(function() {
             if($(".check").is(':checked')){
                 $('.button').prop('disabled', false);
             }else{
-                $('.button').prop('disabled', true);
+                $('.button').prop('disabled', true); 
             }
         })
     });

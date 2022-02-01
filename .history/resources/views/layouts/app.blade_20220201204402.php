@@ -28,24 +28,24 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!--<link href="{{ asset('css/satake.css')}}" rel="stylesheet">-->
-    <link href="{{ asset('css/bootstrap.css')}}" rel="stylesheet">
-    <!--<link href="{{ asset('css/note.css')}}" rel="stylesheet">-->
-    <!--<link href="{{ asset('css/products/product.css')}}" rel="stylesheet">-->
-    <!--<link href="{{ asset('css/products/maintenance.css')}}" rel="stylesheet">-->
+    <!--<link href="{{ secure_asset('css/satake.css')}}" rel="stylesheet">-->
+    <link href="{{ secure_asset('css/bootstrap.css')}}" rel="stylesheet">
+    <!--<link href="{{ secure_asset('css/note.css')}}" rel="stylesheet">-->
+    <!--<link href="{{ secure_asset('css/products/product.css')}}" rel="stylesheet">-->
+    <!--<link href="{{ secure_asset('css/products/maintenance.css')}}" rel="stylesheet">-->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-
+   
 </head>
 <body>
-
+   
         <main class="py-4">
             @component('components.header')
             @endcomponent
             @yield('content')
-
+            
         </main>
     </div>
 </body>
