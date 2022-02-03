@@ -136,7 +136,6 @@ class MaintenanceController extends Controller
         }else{
             $maintenance->imgpath = null;
         }
-        log::debug($maintenance);
         $maintenance->update();
 
         return redirect()->route('maintenance.show', $maintenance);

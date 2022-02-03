@@ -70,7 +70,7 @@ class MaintenanceController extends Controller
         } else {
             $maintenance->new_flg = false;
         }
-        if ($request->imgpath) {
+        if ($request->input('imgpath') != null) {
             $filename = $request->imgpath->getClientOriginalName();
             $img = $request->imgpath->storeAs('',$filename,'public');
             $maintenance->imgpath = $img;
@@ -136,7 +136,6 @@ class MaintenanceController extends Controller
         }else{
             $maintenance->imgpath = null;
         }
-        log::debug($maintenance);
         $maintenance->update();
 
         return redirect()->route('maintenance.show', $maintenance);

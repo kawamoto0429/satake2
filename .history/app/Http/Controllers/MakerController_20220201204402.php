@@ -18,7 +18,7 @@ class MakerController extends Controller
     public function index()
     {
         $makers = Maker::all();
-
+       
         return view('products.makers.index', compact('makers'));
     }
 
@@ -40,6 +40,8 @@ class MakerController extends Controller
      */
     public function store(MakerRequest $request)
     {
+        
+        
         $maker = new Maker();
         $maker->name = $request->name;
         if($request->imgpath){
@@ -48,7 +50,7 @@ class MakerController extends Controller
             $maker->imgpath = $img;
         }
         $maker->save();
-
+        
         return redirect('/products/makers');
     }
 
@@ -93,7 +95,7 @@ class MakerController extends Controller
             $maker->imgpath = null;
         }
         $maker->update();
-
+        
         return redirect('/products/makers');
     }
 
@@ -106,17 +108,17 @@ class MakerController extends Controller
     public function destroy(Maker $maker)
     {
         $maker_id = $maker->id;
-
+        
         $target_items = Maintenance::where('maker_id', $maker_id)->get('id');
-
+        
         Log::debug($target_items);
-
+        
         for($i=0; $i < count($target_items); $i++){
             $target_items[$i]->delete();
         }
-
+        
         $maker->delete();
-
+        
         return redirect('/products/makers');
     }
 }
