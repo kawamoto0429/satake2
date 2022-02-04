@@ -70,7 +70,7 @@
         </div>
     </div>
 </div>
-<script src="{{ asset('js/genre.js') }}" defer></script>
+<script src="{{ secure_asset('js/.js') }}" defer></script>
 <script >
     $(function(){
 

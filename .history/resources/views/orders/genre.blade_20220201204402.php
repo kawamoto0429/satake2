@@ -3,8 +3,8 @@
 
 @section('content')
 <div class="container">
-
-
+    
+    
     <h1>{{$maker->name}}</h1>
     <div class="container-fluid mt-4">
     <div class="row">
@@ -21,7 +21,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     @foreach($category->genres as $genre)
                       <a class="dropdown-item" href="/orders/{{$maker->id}}/{{$genre->id}}/home">{{$genre->name}}</a>
-                    @endforeach
+                    @endforeach  
                 </div>
             </li>
         @endforeach
@@ -61,19 +61,18 @@
                     </tbody>
                 </table>
                 </div>
-
+            
             <input type="text" name="purchase_qty">個
             <input type="number" min="1" name="arrived_at"> 日後
             <button type="submit" class="button" disabled>確定</button>
             </form>
-
+        
         </div>
     </div>
 </div>
-<script src="{{ asset('js/genre.js') }}" defer></script>
-<script >
+<script>
     $(function(){
-
+    
         $('#search').on('input', () => {
             let keywords = $('#search').val();
             <!--console.log();-->
@@ -100,22 +99,22 @@
                         <td><a href="/orders/${value.id}/show">${value.name}</a></td>
                         <td>${value.lot}</td>
                         <td>${value.price_1pc}<label>円</label></td>
-                    </tr>
+                    </tr>    
                   `;
                   $('.products-list').append(html);
-
+                  
                 })
             }).fail(function() {
               console.log('失敗');
-            });
+            }); 
         });
-
+        
         $('#genre li').click(function(){
         let name = $(this).val();
         console.log(name);
-
+        
             $.ajax({
-
+            
                 type: "get",
                 url: "/orders/genre/ajax",
                 data: {
@@ -135,24 +134,23 @@
                         <td><a href="/orders/${value.id}/show">${value.name}</a></td>
                         <td>${value.lot}</td>
                         <td>${value.price_1pc}<label>円</label></td>
-                    </tr>
+                    </tr>  
                   `;
                   $('.products-list').append(html);
                 })
             }).fail(function() {
               console.log('失敗');
-            });
+            }); 
         });
-
-        // $(document).on('change', '.c_input', function(){
-        //   console.log("moved");
-        //   if($(".c_input").is(':checked')){
-        //       $('.button').prop('disabled', false);
-        //   }else{
-        //       $('.button').prop('disabled', true);
-        //   }
-        //  })
+        
+        $(document).on('change', '.c_input', function(){
+          console.log("moved");
+          if($(".c_input").is(':checked')){
+              $('.button').prop('disabled', false);
+          }else{
+              $('.button').prop('disabled', true); 
+          }
+         })
     });
-
 </script>
 @endsection

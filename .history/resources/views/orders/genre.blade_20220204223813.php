@@ -70,8 +70,7 @@
         </div>
     </div>
 </div>
-<script src="{{ asset('js/genre.js') }}" defer></script>
-<script >
+<script>
     $(function(){
 
         $('#search').on('input', () => {
