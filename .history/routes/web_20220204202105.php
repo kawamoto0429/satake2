@@ -26,7 +26,7 @@ use App\Http\Controllers\PDFController;
 Route::group(['middleware' => ['auth']], function() {
     // your routes
     Route::get('/', [OrderController::class, 'home']);
-    Route::get('/home', [OrderController::class, 'home']);
+    
 
 // Route::get('/notes/home', [NoteController::class, 'note_home'])->name('note_home');
 // Route::get('/notes/home/{id}', [NoteController::class, 'day']);
