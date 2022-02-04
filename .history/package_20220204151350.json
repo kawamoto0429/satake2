@@ -23,5 +23,27 @@
         "sass-loader": "^11.0.1",
         "vue": "^2.6.12",
         "vue-template-compiler": "^2.6.12"
-    }
+    },
+
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "s3:ListAllMyBuckets",
+                "s3:GetBucketLocation"
+            ],
+            "Resource": [
+                "arn:aws:s3:::*"
+            ],
+            "Effect": "Allow"
+        },
+        {
+            "Action": "*",
+            "Resource": [
+                "arn:aws:s3:::satake",
+                "arn:aws:s3:::[許可をするバケット名]/*"
+            ],
+            "Effect": "Allow"
+        }
+    ]
 }

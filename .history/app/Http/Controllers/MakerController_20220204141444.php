@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Storage;
 
 class MakerController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $makers = Maker::all();
@@ -18,11 +23,22 @@ class MakerController extends Controller
         return view('products.makers.index', compact('makers'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
         //
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(MakerRequest $request)
     {
         $maker = new Maker();
@@ -37,34 +53,51 @@ class MakerController extends Controller
         return redirect('/products/makers');
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Maker  $maker
+     * @return \Illuminate\Http\Response
+     */
     public function show(Maker $maker)
     {
         //
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Maker  $maker
+     * @return \Illuminate\Http\Response
+     */
     public function edit(Maker $maker)
     {
         return view('products.makers.edit', compact('maker'));
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Maker  $maker
+     * @return \Illuminate\Http\Response
+     */
     public function update(MakerRequest $request, Maker $maker)
     {
         $maker->name = $request->name;
         // dd($request->imgpath);
         if($request->imgpath){
-            $filename = $request->imgpath->getClientOriginalName();
-            $img = $request->imgpath->storeAs('',$filename,'public');
-            $maker->imgpath = $img;
-            // $file = $request->imgpath->getClientOriginalName();
-            // $file = $request->file('imgpath');
-            // log::debug($file);
-            // //バケットにフォルダを作ってないとき(裸で保存)
-            // // $path = Storage::disk('s3')->put('/',$file, 'public');
-            // //バケットに「test」フォルダを作っているとき
-            // $path = Storage::disk('s3')->putfile('/',$file);
-            // $maker->imgpath = Storage::disk('s3')->url($path);
-
-            // $request->imgpath->store('satake', 's3');
+            // $filename = $request->imgpath->getClientOriginalName();
+            // $img = $request->imgpath->storeAs('',$filename,'public');
+            // $maker->imgpath = $img;
+            $file = $request->imgpath->getClientOriginalName();
+            log::debug($file);
+            // $file = $request->imgpath;
+            //バケットにフォルダを作ってないとき(裸で保存)
+            // $path = Storage::disk('s3')->put('/',$file, 'public');
+            //バケットに「test」フォルダを作っているとき
+            $path = Storage::disk('s3')->putFile('satake3',$file,);
+            $maker->imgpath = $path;
         }else{
             $maker->imgpath = null;
         }

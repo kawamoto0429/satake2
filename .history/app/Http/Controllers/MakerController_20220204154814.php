@@ -55,7 +55,8 @@ class MakerController extends Controller
             $filename = $request->imgpath->getClientOriginalName();
             $img = $request->imgpath->storeAs('',$filename,'public');
             $maker->imgpath = $img;
-            // $file = $request->imgpath->getClientOriginalName();
+            $file = $request->imgpath->getClientOriginalName();
+
             // $file = $request->file('imgpath');
             // log::debug($file);
             // //バケットにフォルダを作ってないとき(裸で保存)
