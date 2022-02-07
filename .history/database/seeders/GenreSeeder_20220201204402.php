@@ -85,7 +85,7 @@ class GenreSeeder extends Seeder
                 'category_id' => 1,
                 'category_name' => '菓子パン',
             ],
-
+            
             [
                 'name' => '菓子パン（その他）',
                 'maker_id' => 1,
@@ -366,7 +366,7 @@ class GenreSeeder extends Seeder
                 'category_id' => 13,
                 'category_name' => '袋パン',
             ],
-
+            
             [
                 'name' => '袋パン（その他）',
                 'maker_id' => 4,
@@ -408,17 +408,10 @@ class GenreSeeder extends Seeder
                 'maker_name'=> 'ヤマザキ',
                 'category_id'=> 1,
                 'category_name'=> '菓子パン',
-            ],
-            [
-                'name' => '食卓パン',
-                'maker_id'=> 3,
-                'maker_name'=> 'フジパン',
-                'category_id'=> 10,
-                'category_name'=> '袋パン',
             ]
-
-
-
+            
+            
+            
         ]);
     }
 }

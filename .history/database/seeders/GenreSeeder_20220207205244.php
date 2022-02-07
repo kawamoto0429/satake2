@@ -408,13 +408,13 @@ class GenreSeeder extends Seeder
                 'maker_name'=> 'ヤマザキ',
                 'category_id'=> 1,
                 'category_name'=> '菓子パン',
-            ],
+            ]
             [
-                'name' => '食卓パン',
-                'maker_id'=> 3,
-                'maker_name'=> 'フジパン',
-                'category_id'=> 10,
-                'category_name'=> '袋パン',
+                'name' => '菓子ケーキ',
+                'maker_id'=> 1,
+                'maker_name'=> 'ヤマザキ',
+                'category_id'=> 1,
+                'category_name'=> '菓子パン',
             ]
 
 

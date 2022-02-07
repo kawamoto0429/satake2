@@ -412,7 +412,7 @@ class GenreSeeder extends Seeder
             [
                 'name' => '食卓パン',
                 'maker_id'=> 3,
-                'maker_name'=> 'フジパン',
+                'maker_name'=> 'ヤマザキ',
                 'category_id'=> 10,
                 'category_name'=> '袋パン',
             ]
