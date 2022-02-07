@@ -304,7 +304,7 @@ class GenreSeeder extends Seeder
                 'category_name' => '菓子パン',
             ],
             [
-                'name' => 'サンドロール・ロングスティック',
+                'name' => '',
                 'maker_id' => 3,
                 'maker_name' => 'フジパン',
                 'category_id' => 9,
