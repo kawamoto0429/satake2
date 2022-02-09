@@ -12,7 +12,6 @@ use App\Http\Requests\MaintenanceRequest;
 use Goodby\CSV\Import\Standard\LexerConfig;
 use Goodby\CSV\Import\Standard\Lexer;
 use Goodby\CSV\Import\Standard\Interpreter;
-use Illuminate\Support\Facades\Storage;
 
 class MaintenanceController extends Controller
 {
@@ -72,12 +71,9 @@ class MaintenanceController extends Controller
             $maintenance->new_flg = false;
         }
         if ($request->imgpath) {
-            // $filename = $request->imgpath->getClientOriginalName();
-            // $img = $request->imgpath->storeAs('',$filename,'public');
-            // $maintenance->imgpath = $img;
-            $file1 = $request->file('imgpath');
-            $path = Storage::disk('s3')->putfile('/products', $file1);
-            $maintenance->imgpath = Storage::disk('s3')->url($path);
+            $filename = $request->imgpath->getClientOriginalName();
+            $img = $request->imgpath->storeAs('',$filename,'public');
+            $maintenance->imgpath = $img;
         }else{
             $maintenance->imgpath = null;
         }
@@ -139,7 +135,7 @@ class MaintenanceController extends Controller
             // $maintenance->imgpath = $img;
             $file1 = $request->file('imgpath');
             $path = Storage::disk('s3')->putfile('/products', $file1);
-            $maintenance->imgpath = Storage::disk('s3')->url($path);
+            $ma->imgpath = Storage::disk('s3')->url($path);
         }else{
             $maintenance->imgpath = null;
         }

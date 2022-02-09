@@ -76,7 +76,7 @@
                 @endif
                 </tr>
                 <th scope="row">画像</th>
-                <td><img class="maintenance-img" src="{{ $maintenance->imgpath }}"></td>
+                <td><img class="maintenance-img" src="{{ $maintenance->imgpath }}"><label>{{$maintenance->imgpath}}</label></td>
                 </tr>
             </tbody>
         </table>

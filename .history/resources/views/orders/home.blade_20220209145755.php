@@ -47,7 +47,7 @@
                 @else
                 <a href="{{route('home_show', $maintenance)}}">
                     <div>
-                        <img class="product mb-2" src="{{ $maintenance->imgpath }}">
+                        <img class="product mb-2" src="{{ $maintenance->imgpath)}}">
                     </div>
                     <div class="mozi">
                         {{$maintenance->name}}
