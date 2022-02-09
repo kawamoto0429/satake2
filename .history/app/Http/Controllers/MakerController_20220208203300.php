@@ -57,15 +57,11 @@ class MakerController extends Controller
             // $maker->imgpath = $img;
             // $file = $request->imgpath->getClientOriginalName();
             $file1 = $request->file('imgpath');
-            // dd($file1);
-            // log::debug($file);
-            // //バケットにフォルダを作ってないとき(裸で保存)
-            // // $path = Storage::disk('s3')->put('/',$file, 'public');
-            // //バケットに「test」フォルダを作っているとき
+    
             $path = Storage::disk('s3')->putfile('/', $file1);
-            $maker->imgpath = Storage::disk('s3')->url($path);
-            // dd($maker->imgpath);
+            // $maker->imgpath = Storage::disk('s3')->url($path);
 
+            // $request->imgpath->store('satake', 's3');
         }else{
             $maker->imgpath = null;
         }

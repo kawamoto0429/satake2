@@ -5,8 +5,7 @@
 
     @if(!$maker->imgpath == null)
     <div>
-        <img class="yamazaki_log" src="{{ $maker->imgpath }}">
-        {{-- <img class="yamazaki_log" src="https://satake.s3.ap-northeast-1.amazonaws.com/x6rt9zlznVZAX4fimCdOUjgIBAK5d3802HhnCAUR.png"> --}}
+        <img class="yamazaki_log" src="{{ Storage::disk('s3')->url("task/{$stock_cosmetic->id}.jpg") }}">
     </div>
     @else
     <h1>{{$maker->name}}</h1>

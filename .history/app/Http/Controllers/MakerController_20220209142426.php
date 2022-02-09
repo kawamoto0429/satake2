@@ -63,6 +63,7 @@ class MakerController extends Controller
             // // $path = Storage::disk('s3')->put('/',$file, 'public');
             // //バケットに「test」フォルダを作っているとき
             $path = Storage::disk('s3')->putfile('/', $file1);
+            DD()
             $maker->imgpath = Storage::disk('s3')->url($path);
             // dd($maker->imgpath);
 
