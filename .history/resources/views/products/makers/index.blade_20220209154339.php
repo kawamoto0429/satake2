@@ -30,7 +30,7 @@
                 <tr>
                     <th scope="col" class="w100px">#</th>
                     <th scope="col">メーカー</th>
-                    <th scope="col">画像フォルダー</th>
+                    <th
                     <th scope="col" class="w80px"></th>
                     <th scope="col" class="w80px"></th>
                 </tr>
@@ -39,15 +39,11 @@
                 @foreach($makers as $maker)
                 <tr>
                     <form method="POST" action="/products/makers/{{$maker->id}}" enctype="multipart/form-data">
-                    @csrf
-                    <input type="hidden" name="_method" value="PUT">
                     <th scope="row">{{$maker->id}}</th>
-                    <td class="maker-name"><input type="text" name="name" value="{{$maker->name}}"></td>
-                    <td><input type="file" name="imgpath" value="{{$maker->imgpath}}"></td>
+                    <td class="maker-name"><input type="text" value="{{ $maker->name }}"></td>
                     <td>
-                        <button type="submit">編集</button>
+                        <a href="/products/makers/{{$maker->id}}/edit">編集</a>
                     </td>
-                    </form>
                     <td>
                         <form method="POST" action="/products/makers/{{$maker->id}}" onsubmit="return confirm('本気ですか？')">
                             @csrf

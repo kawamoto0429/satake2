@@ -42,7 +42,7 @@
                     @csrf
                     <input type="hidden" name="_method" value="PUT">
                     <th scope="row">{{$maker->id}}</th>
-                    <td class="maker-name"><input type="text" name="name" value="{{$maker->name}}"></td>
+                    <td class="maker-name"><input type="text" value="{{ $maker->name }}"></td>
                     <td><input type="file" name="imgpath" value="{{$maker->imgpath}}"></td>
                     <td>
                         <button type="submit">編集</button>
