@@ -62,11 +62,10 @@ $(function(){
         });
 
     });
-    $(document).on('change', '.file', function(){
-        if($('.file').val()){
-            $('.fileBtn').prop('disabled', false);
-        }else{
-            $('.fileBtn').prop('disabled', true);
-        }
-    });
+
+    if($('file').val()){
+        $('.file').prop('disabled', false);
+    }else{
+        $('.fileBtn').prop('disabled', true);
+    }
 });

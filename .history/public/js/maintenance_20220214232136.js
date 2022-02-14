@@ -62,7 +62,7 @@ $(function(){
         });
 
     });
-    $(document).on('change', '.file', function(){
+    $(document).on('change', '.', function(){
         if($('.file').val()){
             $('.fileBtn').prop('disabled', false);
         }else{

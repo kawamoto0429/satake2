@@ -12,7 +12,7 @@
         <form method="POST" action="{{route('csv_store')}}" enctype="multipart/form-data">
             {{ csrf_field() }}
             <input class="file" type="file" name="csv_input">
-            <button class="fileBtn" disabled>CSVで登録</button>
+            <button class="fileBtn">CSVで登録</button>
         </form>
     </div>
 
