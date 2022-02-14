@@ -217,7 +217,7 @@ class OrderController extends Controller
         $purchases = purchase::where('maker_id', $maker_id)
                                 ->whereDate('created_at', $today)
                                 ->where('user_id', $user_id)
-                                ->orderBy('arrived_at', 'asc')
+                                ->orderBy('arrived_at', 'dsc')
                                 ->paginate(15);
 
         $categories = Category::all();

@@ -156,7 +156,6 @@ class OrderController extends Controller
         $purchases = Purchase::whereDate('created_at', $today)
                                 ->where('user_id', $user_id)
                                 ->orderBy('arrived_at', 'asc')
-                                ->orderBy('maker_id', "asc")
                                 ->paginate(20);
         $counting = [];
 

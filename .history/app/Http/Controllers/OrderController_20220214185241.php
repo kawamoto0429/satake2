@@ -164,6 +164,7 @@ class OrderController extends Controller
         {
             $counting[$category->name] = count(Purchase::where('category_name', $category->name )
                                         ->whereDate('created_at', $today)
+                                        ->orderBy('arrived_at', 'asc')
                                         ->where('user_id', $user_id)
                                         ->get());
         }
