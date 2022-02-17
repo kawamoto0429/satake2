@@ -1,0 +1,163 @@
+.w20{
+  width:50%;
+}
+
+.sidebar_fixed {
+  position: sticky;
+  top: 60px;
+}
+
+.w10px {
+  width: 10px;
+}
+
+.w40px {
+  width: 40px;
+}
+
+
+.w50px {
+  width: 50px;
+}
+
+.w60px {
+  width: 60px;
+}
+
+.w80px {
+  width: 80px;
+}
+
+.w100px {
+  width: 100px;
+}
+
+.w120px {
+  width: 120px;
+}
+
+.w150px {
+  width: 150px;
+}
+
+.w-300px {
+  width: 300px;
+}
+
+.w-600px {
+  width: 600px;
+}
+
+.w-900px {
+  width: 900px;
+}
+
+.w-1000px {
+  width: 1000px;
+}
+
+.h-80px {
+  height: 80px;
+}
+
+.m-auto {
+  margin: auto;
+}
+
+.p-auto {
+  padding: 25px;
+}
+
+.error {
+  color: red;
+}
+
+.background-g {
+  background: #00473F;
+}
+
+.h-38 {
+  height: 38px;
+}
+
+.h-100px {
+  height:100px;
+}
+
+
+
+.sticky_table_wrapper {
+  overflow: scroll;
+  /*width: calc(100vw - 1rem);*/
+  height: 75vh;
+}
+
+table.st-tbl1 {
+	text-align: left;
+	position: relative;
+	border-collapse: collapse;
+}
+table.st-tbl1 th,
+table.st-tbl1 td{
+	padding: 1rem;
+	border: solid 1px #ddd;
+}
+table.st-tbl1 th {
+	background: #00473F;
+	position: sticky;
+	color: white;
+	top: 0;
+}
+
+.yamazaki_log {
+  width: 150px;
+  height: 50px;
+}
+
+.product {
+  width: 180px;
+  height: 150px;
+}
+
+.item {
+  float: left;
+  /*max-width: 102px;*/
+  /*width: 25%;*/
+}
+
+.img {
+  width: 200px;
+  height: 180px;
+}
+
+.m {
+  width: 150px;
+  height: 100px;
+}
+
+.maintenance-img {
+  width: 200px;
+  height: 150px;
+}
+
+.block {
+  display: block;
+
+}
+
+.mozi {
+  width:180px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+button
+{
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        outline: none;
+        padding: 0;
+        appearance: none;
+}
