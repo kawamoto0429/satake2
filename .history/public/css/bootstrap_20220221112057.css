@@ -163,14 +163,14 @@ table.st-tbl1 th {
 }
 
 .kakuninn {
-    width: 60px;
+    width: 680px;
     height: 30px;
     margin: 0 0 10px 0;
     border: 2px solid #555;
-    text-align: center;
+    /* text-align: center; */
 }
 
 .block-btn {
     display: block;
-    /* padding: 0px 15px 0px; */
+    padding: 0px 15px 0px;
 }

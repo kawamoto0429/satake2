@@ -64,7 +64,7 @@
             {{ $purchases->links() }}
         </div>
     </div>
-    <div class="kakuninn">
+    <div class="ka">
         <a class="block-btn" href="/pdf/{{$maker->id}}">確定</a>
     </div>
     @endsection
