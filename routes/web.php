@@ -24,7 +24,6 @@ use App\Http\Controllers\PDFController;
 |
 */
 Route::group(['middleware' => ['auth']], function() {
-    // your routes
     Route::get('/', [OrderController::class, 'home']);
     Route::get('/home', [OrderController::class, 'home']);
 
