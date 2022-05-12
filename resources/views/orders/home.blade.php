@@ -6,7 +6,6 @@
     @if(!$maker->imgpath == null)
     <div>
         <img class="yamazaki_log" src="{{ $maker->imgpath }}">
-        {{-- <img class="yamazaki_log" src="https://satake.s3.ap-northeast-1.amazonaws.com/x6rt9zlznVZAX4fimCdOUjgIBAK5d3802HhnCAUR.png"> --}}
     </div>
     @else
     <h1>{{$maker->name}}</h1>
@@ -100,14 +99,6 @@
               console.log('失敗');
             });
         });
-
-
-
-        <!--$('#category li').click(function(){-->
-        <!--    alert("aa");-->
-        <!--    $(this)..slideToggle();-->
-        <!--    return false;-->
-        <!--});-->
 
         $('.check').change(function() {
             if($(".check").is(':checked')){
