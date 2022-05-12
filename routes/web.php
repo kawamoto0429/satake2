@@ -24,9 +24,8 @@ use App\Http\Controllers\PDFController;
 |
 */
 Route::group(['middleware' => ['auth']], function() {
-    Route::get('/', [OrderController::class, 'home']);
-    Route::get('/home', [OrderController::class, 'home']);
 
+    // ノートルート
     Route::get('/notes/home/{y}/{m}/{d}',[NoteController::class, 'order'])->name('home_order');
     Route::get('/notes/maker/ajax', [NoteController::class, 'maker']);
     Route::get('/notes/gain/ajax', [NoteController::class, 'gain']);
@@ -34,7 +33,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/memos/{y}/{m}/{d}/store', [MemoController::class, 'store'])->name('memos_store');
     Route::delete('/memos/{y}/{m}/{d}/{id}', [MemoController::class, 'delete'])->name("memos_delete");
 
-
+    // 発注ルート
+    Route::get('/', [OrderController::class, 'home']);
+    Route::get('/home', [OrderController::class, 'home']);
     Route::get('/orders', [OrderController::class, 'index'])->name('orders');
     Route::get('/orders/{maker}/home', [OrderController::class, 'home'])->name('index_home');
     Route::get('/orders/{maker}/{genre}/home', [OrderController::class, 'genre_home']);
@@ -43,8 +44,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/orders/genre/ajax', [OrderController::class, 'genre']);
     Route::get('/orders/search/ajax', [OrderController::class, 'search']);
     Route::post('/orders/purchase/conclude', [OrderController::class, 'conclude']);
-
-
     Route::get('/orders/purchase', [OrderController::class, 'purchase'])->name('orders_purchase');
     Route::post('/orders/purchase/store', [OrderController::class, 'store'])->name('orders_store');
     Route::put('/orders/purchase/{purchase}/update', [OrderController::class, 'update'])
@@ -55,19 +54,11 @@ Route::group(['middleware' => ['auth']], function() {
         ->where('purchase', '[0-9]+');
     Route::get('/purchase/{maker}/specify', [OrderController::class, 'specify']);
 
-
-    Route::get('/orders/purchase/note', [OrderController::class, 'note_today'])->name('note_today');
-    Route::get('/orders/purchase/note_sub', [OrderController::class, 'note_sub'])->name('note_sub');
-
-    Route::get('/products', [ProductController::class, 'index'])->name('products');
-
-
+    // 商品メンテナンスルート
     Route::resource('/products/makers', MakerController::class);
     Route::resource('/products/categories', CategoryController::class);
     Route::resource('/products/genres', GenreController::class);
     Route::get("/products/genres/category/ajax", [GenreController::class, 'category']);
-
-
     Route::get('/products/maintenances', [MaintenanceController::class, 'index'])->name('maintenance.index');
     Route::get('/products/maintenances/create', [MaintenanceController::class, 'create'])->name('maintenance.create');
     Route::post('/products/maintenances/store', [MaintenanceController::class, 'store'])->name('maintenance.store');
@@ -79,41 +70,31 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/products/maintenances/maker/{maker}', [MaintenanceController::class, 'maker_index'])
             ->where('maker', '[0-9]+');
     Route::get('/maintenances/search/ajax', [MaintenanceController::class, 'search']);
-
     Route::get('/products/maintenances/{maintenance}/edit', [MaintenanceController::class, 'edit'])
         ->name('maintenance.edit')
         ->where('maintenance', '[0-9]+');
-
     Route::put('/products/maintenances/{maintenance}/update', [MaintenanceController::class, 'update'])
         ->name('maintenance.update')
         ->where('maintenance', '[0-9]+');
-
     Route::delete('/products/maintenances/{maintenance}/delete', [MaintenanceController::class, 'delete'])
         ->name('maintenance.delete')
         ->where('maintenance', '[0-9]+');
-
     Route::get('/products/maintenances/maker/ajax', [MaintenanceController::class, 'maker']);
     Route::get('/products/maintenances/category/ajax', [MaintenanceController::class, 'category']);
 
-
-
-    Route::get('/pops',[PopController::class, 'index']);
-
-
-
-    // Route::get('/home', [HomeController::class, 'index'])->name('home');
-
+    // PDFルート
     Route::get('/pdf/{maker}',[PDFController::class, 'index'])->name('pdf');
+    // Route::get('/pops',[PopController::class, 'index']);
 });
 
 Auth::routes();
 
-Route::get('/hello', function () {
-        $pdf = PDF::loadHTML('<h1>こんにちは</h1>');
+// Route::get('/hello', function () {
+//         $pdf = PDF::loadHTML('<h1>こんにちは</h1>');
 
-        return $pdf->setOption('encoding', 'utf-8')->inline();
+//         return $pdf->setOption('encoding', 'utf-8')->inline();
 
-});
+// });
 
 
 
