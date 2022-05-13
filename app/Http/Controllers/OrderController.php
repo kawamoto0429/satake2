@@ -232,7 +232,6 @@ class OrderController extends Controller
                                         ->get();
             return $maintenances;
         }else{
-
             $maintenances = Maintenance::where('maker_id', $maker_id)
                                         ->where('genre_id', $genre_id)
                                         ->where('nodisplay_flg', false)
