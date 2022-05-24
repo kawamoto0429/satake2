@@ -132,7 +132,7 @@ class OrderController extends Controller
         $user_id = Auth::user()->id;
         $exist_purchases = OrderController::existWhere($request->input('maintenance_id'), $request, $date);
         if(count($exist_purchases) <= 0){
-            OrderController::createPurchase($request);
+            OrderController::createPurchase($request->input('maintenance_id'), $request);
             return redirect()->route('orders_purchase');
         }else{
             foreach($exist_purchases as $exist_purchase) {
